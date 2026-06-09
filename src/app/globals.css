@@ -1,0 +1,98 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary-navy: #050A15;
+  --color-secondary-navy: #0C1220;
+  --color-industrial-blue: #0066CC;
+  --color-neon-cyan: #00E5FF;
+  --color-neon-blue: #3A86C8;
+  --color-steel-gray: #94A3B8;
+  --color-dark-glass: rgba(5, 10, 21, 0.75);
+  --color-accent-orange: #FF5A09;
+  
+  --font-sans: var(--font-outfit);
+  --font-body: var(--font-inter);
+}
+
+:root {
+  --background: #050A15;
+  --foreground: #FFFFFF;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Custom premium scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #050A15;
+}
+::-webkit-scrollbar-thumb {
+  background: #1E293B;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #00E5FF;
+}
+
+/* Custom utility styles */
+.glow-effect {
+  box-shadow: 0 0 20px rgba(0, 229, 255, 0.15);
+}
+
+.glow-effect-blue {
+  box-shadow: 0 0 20px rgba(0, 102, 204, 0.3);
+}
+
+.glow-text {
+  text-shadow: 0 0 10px rgba(0, 229, 255, 0.4);
+}
+
+.glassmorphism {
+  background: rgba(12, 18, 32, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.glassmorphic-card {
+  background: linear-gradient(135deg, rgba(12, 18, 32, 0.8) 0%, rgba(5, 10, 21, 0.9) 100%);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glassmorphic-card:hover {
+  border-color: rgba(0, 229, 255, 0.2);
+  box-shadow: 0 10px 30px -10px rgba(0, 229, 255, 0.15);
+  transform: translateY(-2px);
+}
+
+.circuit-grid {
+  background-image: 
+    radial-gradient(circle at 1px 1px, rgba(0, 229, 255, 0.04) 1px, transparent 0),
+    linear-gradient(rgba(0, 102, 204, 0.015) 1px, transparent 0),
+    linear-gradient(90deg, rgba(0, 102, 204, 0.015) 1px, transparent 0);
+  background-size: 20px 20px, 40px 40px, 40px 40px;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
