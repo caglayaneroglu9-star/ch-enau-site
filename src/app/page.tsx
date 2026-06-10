@@ -17,18 +17,12 @@ import StatsSection from "@/components/StatsSection";
 import TechGrid from "@/components/TechGrid";
 import ProblemSolver from "@/components/ProblemSolver";
 import TobaccoMachineryDomain from "@/components/TobaccoMachineryDomain";
+import GlobeAnimation from "@/components/GlobeAnimation";
 import { useLanguage } from "@/config/LanguageContext";
 
 export default function Home() {
   const { t, mounted } = useLanguage();
   const [isVideoOpen, setIsVideoOpen] = useState(false);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsVideoOpen(true);
-    }, 5000);
-    return () => clearTimeout(timer);
-  }, []);
 
   const translatedQuickServices = [
     {
@@ -67,81 +61,83 @@ export default function Home() {
             {/* Logo & Video Flex Container */}
             <motion.div
               layout
-              className="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-12 w-full mb-8 relative"
+              className="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-12 w-full mb-12 relative"
             >
-              {/* Large Company Logo */}
+              {/* Left Side: Large Metallic Logo (Holographic Edition) */}
+              {/* Left Side: Large Company Logo */}
               <motion.div
                 layout
-                initial={{ opacity: 0, scale: 0.9 }}
+                initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5 }}
-                onClick={() => {
-                  if (!isVideoOpen) setIsVideoOpen(true);
-                }}
-                className={`relative rounded-3xl overflow-hidden border border-neon-cyan/30 bg-secondary-navy p-3 glow-effect shrink-0 transition-colors duration-300 ${
-                  isVideoOpen
-                    ? "w-48 h-48 sm:w-56 sm:h-56 lg:w-64 lg:h-64"
-                    : "w-72 h-72 sm:w-96 sm:h-96 cursor-pointer group hover:border-neon-cyan"
-                }`}
+                className="w-64 h-64 sm:w-72 sm:h-72 lg:w-80 lg:h-80 rounded-3xl overflow-hidden border border-neon-cyan/30 bg-secondary-navy p-3 glow-effect shrink-0 select-none relative group hover:border-neon-cyan transition-colors duration-300"
               >
                 <img
                   src="/logo.jpg"
                   alt="CH Energie & Automation Logo"
                   className="object-cover w-full h-full rounded-2xl group-hover:scale-[1.02] transition-transform duration-300"
                 />
-
-                {/* Play Overlay if video is closed */}
-                {!isVideoOpen && (
-                  <div className="absolute inset-0 bg-primary-navy/40 backdrop-blur-[2px] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl">
-                    <div className="w-16 h-16 rounded-full bg-industrial-blue/95 border border-neon-cyan/50 text-neon-cyan flex items-center justify-center shadow-[0_0_20px_rgba(0,229,255,0.4)] animate-pulse">
-                      <Play className="w-6 h-6 fill-current translate-x-0.5" />
-                    </div>
-                  </div>
-                )}
               </motion.div>
 
-              {/* Video Panel */}
-              <AnimatePresence>
-                {isVideoOpen && (
-                  <motion.div
-                    initial={{ opacity: 0, x: 50, scale: 0.95 }}
-                    animate={{ opacity: 1, x: 0, scale: 1 }}
-                    exit={{ opacity: 0, x: 50, scale: 0.95 }}
-                    transition={{ duration: 0.5, type: "spring", stiffness: 100 }}
-                    className="relative w-full max-w-lg aspect-video rounded-3xl overflow-hidden border border-neon-cyan/30 bg-secondary-navy shadow-2xl glow-effect flex items-center justify-center group shrink-0"
-                  >
-                    <video
-                      src="https://assets.mixkit.co/videos/preview/mixkit-robotic-arm-assembling-circuit-board-43188-large.mp4"
-                      autoPlay
-                      muted
-                      loop
-                      playsInline
-                      className="w-full h-full object-cover"
-                    />
-
-                    {/* Dark gradient shadow overlay for controls */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-primary-navy/40 via-transparent to-transparent pointer-events-none" />
-
-                    {/* Close Button overlay */}
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setIsVideoOpen(false);
-                      }}
-                      className="absolute top-4 right-4 p-2 rounded-full bg-primary-navy/80 hover:bg-red-600/90 border border-white/10 hover:border-red-500 text-white transition-all shadow-[0_0_15px_rgba(0,0,0,0.4)] hover:scale-105 cursor-pointer"
-                      aria-label="Videoyu Kapat"
+              {/* Right Side: Globe Animation Dashboard or Video Panel */}
+              <motion.div
+                layout
+                className="w-full max-w-lg sm:max-w-xl aspect-video rounded-3xl overflow-hidden border border-neon-cyan/30 bg-secondary-navy shadow-2xl glow-effect flex items-center justify-center relative shrink-0"
+              >
+                <AnimatePresence mode="wait">
+                  {!isVideoOpen ? (
+                    <motion.div
+                      key="globe"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="w-full h-full"
                     >
-                      <X className="w-4 h-4" />
-                    </button>
+                      <GlobeAnimation onTriggerVideo={() => setIsVideoOpen(true)} />
+                    </motion.div>
+                  ) : (
+                    <motion.div
+                      key="video"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="w-full h-full relative"
+                    >
+                      <video
+                        src="https://assets.mixkit.co/videos/preview/mixkit-robotic-arm-assembling-circuit-board-43188-large.mp4"
+                        autoPlay
+                        controls
+                        playsInline
+                        onEnded={() => setIsVideoOpen(false)}
+                        className="w-full h-full object-cover"
+                      />
 
-                    {/* Mini overlay label */}
-                    <div className="absolute bottom-4 left-4 bg-primary-navy/80 border border-white/5 px-3 py-1 rounded-full text-[10px] font-bold text-steel-gray flex items-center gap-1">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                      {t("home.hero.promoLabel")}
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+                      {/* Dark gradient shadow overlay for controls */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-primary-navy/40 via-transparent to-transparent pointer-events-none" />
+
+                      {/* Close Button overlay */}
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setIsVideoOpen(false);
+                        }}
+                        className="absolute top-4 right-4 p-2 rounded-full bg-primary-navy/80 hover:bg-red-600/90 border border-white/10 hover:border-red-500 text-white transition-all shadow-[0_0_15px_rgba(0,0,0,0.4)] hover:scale-105 cursor-pointer z-20"
+                        aria-label="Videoyu Kapat"
+                      >
+                        <X className="w-4 h-4" />
+                      </button>
+
+                      {/* Mini overlay label */}
+                      <div className="absolute bottom-4 left-4 bg-primary-navy/80 border border-white/5 px-3 py-1 rounded-full text-[10px] font-bold text-steel-gray flex items-center gap-1 z-20">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                        {t("home.hero.promoLabel")}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
             </motion.div>
 
             {/* Heading Copy */}
