@@ -5,6 +5,10 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Chatbot from "@/components/Chatbot";
 import { LanguageProvider } from "@/config/LanguageContext";
+import { BackgroundProvider } from "@/config/BackgroundContext";
+import VideoBackground from "@/components/VideoBackground";
+import VideoBackgroundControls from "@/components/VideoBackgroundControls";
+
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -53,14 +57,18 @@ export default function RootLayout({
       lang="en"
       className={`${outfit.variable} ${inter.variable} h-full scroll-smooth antialiased`}
     >
-      <body className="bg-primary-navy text-white min-h-full flex flex-col font-body">
+      <body className="bg-primary-navy text-white min-h-full flex flex-col font-body relative">
         <LanguageProvider>
-          <Navbar />
-          {/* Floating gradient light background accents */}
-          <div className="fixed top-0 left-0 w-full h-[500px] bg-[radial-gradient(ellipse_at_top,_var(--color-industrial-blue)_0%,_transparent_60%)] opacity-15 pointer-events-none z-0" />
-          <main className="flex-grow z-10 pt-20">{children}</main>
-          <Footer />
-          <Chatbot />
+          <BackgroundProvider>
+            <VideoBackground />
+            {/* Floating gradient light background accents */}
+            <div className="fixed top-0 left-0 w-full h-[500px] bg-[radial-gradient(ellipse_at_top,_var(--color-industrial-blue)_0%,_transparent_60%)] opacity-15 pointer-events-none z-0" />
+            <Navbar />
+            <main className="flex-grow z-10 pt-20">{children}</main>
+            <Footer />
+            <Chatbot />
+            <VideoBackgroundControls />
+          </BackgroundProvider>
         </LanguageProvider>
       </body>
     </html>

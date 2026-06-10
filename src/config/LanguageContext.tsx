@@ -23,21 +23,34 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    const saved = localStorage.getItem("preferred_language") as Language;
-    if (saved && ["en", "tr", "de"].includes(saved)) {
-      setLanguage(saved);
-    } else {
-      const browserLang = navigator.language.slice(0, 2) as Language;
-      if (["en", "tr", "de"].includes(browserLang)) {
-        setLanguage(browserLang);
+    try {
+      if (typeof window !== "undefined" && window.localStorage) {
+        const saved = localStorage.getItem("preferred_language") as Language;
+        if (saved && ["en", "tr", "de"].includes(saved)) {
+          setLanguage(saved);
+        } else {
+          const browserLang = navigator.language.slice(0, 2) as Language;
+          if (["en", "tr", "de"].includes(browserLang)) {
+            setLanguage(browserLang);
+          }
+        }
       }
+    } catch (e) {
+      console.warn("Could not read language from localStorage:", e);
+    } finally {
+      setMounted(true);
     }
-    setMounted(true);
   }, []);
 
   const changeLanguage = (lang: Language) => {
     setLanguage(lang);
-    localStorage.setItem("preferred_language", lang);
+    try {
+      if (typeof window !== "undefined" && window.localStorage) {
+        localStorage.setItem("preferred_language", lang);
+      }
+    } catch (e) {
+      console.warn("Could not save language preference:", e);
+    }
   };
 
   const t = (path: string) => {
