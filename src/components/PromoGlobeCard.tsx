@@ -1,12 +1,7 @@
 "use client";
 
 import React, { useRef, useEffect, useState } from "react";
-import { Play } from "lucide-react";
 import { useLanguage } from "@/config/LanguageContext";
-
-interface PromoGlobeCardProps {
-  onClick: () => void;
-}
 
 interface Point3D {
   x: number;
@@ -19,7 +14,7 @@ interface Segment3D {
   p2: Point3D;
 }
 
-export default function PromoGlobeCard({ onClick }: PromoGlobeCardProps) {
+export default function PromoGlobeCard() {
   const { t } = useLanguage();
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -719,10 +714,9 @@ export default function PromoGlobeCard({ onClick }: PromoGlobeCardProps) {
   return (
     <div
       ref={containerRef}
-      onClick={onClick}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="relative w-full max-w-2xl aspect-[2/1.1] rounded-3xl overflow-hidden border border-neon-cyan/35 bg-[#030d1a]/80 p-5 md:p-6 flex flex-col justify-between cursor-pointer group transition-all duration-300 shadow-[0_0_20px_rgba(0,229,255,0.05)] hover:shadow-[0_0_30px_rgba(0,229,255,0.18)] hover:border-neon-cyan/70 select-none select-none"
+      className="relative w-full max-w-2xl aspect-[2/1.1] rounded-3xl overflow-hidden border border-neon-cyan/35 bg-[#030d1a]/80 p-5 md:p-6 flex flex-col justify-between cursor-default group transition-all duration-300 shadow-[0_0_20px_rgba(0,229,255,0.05)] hover:shadow-[0_0_25px_rgba(0,229,255,0.12)] hover:border-neon-cyan/50 select-none"
     >
       {/* Corner brackets/HUD lines for futuristic feel */}
       <div className="absolute top-2 left-2 w-3.5 h-3.5 border-t border-l border-neon-cyan/40 rounded-tl group-hover:border-neon-cyan/80 transition-colors" />
@@ -758,19 +752,14 @@ export default function PromoGlobeCard({ onClick }: PromoGlobeCardProps) {
           <span className="text-emerald-400/90">[SYS] VPN links: SECURE</span>
         </div>
 
-        {/* CTA and info */}
-        <div className="flex items-center gap-3 text-right">
-          <div className="flex flex-col items-end">
-            <span className="font-sans font-black text-sm md:text-base text-neon-cyan tracking-wide uppercase">
-              PROMO DEMO
-            </span>
-            <span className="text-steel-gray font-normal text-[8px] md:text-[9px] tracking-wide mt-0.5">
-              {t("home.hero.promoHoverWatch") || "Click or hover 5s to watch"}
-            </span>
-          </div>
-          <div className="w-12 h-12 rounded-full bg-[#030d1a]/95 border border-neon-cyan/40 group-hover:border-neon-cyan text-neon-cyan flex items-center justify-center shadow-[0_0_15px_rgba(0,229,255,0.25)] group-hover:shadow-[0_0_25px_rgba(0,229,255,0.45)] group-hover:scale-105 transition-all duration-300 shrink-0">
-            <Play className="w-4 h-4 fill-neon-cyan text-neon-cyan translate-x-0.5" />
-          </div>
+        {/* HQ Status / Info */}
+        <div className="flex flex-col items-end text-right">
+          <span className="font-sans font-black text-sm md:text-base text-neon-cyan tracking-wide uppercase">
+            GLOBAL NETWORK
+          </span>
+          <span className="text-steel-gray font-normal text-[8px] md:text-[9px] tracking-wide mt-0.5">
+            HQ Izmir & worldwide dispatch
+          </span>
         </div>
       </div>
     </div>

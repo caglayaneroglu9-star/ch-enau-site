@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import {
   Wrench,
   Cpu,
@@ -10,8 +10,6 @@ import {
   ArrowRight,
   Zap,
   CheckCircle,
-  Play,
-  X,
 } from "lucide-react";
 import StatsSection from "@/components/StatsSection";
 import TechGrid from "@/components/TechGrid";
@@ -22,14 +20,6 @@ import PromoGlobeCard from "@/components/PromoGlobeCard";
 
 export default function Home() {
   const { t, mounted } = useLanguage();
-  const [isVideoOpen, setIsVideoOpen] = useState(false);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsVideoOpen(true);
-    }, 5000);
-    return () => clearTimeout(timer);
-  }, []);
 
   const translatedQuickServices = [
     {
@@ -65,61 +55,16 @@ export default function Home() {
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full flex justify-center">
           <div className="flex flex-col items-center text-center max-w-4xl">
-            {/* Promo Video / Globe Card Container */}
+            {/* Globe Card Container */}
             <div className="w-full max-w-2xl mb-8 relative flex justify-center">
-              <AnimatePresence mode="wait">
-                {!isVideoOpen ? (
-                  <motion.div
-                    key="globe-card"
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.95 }}
-                    transition={{ duration: 0.4 }}
-                    className="w-full flex justify-center"
-                  >
-                    <PromoGlobeCard onClick={() => setIsVideoOpen(true)} />
-                  </motion.div>
-                ) : (
-                  <motion.div
-                    key="video-card"
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.95 }}
-                    transition={{ duration: 0.4 }}
-                    className="relative w-full aspect-[2/1.1] rounded-3xl overflow-hidden border border-neon-cyan/45 bg-[#030d1a] shadow-[0_0_30px_rgba(0,229,255,0.2)] flex items-center justify-center group"
-                  >
-                    <video
-                      src="https://videos.pexels.com/video-files/855859/855859-hd_1920_1080_30fps.mp4"
-                      autoPlay
-                      muted
-                      loop
-                      playsInline
-                      className="w-full h-full object-cover"
-                    />
-
-                    {/* Dark gradient shadow overlay for controls */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-primary-navy/40 via-transparent to-transparent pointer-events-none" />
-
-                    {/* Close Button overlay */}
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setIsVideoOpen(false);
-                      }}
-                      className="absolute top-4 right-4 p-2 rounded-full bg-[#030d1a]/90 hover:bg-red-600/90 border border-white/10 hover:border-red-500 text-white transition-all shadow-[0_0_15px_rgba(0,0,0,0.4)] hover:scale-105 cursor-pointer z-20"
-                      aria-label="Videoyu Kapat"
-                    >
-                      <X className="w-4 h-4" />
-                    </button>
-
-                    {/* Mini overlay label */}
-                    <div className="absolute bottom-4 left-4 bg-[#030d1a]/90 border border-white/5 px-3 py-1 rounded-full text-[10px] font-bold text-steel-gray flex items-center gap-1 z-20">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                      {t("home.hero.promoLabel")}
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6 }}
+                className="w-full flex justify-center"
+              >
+                <PromoGlobeCard />
+              </motion.div>
             </div>
 
             {/* Heading Copy */}
