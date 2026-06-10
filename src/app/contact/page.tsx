@@ -3,8 +3,10 @@
 import React, { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { Mail, Phone, MapPin, Zap, Send, CheckCircle, MessageSquare } from "lucide-react";
+import { useLanguage } from "@/config/LanguageContext";
 
 function ContactFormContent() {
+  const { t, language } = useLanguage();
   const searchParams = useSearchParams();
   const [formData, setFormData] = useState({
     name: "",
@@ -40,13 +42,36 @@ function ContactFormContent() {
 
     // Simple validation
     if (!formData.name || !formData.company || !formData.email || !formData.message) {
-      setError("Please fill out all required fields.");
+      setError(
+        language === "tr"
+          ? "Lütfen tüm zorunlu alanları doldurun."
+          : language === "de"
+          ? "Bitte füllen Sie alle Pflichtfelder aus."
+          : "Please fill out all required fields."
+      );
       return;
     }
 
     // Success transition
     setSubmitted(true);
   };
+
+  const isTr = language === "tr";
+  const isDe = language === "de";
+
+  const caglayanTitle = isTr
+    ? "Elektrik-Elektronik Mühendisi | Kıdemli Sistem Mimarı"
+    : isDe
+    ? "Elektroingenieur | Senior-Systemarchitekt"
+    : "Electrical & Electronics Engineer | Senior Systems Architect";
+
+  const hakanTitle = isTr
+    ? "Kıdemli Otomasyon Mühendisi"
+    : isDe
+    ? "Senior Automatisierungsingenieur"
+    : "Senior Automation Engineer";
+
+  const optionalLabel = isTr ? "(İsteğe Bağlı)" : isDe ? "(Optional)" : "(Optional)";
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-20 items-start">
@@ -63,33 +88,32 @@ function ContactFormContent() {
                 <CheckCircle className="w-12 h-12" />
               </div>
               <h2 className="font-sans font-extrabold text-2xl text-white">
-                Technical Request Transmitted
+                {t("contactPage.form.successTitle")}
               </h2>
               <p className="font-body text-sm text-steel-gray max-w-md mx-auto leading-relaxed">
-                Thank you. Your request has been assigned to our automation queue.
                 {formData.emergency ? (
                   <span className="text-red-400 font-bold block mt-2">
-                    ALERT: Direct standby engineer has been paged. Expect a call within 15 minutes.
+                    {t("contactPage.form.successDescEmergency")}
                   </span>
                 ) : (
-                  " We will contact you with a diagnostic proposal within 2 hours."
+                  t("contactPage.form.successDescNormal")
                 )}
               </p>
               <button
                 onClick={() => setSubmitted(false)}
                 className="mt-6 px-6 py-2 bg-secondary-navy hover:bg-secondary-navy/80 border border-white/10 text-white rounded-lg text-sm font-semibold transition-colors"
               >
-                Submit another inquiry
+                {t("contactPage.form.submitAnother")}
               </button>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="flex flex-col gap-6">
               <div>
                 <h2 className="font-sans font-extrabold text-xl sm:text-2xl text-white">
-                  Technical Service Request
+                  {t("contactPage.form.formTitle")}
                 </h2>
                 <p className="font-body text-xs sm:text-sm text-steel-gray mt-1">
-                  Specify details regarding cabinet retrofits, logic issues, or machine diagnostics.
+                  {t("contactPage.form.formDesc")}
                 </p>
               </div>
 
@@ -103,7 +127,7 @@ function ContactFormContent() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="flex flex-col gap-1.5">
                   <label htmlFor="name" className="font-sans font-bold text-xs text-white/60 uppercase tracking-wide">
-                    Full Name <span className="text-red-400">*</span>
+                    {t("contactPage.form.name")} <span className="text-red-400">*</span>
                   </label>
                   <input
                     type="text"
@@ -117,7 +141,7 @@ function ContactFormContent() {
                 </div>
                 <div className="flex flex-col gap-1.5">
                   <label htmlFor="company" className="font-sans font-bold text-xs text-white/60 uppercase tracking-wide">
-                    Company Name <span className="text-red-400">*</span>
+                    {t("contactPage.form.company")} <span className="text-red-400">*</span>
                   </label>
                   <input
                     type="text"
@@ -134,7 +158,7 @@ function ContactFormContent() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="flex flex-col gap-1.5">
                   <label htmlFor="email" className="font-sans font-bold text-xs text-white/60 uppercase tracking-wide">
-                    Corporate Email <span className="text-red-400">*</span>
+                    {t("contactPage.form.email")} <span className="text-red-400">*</span>
                   </label>
                   <input
                     type="email"
@@ -148,7 +172,7 @@ function ContactFormContent() {
                 </div>
                 <div className="flex flex-col gap-1.5">
                   <label htmlFor="phone" className="font-sans font-bold text-xs text-white/60 uppercase tracking-wide">
-                    Contact Phone <span className="text-white/40">(Optional)</span>
+                    {t("contactPage.form.phone")} <span className="text-white/40">{optionalLabel}</span>
                   </label>
                   <input
                     type="tel"
@@ -164,7 +188,7 @@ function ContactFormContent() {
 
               <div className="flex flex-col gap-1.5">
                 <label htmlFor="machine" className="font-sans font-bold text-xs text-white/60 uppercase tracking-wide">
-                  Target Equipment Platform
+                  {t("contactPage.form.machineType")}
                 </label>
                 <select
                   id="machine"
@@ -173,19 +197,19 @@ function ContactFormContent() {
                   onChange={handleChange}
                   className="bg-primary-navy/80 border border-white/10 rounded-lg px-4 py-2.5 text-sm text-white focus:outline-none focus:border-neon-cyan transition-colors"
                 >
-                  <option value="general">General PLC / Motion Diagnostics</option>
-                  <option value="gd-maker-packer">G.D. Maker & Packer</option>
-                  <option value="sasib-maker-packer">SASIB Maker & Packer</option>
-                  <option value="gd-filter">G.D. Filtermaschinen</option>
-                  <option value="molins-filter">MOLINS Filtermaschinen</option>
-                  <option value="mts-tube">MTS Tubemaschinen</option>
-                  <option value="other">Other High-Speed Packing Lines</option>
+                  <option value="general">{t("contactPage.form.generalOption")}</option>
+                  <option value="gd-maker-packer">{t("contactPage.form.machineOptions.gd")}</option>
+                  <option value="sasib-maker-packer">{t("contactPage.form.machineOptions.sasib")}</option>
+                  <option value="gd-filter">{t("contactPage.form.machineOptions.gdFilter")}</option>
+                  <option value="molins-filter">{t("contactPage.form.machineOptions.molins")}</option>
+                  <option value="mts-tube">{t("contactPage.form.machineOptions.mts")}</option>
+                  <option value="other">{t("contactPage.form.otherOption")}</option>
                 </select>
               </div>
 
               <div className="flex flex-col gap-1.5">
                 <label htmlFor="message" className="font-sans font-bold text-xs text-white/60 uppercase tracking-wide">
-                  Describe System Failure / Specifications <span className="text-red-400">*</span>
+                  {t("contactPage.form.issueDesc")} <span className="text-red-400">*</span>
                 </label>
                 <textarea
                   id="message"
@@ -194,7 +218,7 @@ function ContactFormContent() {
                   value={formData.message}
                   onChange={handleChange}
                   className="bg-primary-navy/80 border border-white/10 rounded-lg px-4 py-2.5 text-sm text-white focus:outline-none focus:border-neon-cyan transition-colors resize-none"
-                  placeholder="Explain symptoms, controller hardware models, recent modifications, and error log notices..."
+                  placeholder={t("contactPage.form.issuePlaceholder")}
                 />
               </div>
 
@@ -218,10 +242,10 @@ function ContactFormContent() {
                 <div>
                   <h4 className="font-sans font-bold text-sm text-white flex items-center gap-1.5">
                     <Zap className={`w-4 h-4 fill-current ${formData.emergency ? "text-red-400" : "text-steel-gray"}`} />
-                    CRITICAL EMERGENCY: Production Line Offline
+                    {t("contactPage.form.emergencyTitle")}
                   </h4>
                   <p className="font-body text-xs text-steel-gray mt-1 leading-relaxed">
-                    Check this option if your machine is stalled and you require an immediate standby engineer. Checking this triggers direct SMS alerts to our duty directors.
+                    {t("contactPage.form.emergencyDesc")}
                   </p>
                 </div>
               </div>
@@ -235,7 +259,7 @@ function ContactFormContent() {
                 }`}
               >
                 <Send className="w-4 h-4" />
-                Transmit Service Inquiry
+                {formData.emergency ? t("contactPage.form.transmitBtn") : t("contactPage.form.submitBtn")}
               </button>
             </form>
           )}
@@ -249,10 +273,12 @@ function ContactFormContent() {
           <div className="absolute top-0 right-0 w-[150px] h-[150px] bg-red-600/5 rounded-full blur-[60px] pointer-events-none" />
           <div className="flex items-center gap-2.5 mb-4">
             <Zap className="w-5 h-5 text-red-400 fill-current animate-pulse" />
-            <h3 className="font-sans font-bold text-lg text-white">Standby Support Engineers</h3>
+            <h3 className="font-sans font-bold text-lg text-white">
+              {t("contactPage.standbyTitle")}
+            </h3>
           </div>
           <p className="font-body text-sm text-steel-gray leading-relaxed mb-6">
-            If your factory floor is suffering downtime, connect directly with our active on-call automation specialists:
+            {t("contactPage.standbyDesc")}
           </p>
 
           <div className="flex flex-col gap-6">
@@ -260,10 +286,10 @@ function ContactFormContent() {
             <div className="p-4 rounded-xl bg-primary-navy/60 border border-white/5 flex flex-col gap-3">
               <div>
                 <h4 className="font-sans font-bold text-sm text-white">Çağlayan EROĞLU</h4>
-                <p className="font-body text-xs text-neon-cyan">Electrical & Electronics Engineer | Senior Systems Architect</p>
+                <p className="font-body text-xs text-neon-cyan">{caglayanTitle}</p>
                 <p className="font-body text-[10px] text-emerald-400/90 font-semibold mt-1.5 flex items-center gap-1.5">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                  German NRW Government Recognized Diploma (Gleichwertigkeit)
+                  {t("contactPage.germanNRW")}
                 </p>
               </div>
               <div className="flex flex-col gap-2 font-body text-xs sm:text-sm">
@@ -302,7 +328,7 @@ function ContactFormContent() {
             <div className="p-4 rounded-xl bg-primary-navy/60 border border-white/5 flex flex-col gap-3">
               <div>
                 <h4 className="font-sans font-bold text-sm text-white">Hakan ÖZKAN</h4>
-                <p className="font-body text-xs text-neon-cyan">Senior Automation Engineer</p>
+                <p className="font-body text-xs text-neon-cyan">{hakanTitle}</p>
               </div>
               <div className="flex flex-col gap-2 font-body text-xs sm:text-sm">
                 <a href="tel:+905074139675" className="flex items-center gap-2 text-steel-gray hover:text-white transition-colors">
@@ -327,14 +353,18 @@ function ContactFormContent() {
 
         {/* Regular channel details */}
         <div className="glassmorphic-card p-6 sm:p-8 rounded-2xl border border-white/5 flex flex-col gap-6">
-          <h3 className="font-sans font-bold text-lg text-white">General Inquiries</h3>
+          <h3 className="font-sans font-bold text-lg text-white">
+            {t("contactPage.generalInquiries")}
+          </h3>
           <ul className="flex flex-col gap-4">
             <li className="flex gap-4 items-center">
               <div className="p-3 rounded-lg bg-primary-navy border border-white/5 text-neon-cyan shrink-0">
                 <Mail className="w-5 h-5" />
               </div>
               <div>
-                <p className="font-sans font-bold text-xs text-white/50 uppercase tracking-widest">Email</p>
+                <p className="font-sans font-bold text-xs text-white/50 uppercase tracking-widest">
+                  {t("contactPage.emailLabel")}
+                </p>
                 <a href="mailto:support@ch-energie.de" className="font-body text-sm sm:text-base text-white hover:text-neon-cyan transition-colors">
                   support@ch-energie.de
                 </a>
@@ -345,10 +375,18 @@ function ContactFormContent() {
                 <MapPin className="w-5 h-5" />
               </div>
               <div>
-                <p className="font-sans font-bold text-xs text-white/50 uppercase tracking-widest">Office Address</p>
+                <p className="font-sans font-bold text-xs text-white/50 uppercase tracking-widest">
+                  {t("contactPage.addressLabel")}
+                </p>
                 <p className="font-body text-sm sm:text-base text-white leading-relaxed">
-                  Gaziemir / İzmir <br />
-                  <span className="text-xs text-steel-gray">(Global flight & drive-to dispatch)</span>
+                  {t("footer.address")} <br />
+                  <span className="text-xs text-steel-gray">
+                    {language === "tr"
+                      ? "(Küresel uçuş ve araçla müdahale imkanı)"
+                      : language === "de"
+                      ? "(Globaler Flug- und Fahrbereitschaftsdienst)"
+                      : "(Global flight & drive-to dispatch)"}
+                  </span>
                 </p>
               </div>
             </li>
@@ -360,6 +398,8 @@ function ContactFormContent() {
 }
 
 export default function ContactPage() {
+  const { t } = useLanguage();
+
   return (
     <div className="py-12 sm:py-20 relative">
       <div className="absolute inset-0 circuit-grid opacity-5 pointer-events-none" />
@@ -368,13 +408,13 @@ export default function ContactPage() {
         {/* Header Block */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <span className="font-body text-xs font-bold tracking-[0.2em] text-neon-cyan uppercase bg-neon-cyan/10 px-3.5 py-1.5 rounded-full">
-            Technical Communications
+            {t("contactPage.tag")}
           </span>
           <h1 className="font-sans font-extrabold text-4xl sm:text-5xl text-white mt-5 tracking-tight">
-            Consult our Standby Engineers
+            {t("contactPage.title")}
           </h1>
           <p className="font-body text-base sm:text-lg text-steel-gray mt-4 leading-relaxed">
-            Reach out for diagnostic consultations, system modernizations, or emergency support schedules.
+            {t("contactPage.desc")}
           </p>
         </div>
 
@@ -386,9 +426,11 @@ export default function ContactPage() {
         {/* Global Dispatch Map Mockup */}
         <div className="glassmorphic-card p-6 sm:p-8 rounded-2xl border border-white/5 text-center relative overflow-hidden">
           <div className="absolute inset-0 bg-primary-navy opacity-20 circuit-grid" />
-          <h3 className="font-sans font-extrabold text-lg text-white mb-2 relative z-10">Global Dispatch Network</h3>
+          <h3 className="font-sans font-extrabold text-lg text-white mb-2 relative z-10">
+            {t("contactPage.dispatchTitle")}
+          </h3>
           <p className="font-body text-sm text-steel-gray max-w-xl mx-auto mb-6 relative z-10">
-            Headquartered in Gaziemir / İzmir, our team is located strategically to guarantee fast travel to manufacturing centers worldwide.
+            {t("contactPage.dispatchDesc")}
           </p>
 
           {/* SVG Map Layout Representation */}

@@ -1,8 +1,13 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 import { Mail, Phone, MapPin, Zap, MessageSquare } from "lucide-react";
+import { useLanguage } from "@/config/LanguageContext";
 
 export default function Footer() {
+  const { t } = useLanguage();
+
   return (
     <footer className="bg-primary-navy border-t border-white/5 pt-16 pb-12 relative overflow-hidden">
       {/* Decorative cyber grid accent */}
@@ -31,12 +36,12 @@ export default function Footer() {
               </div>
             </Link>
             <p className="font-body text-sm text-steel-gray leading-relaxed mt-2">
-              Premium industrial automation and motion control systems engineering. Specialized in high-speed tobacco production & packaging machinery.
+              {t("footer.about")}
             </p>
             <div className="flex items-center gap-2.5 mt-2">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
               <span className="font-body text-xs font-semibold text-emerald-400">
-                Engineers Ready for Global Dispatch
+                {t("footer.readyLabel") || "Engineers Ready for Global Dispatch"}
               </span>
             </div>
           </div>
@@ -44,7 +49,7 @@ export default function Footer() {
           {/* Quick Sitemap */}
           <div>
             <h3 className="font-sans font-semibold text-sm text-white uppercase tracking-wider mb-5">
-              Services & Navigation
+              {t("footer.quickLinks") || "Quick Navigation"}
             </h3>
             <ul className="flex flex-col gap-3">
               <li>
@@ -52,7 +57,7 @@ export default function Footer() {
                   href="/services"
                   className="font-body text-sm text-steel-gray hover:text-neon-cyan transition-colors"
                 >
-                  Automation Engineering
+                  {t("nav.services")}
                 </Link>
               </li>
               <li>
@@ -60,7 +65,7 @@ export default function Footer() {
                   href="/expertise"
                   className="font-body text-sm text-steel-gray hover:text-neon-cyan transition-colors"
                 >
-                  Tobacco Packaging Machinery
+                  {t("nav.machinery")}
                 </Link>
               </li>
               <li>
@@ -68,7 +73,7 @@ export default function Footer() {
                   href="/troubleshooting"
                   className="font-body text-sm text-steel-gray hover:text-neon-cyan transition-colors"
                 >
-                  Chronic Fault Diagnostics
+                  {t("nav.solutions")}
                 </Link>
               </li>
               <li>
@@ -76,7 +81,7 @@ export default function Footer() {
                   href="/contact"
                   className="font-body text-sm text-steel-gray hover:text-neon-cyan transition-colors"
                 >
-                  Consultation & Quotation
+                  {t("nav.contact")}
                 </Link>
               </li>
             </ul>
@@ -85,7 +90,7 @@ export default function Footer() {
           {/* Supported Technologies */}
           <div>
             <h3 className="font-sans font-semibold text-sm text-white uppercase tracking-wider mb-5">
-              Core Stack Expertise
+              {t("footer.coreStack") || "Core Stack Expertise"}
             </h3>
             <div className="flex flex-wrap gap-2">
               {[
@@ -111,14 +116,14 @@ export default function Footer() {
           {/* Contact details */}
           <div>
             <h3 className="font-sans font-semibold text-sm text-white uppercase tracking-wider mb-5">
-              Technical Headquarters
+              {t("footer.hqTitle") || "Technical Headquarters"}
             </h3>
             <ul className="flex flex-col gap-4">
               <li className="flex gap-3 items-start">
                 <MapPin className="w-5 h-5 text-neon-cyan shrink-0 mt-0.5" />
                 <span className="font-body text-sm text-steel-gray leading-relaxed">
-                  Gaziemir / İzmir <br />
-                  <span className="text-xs text-white/40">(On-site operations worldwide)</span>
+                  {t("footer.address") || "Gaziemir / İzmir"} <br />
+                  <span className="text-xs text-white/40">({t("footer.worldwideNotice") || "On-site operations worldwide"})</span>
                 </span>
               </li>
               <li className="flex gap-3 items-start">
@@ -169,17 +174,17 @@ export default function Footer() {
 
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="font-body text-xs text-white/40">
-            &copy; {new Date().getFullYear()} CH Energie & Automation. All rights reserved. German Engineering Standards.
+            &copy; {new Date().getFullYear()} CH Energie & Automation. {t("footer.rights")}
           </p>
           <div className="flex gap-6">
             <span className="font-body text-xs text-white/40 hover:text-white cursor-pointer transition-colors">
-              Privacy Policy
+              {t("footer.privacy") || "Privacy Policy"}
             </span>
             <span className="font-body text-xs text-white/40 hover:text-white cursor-pointer transition-colors">
-              Impressum
+              {t("footer.impressum") || "Impressum"}
             </span>
             <span className="font-body text-xs text-white/40 hover:text-white cursor-pointer transition-colors">
-              Terms of Service
+              {t("footer.terms") || "Terms of Service"}
             </span>
           </div>
         </div>

@@ -3,39 +3,42 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { ShieldCheck, Calendar, Zap, Globe } from "lucide-react";
-
-const stats = [
-  {
-    icon: Calendar,
-    value: "15+",
-    suffix: "Years Experience",
-    label: "Saha ve Makine Tecrübesi",
-    desc: "Long-standing expertise in high-speed, high-precision industrial production lines.",
-  },
-  {
-    icon: ShieldCheck,
-    value: "100+",
-    suffix: "Completed Projects",
-    label: "Başarıyla Devreye Alınan Proje",
-    desc: "From full legacy PLC retrofits to chronic motion control troubleshooting cases.",
-  },
-  {
-    icon: Zap,
-    value: "24/7",
-    suffix: "Technical Support",
-    label: "Kesintisiz Acil Müdahale",
-    desc: "Immediate online diagnostics and fast on-site dispatch to prevent factory downtime.",
-  },
-  {
-    icon: Globe,
-    value: "Global",
-    suffix: "Service Reach",
-    label: "Uluslararası Hizmet Gücü",
-    desc: "Serving manufacturing plants across Germany, Europe, and worldwide.",
-  },
-];
+import { useLanguage } from "@/config/LanguageContext";
 
 export default function StatsSection() {
+  const { t } = useLanguage();
+
+  const stats = [
+    {
+      icon: Calendar,
+      value: t("stats.experience.value") || "15+",
+      suffix: t("stats.experience.suffix") || "Years Experience",
+      label: t("stats.experience.label") || "Field & Machine Experience",
+      desc: t("stats.experience.desc") || "Long-standing expertise in high-speed, high-precision industrial production lines.",
+    },
+    {
+      icon: ShieldCheck,
+      value: t("stats.projects.value") || "100+",
+      suffix: t("stats.projects.suffix") || "Completed Projects",
+      label: t("stats.projects.label") || "Successfully Commissioned",
+      desc: t("stats.projects.desc") || "From full legacy PLC retrofits to chronic motion control troubleshooting cases.",
+    },
+    {
+      icon: Zap,
+      value: t("stats.support.value") || "24/7",
+      suffix: t("stats.support.suffix") || "Technical Support",
+      label: t("stats.support.label") || "Continuous Emergency Response",
+      desc: t("stats.support.desc") || "Immediate online diagnostics and fast on-site dispatch to prevent factory downtime.",
+    },
+    {
+      icon: Globe,
+      value: t("stats.reach.value") || "Global",
+      suffix: t("stats.reach.suffix") || "Service Reach",
+      label: t("stats.reach.label") || "International Capabilities",
+      desc: t("stats.reach.desc") || "Serving manufacturing plants across Germany, Europe, and worldwide.",
+    },
+  ];
+
   return (
     <section className="py-20 relative bg-secondary-navy/40 border-y border-white/5 overflow-hidden">
       {/* Decorative radial background grid */}

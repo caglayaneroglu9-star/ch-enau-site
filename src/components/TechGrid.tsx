@@ -1,55 +1,56 @@
-"use client";
-
 import React from "react";
 import { motion } from "framer-motion";
 import { Cpu, Layers, HardDrive, Network, Settings, Compass } from "lucide-react";
-
-const techPartners = [
-  {
-    name: "Beckhoff Automation",
-    techs: ["TwinCAT 2", "TwinCAT 3 (Visual Studio)", "TcXaeShell", "Drive Manager"],
-    icon: Cpu,
-    color: "border-red-500/20 hover:border-red-500/50 text-red-400",
-    bg: "rgba(239, 68, 68, 0.02)",
-  },
-  {
-    name: "Siemens Automation",
-    techs: ["SIMATIC Manager", "TIA Portal", "Step 7", "WinCC SCADA"],
-    icon: HardDrive,
-    color: "border-teal-500/20 hover:border-teal-500/50 text-teal-400",
-    bg: "rgba(20, 184, 166, 0.02)",
-  },
-  {
-    name: "Bosch Rexroth",
-    techs: ["IndraWorks DS", "IndraLogic & Visual Motion", "Servo Systems"],
-    icon: Layers,
-    color: "border-blue-500/20 hover:border-blue-500/50 text-blue-400",
-    bg: "rgba(59, 130, 246, 0.02)",
-  },
-  {
-    name: "Lenze Solutions",
-    techs: ["Drive PLC", "Engineer Suite", "Servo Inverters & Drives"],
-    icon: Settings,
-    color: "border-amber-500/20 hover:border-amber-500/50 text-amber-400",
-    bg: "rgba(245, 158, 11, 0.02)",
-  },
-  {
-    name: "Engineering Tools & Software",
-    techs: ["Microsoft Office", "Visual Studio Code", "CODESYS", "GDL (GD Box Programming)"],
-    icon: Compass,
-    color: "border-purple-500/20 hover:border-purple-500/50 text-purple-400",
-    bg: "rgba(168, 85, 247, 0.02)",
-  },
-  {
-    name: "Industrial Communications",
-    techs: ["EtherCAT Network", "PROFINET Protocol", "PROFIBUS", "EtherNet/IP"],
-    icon: Network,
-    color: "border-neon-cyan/20 hover:border-neon-cyan/50 text-neon-cyan",
-    bg: "rgba(0, 229, 255, 0.02)",
-  },
-];
+import { useLanguage } from "@/config/LanguageContext";
 
 export default function TechGrid() {
+  const { t } = useLanguage();
+
+  const techPartners = [
+    {
+      name: "Beckhoff Automation",
+      techs: ["TwinCAT 2", "TwinCAT 3 (Visual Studio)", "TcXaeShell", "Drive Manager"],
+      icon: Cpu,
+      color: "border-red-500/20 hover:border-red-500/50 text-red-400",
+      bg: "rgba(239, 68, 68, 0.02)",
+    },
+    {
+      name: "Siemens Automation",
+      techs: ["SIMATIC Manager", "TIA Portal", "Step 7", "WinCC SCADA"],
+      icon: HardDrive,
+      color: "border-teal-500/20 hover:border-teal-500/50 text-teal-400",
+      bg: "rgba(20, 184, 166, 0.02)",
+    },
+    {
+      name: "Bosch Rexroth",
+      techs: ["IndraWorks DS", "IndraLogic & Visual Motion", "Servo Systems"],
+      icon: Layers,
+      color: "border-blue-500/20 hover:border-blue-500/50 text-blue-400",
+      bg: "rgba(59, 130, 246, 0.02)",
+    },
+    {
+      name: "Lenze Solutions",
+      techs: ["Drive PLC", "Engineer Suite", "Servo Inverters & Drives"],
+      icon: Settings,
+      color: "border-amber-500/20 hover:border-amber-500/50 text-amber-400",
+      bg: "rgba(245, 158, 11, 0.02)",
+    },
+    {
+      name: t("techGrid.toolsName") || "Engineering Tools & Software",
+      techs: ["Microsoft Office", "Visual Studio Code", "CODESYS", "GDL (GD Box Programming)"],
+      icon: Compass,
+      color: "border-purple-500/20 hover:border-purple-500/50 text-purple-400",
+      bg: "rgba(168, 85, 247, 0.02)",
+    },
+    {
+      name: t("techGrid.commsName") || "Industrial Communications",
+      techs: ["EtherCAT Network", "PROFINET Protocol", "PROFIBUS", "EtherNet/IP"],
+      icon: Network,
+      color: "border-neon-cyan/20 hover:border-neon-cyan/50 text-neon-cyan",
+      bg: "rgba(0, 229, 255, 0.02)",
+    },
+  ];
+
   return (
     <section className="py-24 relative overflow-hidden">
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-neon-cyan/5 rounded-full blur-[120px] pointer-events-none" />
@@ -62,7 +63,7 @@ export default function TechGrid() {
             viewport={{ once: true }}
             className="font-body text-xs font-bold tracking-[0.2em] text-neon-cyan uppercase bg-neon-cyan/10 px-3.5 py-1.5 rounded-full"
           >
-            Engineering Ecosystem
+            {t("techGrid.tag") || "Engineering Ecosystem"}
           </motion.span>
           <motion.h2
             initial={{ opacity: 0, y: 10 }}
@@ -71,7 +72,7 @@ export default function TechGrid() {
             transition={{ delay: 0.1 }}
             className="font-sans font-extrabold text-3xl sm:text-4xl text-white mt-4 tracking-tight"
           >
-            Supported Hardware & Software Platforms
+            {t("techGrid.title") || "Supported Hardware & Software Platforms"}
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 10 }}
@@ -80,7 +81,7 @@ export default function TechGrid() {
             transition={{ delay: 0.2 }}
             className="font-body text-base text-steel-gray mt-4 leading-relaxed"
           >
-            We deploy direct manufacturer-level software toolsets to ensure seamless, high-performance integration and diagnostics.
+            {t("techGrid.desc") || "We deploy direct manufacturer-level software toolsets to ensure seamless, high-performance integration and diagnostics."}
           </motion.p>
         </div>
 

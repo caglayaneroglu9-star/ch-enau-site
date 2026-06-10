@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { MessageSquare, X, Send, Bot, Sparkles, PhoneCall, Zap } from "lucide-react";
 import chatbotConfig from "../config/chatbot.json";
+import { useLanguage } from "@/config/LanguageContext";
 
 interface Message {
   id: string;
@@ -13,6 +14,8 @@ interface Message {
 }
 
 export default function Chatbot() {
+  const { t, language } = useLanguage();
+
   // Check if chatbot is enabled in the configuration
   if (!chatbotConfig.enabled) {
     return null;
@@ -25,17 +28,17 @@ export default function Chatbot() {
   const [hasNewMessage, setHasNewMessage] = useState(true);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  // Initialize with welcome message
+  // Initialize or update welcome message when language changes
   useEffect(() => {
     setMessages([
       {
         id: "welcome",
         sender: "bot",
-        text: chatbotConfig.welcomeMessage,
+        text: t("chatbot.welcomeMessage"),
         timestamp: new Date(),
       },
     ]);
-  }, []);
+  }, [language]);
 
   // Auto-scroll to bottom of chat
   useEffect(() => {
@@ -77,7 +80,11 @@ export default function Chatbot() {
         "haberleşme", "habereşme", "ethercat drop", "modül", "safety", "güvenlik", 
         "acil stop", "stop hatası", "rejection", "fire", "senkron", "mismatch", 
         "türbülans", "vakum", "enkoder", "encoder", "cam profile", "kam profili", 
-        "hata kodu", "error code"
+        "hata kodu", "error code",
+        // German
+        "fehler", "störung", "kaputt", "karte", "platine", "kommunikation", 
+        "sicherheit", "not-aus", "notaus", "synchronisation", "abweichung", 
+        "vakuum", "fehlercode"
       ];
 
       const isComplexQuery = complexKeywords.some(keyword => normalizedQuery.includes(keyword));
@@ -86,13 +93,13 @@ export default function Chatbot() {
       let isFallback = false;
 
       if (isComplexQuery) {
-        matchedResponse = "Girdiğiniz detaylar (arıza, elektronik kart, haberleşme kesintisi veya kritik emniyet hatası vb.) üst seviye karmaşık bir probleme işaret ediyor. Bu tür kritik durumlarda hatalı müdahaleleri önlemek adına yapay zeka yönlendirmesi yerine doğrudan kıdemli mühendislerimizle görüşmeniz hayati önem taşır. \n\nLütfen doğrudan iletişime geçin:\n- Çağlayan EROĞLU: +49 (0) 160 122 13 06 / +90 (533) 706 38 13\n- Hakan ÖZKAN: +90 (507) 413 96 75";
+        matchedResponse = t("chatbot.fallbackMessage");
         isFallback = true;
       } else {
         // Find best match in training documents
-        const bestMatch = chatbotConfig.trainingDocuments.find((doc) => {
-          return doc.keywords.some((keyword) => {
-            // Check if keyword is present in the query
+        const trainingDocs = t("chatbot.trainingDocuments") || [];
+        const bestMatch = trainingDocs.find((doc: any) => {
+          return (doc.keywords || []).some((keyword: string) => {
             return normalizedQuery.includes(keyword.toLowerCase());
           });
         });
@@ -100,7 +107,7 @@ export default function Chatbot() {
         if (bestMatch) {
           matchedResponse = bestMatch.response;
         } else {
-          matchedResponse = chatbotConfig.fallbackMessage;
+          matchedResponse = t("chatbot.fallbackMessage");
           isFallback = true;
         }
       }
@@ -127,6 +134,31 @@ export default function Chatbot() {
     }
   };
 
+  const isTr = language === "tr";
+  const isDe = language === "de";
+
+  const assistantSub = isTr
+    ? "Aktif Destek Asistanı"
+    : isDe
+    ? "Aktiver Support-Assistent"
+    : "Active Support Assistant";
+
+  const contactText = isTr ? "İletişime Geç" : isDe ? "Kontaktieren Sie uns" : "Contact Us";
+
+  const typingText = isTr
+    ? "Asistan yazıyor"
+    : isDe
+    ? "Assistent schreibt"
+    : "Assistant is typing";
+
+  const inputPlaceholder = isTr
+    ? "Sorunuzu buraya yazın..."
+    : isDe
+    ? "Geben Sie Ihre Frage hier ein..."
+    : "Type your question here...";
+
+  const quickChips = t("chatbot.quickChips") || [];
+
   return (
     <div className="fixed bottom-6 right-6 z-50 font-sans">
       {/* Floating Action Button */}
@@ -137,7 +169,7 @@ export default function Chatbot() {
             ? "bg-secondary-navy text-white hover:bg-primary-navy"
             : "bg-industrial-blue text-white hover:scale-105 shadow-[0_0_20px_rgba(0,102,204,0.4)]"
         }`}
-        aria-label="Yapay Zeka Asistanı"
+        aria-label={t("chatbot.botName")}
       >
         {isOpen ? (
           <X className="w-6 h-6 animate-fade-in" />
@@ -163,10 +195,10 @@ export default function Chatbot() {
               </div>
               <div>
                 <h5 className="font-bold text-sm text-white flex items-center gap-1">
-                  {chatbotConfig.botName}
+                  {t("chatbot.botName")}
                   <Sparkles className="w-3 h-3 text-neon-cyan animate-pulse" />
                 </h5>
-                <p className="text-[10px] text-steel-gray font-medium">Aktif Destek Asistanı</p>
+                <p className="text-[10px] text-steel-gray font-medium">{assistantSub}</p>
               </div>
             </div>
             <button
@@ -207,7 +239,7 @@ export default function Chatbot() {
                       href="/contact"
                       className="text-[9px] text-neon-cyan hover:underline font-bold flex items-center gap-0.5"
                     >
-                      <PhoneCall className="w-2.5 h-2.5" /> İletişime Geç
+                      <PhoneCall className="w-2.5 h-2.5" /> {contactText}
                     </a>
                   )}
                 </div>
@@ -218,7 +250,7 @@ export default function Chatbot() {
             {isTyping && (
               <div className="self-start max-w-[80%] flex flex-col items-start gap-1">
                 <div className="bg-primary-navy/80 text-steel-gray p-3 rounded-2xl rounded-bl-none border border-white/5 flex items-center gap-1.5">
-                  <span className="text-xs text-white/40">Asistan yazıyor</span>
+                  <span className="text-xs text-white/40">{typingText}</span>
                   <span className="flex gap-1">
                     <span className="w-1.5 h-1.5 bg-neon-cyan rounded-full animate-bounce delay-0" />
                     <span className="w-1.5 h-1.5 bg-neon-cyan rounded-full animate-bounce delay-150" />
@@ -233,7 +265,7 @@ export default function Chatbot() {
 
           {/* Quick Choice Chips */}
           <div className="px-4 py-2 border-t border-white/5 bg-primary-navy/30 flex flex-wrap gap-1.5 max-h-[85px] overflow-y-auto">
-            {chatbotConfig.quickChips.map((chipText) => (
+            {quickChips.map((chipText: string) => (
               <button
                 key={chipText}
                 type="button"
@@ -252,7 +284,7 @@ export default function Chatbot() {
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
               onKeyPress={handleKeyPress}
-              placeholder="Sorunuzu buraya yazın..."
+              placeholder={inputPlaceholder}
               className="flex-1 bg-secondary-navy border border-white/5 rounded-xl px-3.5 py-2 text-xs text-white focus:outline-none focus:border-neon-cyan/50 placeholder-white/20 transition-colors"
             />
             <button

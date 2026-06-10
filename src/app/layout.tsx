@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Chatbot from "@/components/Chatbot";
+import { LanguageProvider } from "@/config/LanguageContext";
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -32,6 +33,7 @@ export const metadata: Metadata = {
     "Motion Control Systems",
     "Electrical Troubleshooting",
     "GD Maker Packer",
+    "Sasib Maker Packer",
     "Sasib Packer",
     "Molins repair"
   ].join(", "),
@@ -52,12 +54,14 @@ export default function RootLayout({
       className={`${outfit.variable} ${inter.variable} h-full scroll-smooth antialiased`}
     >
       <body className="bg-primary-navy text-white min-h-full flex flex-col font-body">
-        <Navbar />
-        {/* Floating gradient light background accents */}
-        <div className="fixed top-0 left-0 w-full h-[500px] bg-[radial-gradient(ellipse_at_top,_var(--color-industrial-blue)_0%,_transparent_60%)] opacity-15 pointer-events-none z-0" />
-        <main className="flex-grow z-10 pt-20">{children}</main>
-        <Footer />
-        <Chatbot />
+        <LanguageProvider>
+          <Navbar />
+          {/* Floating gradient light background accents */}
+          <div className="fixed top-0 left-0 w-full h-[500px] bg-[radial-gradient(ellipse_at_top,_var(--color-industrial-blue)_0%,_transparent_60%)] opacity-15 pointer-events-none z-0" />
+          <main className="flex-grow z-10 pt-20">{children}</main>
+          <Footer />
+          <Chatbot />
+        </LanguageProvider>
       </body>
     </html>
   );

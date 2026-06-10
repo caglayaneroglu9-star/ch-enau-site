@@ -3,20 +3,22 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, PhoneCall, Zap } from "lucide-react";
-
-const navLinks = [
-  { name: "Home", href: "/" },
-  { name: "Services", href: "/services" },
-  { name: "Tobacco Machinery", href: "/expertise" },
-  { name: "Chronic Solutions", href: "/troubleshooting" },
-  { name: "Contact Us", href: "/contact" },
-];
+import { Menu, X, PhoneCall, Zap, Globe } from "lucide-react";
+import { useLanguage } from "@/config/LanguageContext";
 
 export default function Navbar() {
+  const { language, setLanguage, t, mounted } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
+
+  const translatedNavLinks = [
+    { name: t("nav.home"), href: "/" },
+    { name: t("nav.services"), href: "/services" },
+    { name: t("nav.machinery"), href: "/expertise" },
+    { name: t("nav.solutions"), href: "/troubleshooting" },
+    { name: t("nav.contact"), href: "/contact" },
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -61,7 +63,7 @@ export default function Navbar() {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => {
+            {translatedNavLinks.map((link) => {
               const isActive = pathname === link.href;
               return (
                 <Link
@@ -80,15 +82,33 @@ export default function Navbar() {
             })}
           </nav>
 
-          {/* Call / Emergency Button & Mobile Toggle */}
+          {/* Call / Emergency Button, Language Selector & Mobile Toggle */}
           <div className="flex items-center gap-4">
             <Link
               href="/contact?emergency=true"
               className="hidden lg:flex items-center gap-2 px-5 py-2.5 rounded-full bg-red-600/10 hover:bg-red-600/20 border border-red-500/30 hover:border-red-500 text-red-400 hover:text-white font-sans text-xs font-bold tracking-wider uppercase transition-all duration-300 shadow-[0_0_15px_rgba(239,68,68,0.1)] hover:shadow-[0_0_20px_rgba(239,68,68,0.3)] animate-pulse"
             >
               <Zap className="w-3.5 h-3.5 fill-current" />
-              Emergency 24/7 Support
+              {t("nav.emergency")}
             </Link>
+
+            {/* Desktop Language Selector */}
+            {mounted && (
+              <div className="hidden md:flex items-center gap-2.5 border-l border-white/10 pl-4 h-6 text-xs">
+                <Globe className="w-3.5 h-3.5 text-steel-gray" />
+                {(["en", "tr", "de"] as const).map((lang) => (
+                  <button
+                    key={lang}
+                    onClick={() => setLanguage(lang)}
+                    className={`font-sans font-bold hover:text-neon-cyan transition-colors uppercase cursor-pointer ${
+                      language === lang ? "text-neon-cyan" : "text-steel-gray"
+                    }`}
+                  >
+                    {lang}
+                  </button>
+                ))}
+              </div>
+            )}
 
             <button
               onClick={() => setIsOpen(!isOpen)}
@@ -105,7 +125,7 @@ export default function Navbar() {
       {isOpen && (
         <div className="md:hidden absolute top-full left-0 right-0 bg-secondary-navy/95 backdrop-blur-lg border-b border-white/5 shadow-2xl py-6 px-4 flex flex-col gap-4">
           <nav className="flex flex-col gap-4">
-            {navLinks.map((link) => {
+            {translatedNavLinks.map((link) => {
               const isActive = pathname === link.href;
               return (
                 <Link
@@ -124,13 +144,34 @@ export default function Navbar() {
             })}
           </nav>
           <hr className="border-white/5" />
+          
+          {/* Mobile Language Selector */}
+          {mounted && (
+            <div className="flex justify-center gap-5 py-2">
+              {(["en", "tr", "de"] as const).map((lang) => (
+                <button
+                  key={lang}
+                  onClick={() => {
+                    setLanguage(lang);
+                    setIsOpen(false);
+                  }}
+                  className={`font-sans font-bold hover:text-neon-cyan text-sm transition-colors uppercase cursor-pointer ${
+                    language === lang ? "text-neon-cyan" : "text-steel-gray"
+                  }`}
+                >
+                  {lang === "en" ? "English" : lang === "tr" ? "Türkçe" : "Deutsch"}
+                </button>
+              ))}
+            </div>
+          )}
+
           <Link
             href="/contact?emergency=true"
             onClick={() => setIsOpen(false)}
             className="flex items-center justify-center gap-2 py-3 rounded-lg bg-red-600/10 border border-red-500/30 text-red-400 font-sans text-sm font-bold tracking-wide uppercase transition-all"
           >
             <PhoneCall className="w-4 h-4" />
-            Emergency 24/7 Support
+            {t("nav.emergency")}
           </Link>
         </div>
       )}

@@ -10,7 +10,6 @@ import {
   ArrowRight,
   Zap,
   CheckCircle,
-  HelpCircle,
   Play,
   X,
 } from "lucide-react";
@@ -18,31 +17,10 @@ import StatsSection from "@/components/StatsSection";
 import TechGrid from "@/components/TechGrid";
 import ProblemSolver from "@/components/ProblemSolver";
 import TobaccoMachineryDomain from "@/components/TobaccoMachineryDomain";
-
-const quickServices = [
-  {
-    icon: Cpu,
-    title: "PLC Programming",
-    desc: "Beckhoff TwinCAT 2/3 (Structured Text, C# integration) & Siemens TIA Portal expertise.",
-  },
-  {
-    icon: Wrench,
-    title: "Machine Modernization",
-    desc: "Retrofitting obsolete controllers with open, high-performance PLC architectures.",
-  },
-  {
-    icon: Activity,
-    title: "Motion Control Systems",
-    desc: "Multi-axis servo tuning, electronic cam profile alignment, and EtherCAT diagnostics.",
-  },
-  {
-    icon: Zap,
-    title: "Emergency Support",
-    desc: "24/7 technical hotline and on-site expert dispatch to troubleshoot critical failures.",
-  },
-];
+import { useLanguage } from "@/config/LanguageContext";
 
 export default function Home() {
+  const { t, mounted } = useLanguage();
   const [isVideoOpen, setIsVideoOpen] = useState(false);
 
   useEffect(() => {
@@ -51,6 +29,29 @@ export default function Home() {
     }, 5000);
     return () => clearTimeout(timer);
   }, []);
+
+  const translatedQuickServices = [
+    {
+      icon: Cpu,
+      title: t("home.quickServices.plcTitle") || "PLC Programming",
+      desc: t("home.quickServices.plcDesc") || "Beckhoff TwinCAT 2/3 (Structured Text, C# integration) & Siemens TIA Portal expertise.",
+    },
+    {
+      icon: Wrench,
+      title: t("home.quickServices.modTitle") || "Machine Modernization",
+      desc: t("home.quickServices.modDesc") || "Retrofitting obsolete controllers with open, high-performance PLC architectures.",
+    },
+    {
+      icon: Activity,
+      title: t("home.quickServices.motionTitle") || "Motion Control Systems",
+      desc: t("home.quickServices.motionDesc") || "Multi-axis servo tuning, electronic cam profile alignment, and EtherCAT diagnostics.",
+    },
+    {
+      icon: Zap,
+      title: t("home.quickServices.emergTitle") || "Emergency Support",
+      desc: t("home.quickServices.emergDesc") || "24/7 technical hotline and on-site expert dispatch to troubleshoot critical failures.",
+    },
+  ];
 
   return (
     <div className="relative min-h-screen">
@@ -136,7 +137,7 @@ export default function Home() {
                     {/* Mini overlay label */}
                     <div className="absolute bottom-4 left-4 bg-primary-navy/80 border border-white/5 px-3 py-1 rounded-full text-[10px] font-bold text-steel-gray flex items-center gap-1">
                       <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                      Tanıtım Videosu
+                      {t("home.hero.promoLabel")}
                     </div>
                   </motion.div>
                 )}
@@ -151,9 +152,9 @@ export default function Home() {
                 transition={{ duration: 0.6, delay: 0.1 }}
                 className="font-sans font-extrabold text-4xl sm:text-5xl lg:text-6xl text-white tracking-tight leading-[1.1] text-center"
               >
-                Industrial Automation Experts for{" "}
+                {t("home.hero.title")}{" "}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-cyan to-industrial-blue glow-text">
-                  Tobacco & Packaging Machinery
+                  {t("home.hero.subtitle")}
                 </span>
               </motion.h1>
 
@@ -163,7 +164,7 @@ export default function Home() {
                 transition={{ duration: 0.6, delay: 0.2 }}
                 className="font-body text-base sm:text-lg text-steel-gray mt-6 leading-relaxed max-w-2xl text-center"
               >
-                Maintenance, Troubleshooting, Modernization and Advanced Automation Solutions. We resolve chronic failures, optimize cycle time, and build high-speed systems from the ground up.
+                {t("home.hero.desc")}
               </motion.p>
 
               {/* Action buttons */}
@@ -177,14 +178,14 @@ export default function Home() {
                   href="/contact"
                   className="px-8 py-4 rounded-lg bg-industrial-blue hover:bg-industrial-blue/90 border border-neon-cyan/50 text-white font-sans font-bold text-sm tracking-wide text-center uppercase transition-all shadow-[0_0_20px_rgba(0,102,204,0.3)] hover:shadow-[0_0_25px_rgba(0,229,255,0.4)]"
                 >
-                  Contact Our Engineers
+                  {t("home.hero.contactButton")}
                 </Link>
 
                 <Link
                   href="/contact?emergency=true"
                   className="px-8 py-4 rounded-lg bg-red-600/10 hover:bg-red-600/20 border border-red-500/30 hover:border-red-500 text-red-400 hover:text-white font-sans font-bold text-sm tracking-wide text-center uppercase transition-all shadow-[0_0_15px_rgba(239,68,68,0.1)]"
                 >
-                  Emergency Service Hotline
+                  {t("home.hero.emergencyButton")}
                 </Link>
               </motion.div>
             </div>
@@ -198,22 +199,22 @@ export default function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             <div className="lg:col-span-8">
               <h2 className="font-sans font-extrabold text-2xl sm:text-3xl lg:text-4xl text-white tracking-tight leading-snug">
-                "We are high-speed tobacco machinery experts. With decades of site experience, we solve complex motion control dropouts and build advanced automation systems from scratch."
+                {t("home.expertise.quote")}
               </h2>
             </div>
             <div className="lg:col-span-4 lg:pl-8 border-l border-white/5">
               <div className="flex flex-col gap-4">
                 <div className="flex gap-3 items-center">
                   <CheckCircle className="w-5 h-5 text-neon-cyan shrink-0" />
-                  <span className="font-body text-sm font-semibold text-white">G.D. Maker & Packer Specialists</span>
+                  <span className="font-body text-sm font-semibold text-white">{t("home.expertise.gd")}</span>
                 </div>
                 <div className="flex gap-3 items-center">
                   <CheckCircle className="w-5 h-5 text-neon-cyan shrink-0" />
-                  <span className="font-body text-sm font-semibold text-white">Sasib Packer Modernization</span>
+                  <span className="font-body text-sm font-semibold text-white">{t("home.expertise.sasib")}</span>
                 </div>
                 <div className="flex gap-3 items-center">
                   <CheckCircle className="w-5 h-5 text-neon-cyan shrink-0" />
-                  <span className="font-body text-sm font-semibold text-white">TwinCAT 3 / TIA Portal Experts</span>
+                  <span className="font-body text-sm font-semibold text-white">{t("home.expertise.twincat")}</span>
                 </div>
               </div>
             </div>
@@ -233,23 +234,23 @@ export default function Home() {
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-16">
             <div>
               <span className="font-body text-xs font-bold tracking-[0.2em] text-neon-cyan uppercase bg-neon-cyan/10 px-3.5 py-1.5 rounded-full inline-block">
-                Core Capabilities
+                {t("home.services.tag")}
               </span>
               <h2 className="font-sans font-extrabold text-3xl sm:text-4xl text-white mt-4 tracking-tight">
-                Our Engineering Services
+                {t("home.services.title")}
               </h2>
             </div>
             <Link
               href="/services"
               className="flex items-center gap-1.5 font-sans font-bold text-sm text-neon-cyan hover:text-white transition-colors group uppercase tracking-wider mt-4 md:mt-0"
             >
-              Explore Full Capabilities
+              {t("home.services.explore")}
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {quickServices.map((service, index) => (
+            {translatedQuickServices.map((service, index) => (
               <div
                 key={service.title}
                 className="glassmorphic-card p-6 rounded-xl border border-white/5 relative group flex flex-col justify-between"
@@ -270,7 +271,7 @@ export default function Home() {
                     href="/services"
                     className="font-sans font-bold text-xs text-neon-cyan hover:text-white uppercase tracking-wider transition-colors inline-flex items-center gap-1 group-hover:gap-2 duration-300"
                   >
-                    Details &rarr;
+                    {t("home.services.details") || "Details"} &rarr;
                   </Link>
                 </div>
               </div>
@@ -295,23 +296,23 @@ export default function Home() {
             <Zap className="w-8 h-8 fill-current" />
           </div>
           <h2 className="font-sans font-extrabold text-3xl sm:text-4xl text-white tracking-tight mb-4">
-            Critical Failure? Production Line Offline?
+            {t("home.emergency.title")}
           </h2>
           <p className="font-body text-base sm:text-lg text-steel-gray max-w-2xl mx-auto mb-8 leading-relaxed">
-            We provide fast remote diagnostics over secure VPN or immediate on-site dispatch. Our engineers are certified to resolve complex machine controller faults globally.
+            {t("home.emergency.desc")}
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
               href="tel:+491601221306"
               className="w-full sm:w-auto px-8 py-4 rounded-lg bg-red-600 hover:bg-red-700 text-white font-sans font-bold text-sm tracking-wide uppercase transition-all shadow-[0_0_20px_rgba(239,68,68,0.3)]"
             >
-              Call Technical Hotline
+              {t("home.emergency.callButton")}
             </Link>
             <Link
               href="/contact?emergency=true"
               className="w-full sm:w-auto px-8 py-4 rounded-lg bg-secondary-navy border border-white/10 hover:border-white/20 text-white font-sans font-bold text-sm tracking-wide uppercase transition-all"
             >
-              Submit Dispatch Request
+              {t("home.emergency.dispatchButton")}
             </Link>
           </div>
         </div>
