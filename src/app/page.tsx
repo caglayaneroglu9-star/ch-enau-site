@@ -58,86 +58,64 @@ export default function Home() {
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full flex justify-center">
           <div className="flex flex-col items-center text-center max-w-4xl">
-            {/* Logo & Video Flex Container */}
+            {/* Globe Animation Dashboard or Video Panel */}
             <motion.div
               layout
-              className="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-12 w-full mb-12 relative"
+              className="w-full max-w-lg sm:max-w-xl aspect-video rounded-3xl overflow-hidden border border-neon-cyan/30 bg-secondary-navy shadow-2xl glow-effect flex items-center justify-center relative mb-12 mx-auto"
             >
-              {/* Left Side: Large Metallic Logo (Holographic Edition) */}
-              {/* Left Side: Large Company Logo */}
-              <motion.div
-                layout
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5 }}
-                className="w-64 h-64 sm:w-72 sm:h-72 lg:w-80 lg:h-80 rounded-3xl overflow-hidden border border-neon-cyan/30 bg-secondary-navy p-3 glow-effect shrink-0 select-none relative group hover:border-neon-cyan transition-colors duration-300"
-              >
-                <img
-                  src="/logo.jpg"
-                  alt="CH Energie & Automation Logo"
-                  className="object-cover w-full h-full rounded-2xl group-hover:scale-[1.02] transition-transform duration-300"
-                />
-              </motion.div>
+              <AnimatePresence mode="wait">
+                {!isVideoOpen ? (
+                  <motion.div
+                    key="globe"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="w-full h-full"
+                  >
+                    <GlobeAnimation onTriggerVideo={() => setIsVideoOpen(true)} />
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="video"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="w-full h-full relative"
+                  >
+                    <video
+                      src="https://assets.mixkit.co/videos/preview/mixkit-robotic-arm-assembling-circuit-board-43188-large.mp4"
+                      autoPlay
+                      controls
+                      playsInline
+                      onEnded={() => setIsVideoOpen(false)}
+                      className="w-full h-full object-cover"
+                    />
 
-              {/* Right Side: Globe Animation Dashboard or Video Panel */}
-              <motion.div
-                layout
-                className="w-full max-w-lg sm:max-w-xl aspect-video rounded-3xl overflow-hidden border border-neon-cyan/30 bg-secondary-navy shadow-2xl glow-effect flex items-center justify-center relative shrink-0"
-              >
-                <AnimatePresence mode="wait">
-                  {!isVideoOpen ? (
-                    <motion.div
-                      key="globe"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 0.3 }}
-                      className="w-full h-full"
+                    {/* Dark gradient shadow overlay for controls */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-primary-navy/40 via-transparent to-transparent pointer-events-none" />
+
+                    {/* Close Button overlay */}
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setIsVideoOpen(false);
+                      }}
+                      className="absolute top-4 right-4 p-2 rounded-full bg-primary-navy/80 hover:bg-red-600/90 border border-white/10 hover:border-red-500 text-white transition-all shadow-[0_0_15px_rgba(0,0,0,0.4)] hover:scale-105 cursor-pointer z-20"
+                      aria-label="Videoyu Kapat"
                     >
-                      <GlobeAnimation onTriggerVideo={() => setIsVideoOpen(true)} />
-                    </motion.div>
-                  ) : (
-                    <motion.div
-                      key="video"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 0.3 }}
-                      className="w-full h-full relative"
-                    >
-                      <video
-                        src="https://assets.mixkit.co/videos/preview/mixkit-robotic-arm-assembling-circuit-board-43188-large.mp4"
-                        autoPlay
-                        controls
-                        playsInline
-                        onEnded={() => setIsVideoOpen(false)}
-                        className="w-full h-full object-cover"
-                      />
+                      <X className="w-4 h-4" />
+                    </button>
 
-                      {/* Dark gradient shadow overlay for controls */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-primary-navy/40 via-transparent to-transparent pointer-events-none" />
-
-                      {/* Close Button overlay */}
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setIsVideoOpen(false);
-                        }}
-                        className="absolute top-4 right-4 p-2 rounded-full bg-primary-navy/80 hover:bg-red-600/90 border border-white/10 hover:border-red-500 text-white transition-all shadow-[0_0_15px_rgba(0,0,0,0.4)] hover:scale-105 cursor-pointer z-20"
-                        aria-label="Videoyu Kapat"
-                      >
-                        <X className="w-4 h-4" />
-                      </button>
-
-                      {/* Mini overlay label */}
-                      <div className="absolute bottom-4 left-4 bg-primary-navy/80 border border-white/5 px-3 py-1 rounded-full text-[10px] font-bold text-steel-gray flex items-center gap-1 z-20">
-                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                        {t("home.hero.promoLabel")}
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </motion.div>
+                    {/* Mini overlay label */}
+                    <div className="absolute bottom-4 left-4 bg-primary-navy/80 border border-white/5 px-3 py-1 rounded-full text-[10px] font-bold text-steel-gray flex items-center gap-1 z-20">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                      {t("home.hero.promoLabel")}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </motion.div>
 
             {/* Heading Copy */}
