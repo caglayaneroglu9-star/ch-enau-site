@@ -20,11 +20,11 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: "CH Energie & Automation | Industrial Automation Experts",
-  description: "Specialized in High-Speed Tobacco & Packaging Machinery Automation, Beckhoff TwinCAT, Siemens TIA Portal, Servo Tuning, and 24/7 Diagnostics globally.",
+  description: "Specialized in High-Speed Cigarette & Packaging Machinery Automation, Beckhoff TwinCAT, Siemens TIA Portal, Servo Tuning, and 24/7 Diagnostics globally.",
   keywords: [
     "PLC Programming",
     "Industrial Automation",
-    "Tobacco Machinery",
+    "Cigarette & Packaging Machinery",
     "Cigarette Packaging Machines",
     "Machine Modernization",
     "TwinCAT Programming",

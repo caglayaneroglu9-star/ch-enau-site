@@ -16,7 +16,7 @@
     },
     {
       "keywords": ["hız", "cpm", "20000", "kapasite", "hızlı", "makine hızı"],
-      "response": "Yüksek hızlı tütün paketleme ve G.D. üretim makinelerinde hızı 20.000 CPM seviyesine kadar çıkarmak için kontrolör çevrim sürelerini 250 mikrosaniyeye optimize ediyoruz. Ancak bu işlem mekanik durum ve servo senkronizasyonuna bağlı olup detaylı inceleme gerektirir."
+      "response": "Yüksek hızlı sigara ve paketleme makinelerinde hızı 20.000 CPM seviyesine kadar çıkarmak için kontrolör çevrim sürelerini 250 mikrosaniyeye optimize ediyoruz. Ancak bu işlem mekanik durum ve servo senkronizasyonuna bağlı olup detaylı inceleme gerektirir."
     },
     {
       "keywords": ["plc", "modernizasyon", "kabin", "retrofit", "beckhoff", "siemens", "twincat", "yazılım"],

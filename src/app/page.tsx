@@ -17,12 +17,19 @@ import StatsSection from "@/components/StatsSection";
 import TechGrid from "@/components/TechGrid";
 import ProblemSolver from "@/components/ProblemSolver";
 import TobaccoMachineryDomain from "@/components/TobaccoMachineryDomain";
-import GlobeAnimation from "@/components/GlobeAnimation";
 import { useLanguage } from "@/config/LanguageContext";
+import PromoGlobeCard from "@/components/PromoGlobeCard";
 
 export default function Home() {
   const { t, mounted } = useLanguage();
   const [isVideoOpen, setIsVideoOpen] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsVideoOpen(true);
+    }, 5000);
+    return () => clearTimeout(timer);
+  }, []);
 
   const translatedQuickServices = [
     {
@@ -58,38 +65,35 @@ export default function Home() {
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full flex justify-center">
           <div className="flex flex-col items-center text-center max-w-4xl">
-            {/* Globe Animation Dashboard or Video Panel */}
-            <motion.div
-              layout
-              className="w-full max-w-lg sm:max-w-xl aspect-video rounded-3xl overflow-hidden border border-neon-cyan/30 bg-secondary-navy shadow-2xl glow-effect flex items-center justify-center relative mb-12 mx-auto"
-            >
+            {/* Promo Video / Globe Card Container */}
+            <div className="w-full max-w-2xl mb-8 relative flex justify-center">
               <AnimatePresence mode="wait">
                 {!isVideoOpen ? (
                   <motion.div
-                    key="globe"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="w-full h-full"
+                    key="globe-card"
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.95 }}
+                    transition={{ duration: 0.4 }}
+                    className="w-full flex justify-center"
                   >
-                    <GlobeAnimation onTriggerVideo={() => setIsVideoOpen(true)} />
+                    <PromoGlobeCard onClick={() => setIsVideoOpen(true)} />
                   </motion.div>
                 ) : (
                   <motion.div
-                    key="video"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="w-full h-full relative"
+                    key="video-card"
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.95 }}
+                    transition={{ duration: 0.4 }}
+                    className="relative w-full aspect-[2/1.1] rounded-3xl overflow-hidden border border-neon-cyan/45 bg-[#030d1a] shadow-[0_0_30px_rgba(0,229,255,0.2)] flex items-center justify-center group"
                   >
                     <video
-                      src="https://assets.mixkit.co/videos/preview/mixkit-robotic-arm-assembling-circuit-board-43188-large.mp4"
+                      src="https://videos.pexels.com/video-files/855859/855859-hd_1920_1080_30fps.mp4"
                       autoPlay
-                      controls
+                      muted
+                      loop
                       playsInline
-                      onEnded={() => setIsVideoOpen(false)}
                       className="w-full h-full object-cover"
                     />
 
@@ -102,21 +106,21 @@ export default function Home() {
                         e.stopPropagation();
                         setIsVideoOpen(false);
                       }}
-                      className="absolute top-4 right-4 p-2 rounded-full bg-primary-navy/80 hover:bg-red-600/90 border border-white/10 hover:border-red-500 text-white transition-all shadow-[0_0_15px_rgba(0,0,0,0.4)] hover:scale-105 cursor-pointer z-20"
+                      className="absolute top-4 right-4 p-2 rounded-full bg-[#030d1a]/90 hover:bg-red-600/90 border border-white/10 hover:border-red-500 text-white transition-all shadow-[0_0_15px_rgba(0,0,0,0.4)] hover:scale-105 cursor-pointer z-20"
                       aria-label="Videoyu Kapat"
                     >
                       <X className="w-4 h-4" />
                     </button>
 
                     {/* Mini overlay label */}
-                    <div className="absolute bottom-4 left-4 bg-primary-navy/80 border border-white/5 px-3 py-1 rounded-full text-[10px] font-bold text-steel-gray flex items-center gap-1 z-20">
+                    <div className="absolute bottom-4 left-4 bg-[#030d1a]/90 border border-white/5 px-3 py-1 rounded-full text-[10px] font-bold text-steel-gray flex items-center gap-1 z-20">
                       <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
                       {t("home.hero.promoLabel")}
                     </div>
                   </motion.div>
                 )}
               </AnimatePresence>
-            </motion.div>
+            </div>
 
             {/* Heading Copy */}
             <div className="flex flex-col items-center">
@@ -199,7 +203,7 @@ export default function Home() {
       {/* 3. Stats Section */}
       <StatsSection />
 
-      {/* 4. Specialized Tobacco Machinery Domain */}
+      {/* 4. Specialized Cigarette & Packaging Machinery Domain */}
       <TobaccoMachineryDomain />
 
       {/* 5. Services Overview Grid */}

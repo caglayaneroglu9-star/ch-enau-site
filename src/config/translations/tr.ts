@@ -2,13 +2,13 @@ export const tr = {
   nav: {
     home: "Ana Sayfa",
     services: "Hizmetlerimiz",
-    machinery: "Tütün Makineleri",
+    machinery: "Sigara ve Paketleme Makineleri",
     solutions: "Kronik Çözümler",
     contact: "İletişim",
     emergency: "7/24 Acil Destek"
   },
   footer: {
-    about: "Yüksek hızlı paketleme ve tütün makineleri için endüstriyel otomasyon uzmanları. Dünya genelinde kronik elektriksel, yazılımsal ve senkronizasyon sorunlarını çözüyoruz.",
+    about: "Yüksek hızlı sigara ve paketleme makineleri için endüstriyel otomasyon uzmanları. Dünya genelinde kronik elektriksel, yazılımsal ve senkronizasyon sorunlarını çözüyoruz.",
     capabilities: "Mühendislik Yetenekleri",
     quickLinks: "Hızlı Navigasyon",
     contactUs: "Bize Ulaşın",
@@ -25,14 +25,15 @@ export const tr = {
   home: {
     hero: {
       title: "Endüstriyel Otomasyon Uzmanları",
-      subtitle: "Tütün ve Paketleme Makineleri",
+      subtitle: "Sigara ve Paketleme Makineleri",
       desc: "Bakım, Arıza Giderme, Modernizasyon ve İleri Düzey Otomasyon Çözümleri. Kronik arızaları giderir, çevrim sürelerini optimize eder ve sıfırdan yüksek hızlı sistemler kurarız.",
       contactButton: "Mühendislerimizle Görüşün",
       emergencyButton: "Acil Servis Destek Hattı",
-      promoLabel: "Tanıtım Videosu"
+      promoLabel: "Tanıtım Videosu",
+      promoHoverWatch: "İzlemek için tıklayın veya 5 sn bekleyin"
     },
     expertise: {
-      quote: "\"Biz yüksek hızlı tütün makineleri uzmanıyız. Onlarca yıllık saha tecrübemizle, karmaşık hareket kontrol kesintilerini giderir ve sıfırdan gelişmiş otomasyon sistemleri kurarız.\"",
+      quote: "\"Biz yüksek hızlı sigara ve paketleme makineleri uzmanıyız. Onlarca yıllık saha tecrübemizle, karmaşık hareket kontrol kesintilerini giderir ve sıfırdan gelişmiş otomasyon sistemleri kurarız.\"",
       gd: "G.D. Maker & Packer Uzmanlığı",
       sasib: "Sasib Maker & Packer Modernizasyonu",
       twincat: "TwinCAT 2 / 3 / TIA Portal Uzmanlığı"
@@ -88,7 +89,7 @@ export const tr = {
   },
   machinery: {
     tag: "Uzmanlık Alanlarımız",
-    title: "Tütün ve Sigara Paketleme Sistemleri",
+    title: "Sigara ve Paketleme Sistemleri",
     desc: "Yüksek hızlı üretim, uzman düzeyinde otomasyon gerektirir. Sektörün en karmaşık makinelerinin arıza tespiti, yenilenmesi ve modernizasyonu konusunda uzmanız.",
     targetPerf: "Hedef Performans Artışı",
     standards: "ISO 9001 ve CE Uyumlu Tasarım Standartları",
@@ -448,7 +449,7 @@ export const tr = {
       },
       {
         title: "Proses & Çevrim Süresi Optimizasyonu",
-        description: "Yüksek hızlı tütün üretiminde hız kârlılıktır. Tekrarlayan işlemlerden milisaniyeler kısmak ve anında verim kazancı sağlamak için mevcut çevrim sürelerini denetliyoruz.",
+        description: "Yüksek hızlı sigara ve paketleme üretiminde hız kârlılıktır. Tekrarlayan işlemlerden milisaniyeler kısmak ve anında verim kazancı sağlamak için mevcut çevrim sürelerini denetliyoruz.",
         details: [
           "Ölü zamanı en aza indirmek için pnömatik-elektronik çakışmalarının iyileştirilmesi",
           "Sensör doğruluğu için yüksek hızlı yakalama girişlerinin (Latch inputs) kurulması",
@@ -555,10 +556,10 @@ export const tr = {
   },
   expertisePage: {
     tag: "Mühendislik Uzmanlığı",
-    title: "Tütün Makineleri Otomasyon Uzmanları",
-    desc: "Yüksek hızlı tütün makinelerinin pano yenilemesi, hız optimizasyonu ve bakım-servisi konularında onlarca yıllık doğrudan saha deneyimine sahip dünyadaki ender otomasyon ekiplerinden biriyiz.",
+    title: "Sigara ve Paketleme Makineleri Otomasyon Uzmanları",
+    desc: "Yüksek hızlı sigara ve paketleme makinelerinin pano yenilemesi, hız optimizasyonu ve bakım-servisi konularında onlarca yıllık doğrudan saha deneyimine sahip dünyadaki ender otomasyon ekiplerinden biriyiz.",
     mainDesc: "Yüksek hızlı üretim, üst düzey mühendislik gerektirir. G.D., SASIB ve Molins makinelerini modernize etme ve arızalarını giderme konusunda küresel çapta derin saha deneyimine sahibiz.",
-    reasonsTitle: "Tütün makinelerinde neden bizimle çalışmalısınız?",
+    reasonsTitle: "Sigara ve paketleme makinelerinde neden bizimle çalışmalısınız?",
     reasons: [
       {
         title: "Özel mekanik aksamlara dair derin anlayış",
@@ -608,7 +609,7 @@ export const tr = {
       },
       {
         keywords: ["hız", "cpm", "20000", "kapasite", "hızlı", "makine hızı"],
-        response: "Yüksek hızlı tütün paketleme ve G.D. üretim makinelerinde hızı 20.000 CPM seviyesine kadar çıkarmak için kontrolör çevrim sürelerini 250 mikrosaniyeye optimize ediyoruz. Ancak bu işlem mekanik durum ve servo senkronizasyonuna bağlı olup detaylı inceleme gerektirir."
+        response: "Yüksek hızlı sigara ve paketleme makinelerinde hızı 20.000 CPM seviyesine kadar çıkarmak için kontrolör çevrim sürelerini 250 mikrosaniyeye optimize ediyoruz. Ancak bu işlem mekanik durum ve servo senkronizasyonuna bağlı olup detaylı inceleme gerektirir."
       },
       {
         keywords: ["plc", "modernizasyon", "kabin", "retrofit", "beckhoff", "siemens", "twincat", "yazılım"],

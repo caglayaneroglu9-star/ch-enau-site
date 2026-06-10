@@ -2,13 +2,13 @@ export const de = {
   nav: {
     home: "Startseite",
     services: "Dienstleistungen",
-    machinery: "Tabakmaschinen",
+    machinery: "Zigaretten- und Verpackungsmaschinen",
     solutions: "Chronische Lösungen",
     contact: "Kontakt",
     emergency: "24/7 Notfallsupport"
   },
   footer: {
-    about: "Spezialisten für industrielle Automatisierung von Hochgeschwindigkeits-Verpackungs- und Tabakmaschinen. Wir lösen chronische elektrische, Software- und Synchronisationsprobleme weltweit.",
+    about: "Spezialisten für industrielle Automatisierung von Hochgeschwindigkeits-Verpackungs- und Zigarettenmaschinen. Wir lösen chronische elektrische, Software- und Synchronisationsprobleme weltweit.",
     capabilities: "Ingenieurleistungen",
     quickLinks: "Schnellnavigation",
     contactUs: "Kontaktieren Sie uns",
@@ -25,14 +25,15 @@ export const de = {
   home: {
     hero: {
       title: "Experten für industrielle Automatisierung für",
-      subtitle: "Tabak- und Verpackungsmaschinen",
+      subtitle: "Zigaretten- und Verpackungsmaschinen",
       desc: "Instandhaltung, Fehlerbehebung, Modernisierung und fortschrittliche Automatisierungslösungen. Wir beheben chronische Störungen, optimieren Taktzeiten und bauen Hochgeschwindigkeitssysteme von Grund auf neu auf.",
       contactButton: "Kontaktieren Sie unsere Ingenieure",
       emergencyButton: "Notfall-Service-Hotline",
-      promoLabel: "Vorstellungsvideo"
+      promoLabel: "Vorstellungsvideo",
+      promoHoverWatch: "Klicken oder 5 Sek. verweilen"
     },
     expertise: {
-      quote: "\"Wir sind Experten für Hochgeschwindigkeits-Tabakmaschinen. Mit jahrzehntelanger Projekterfahrung vor Ort lösen wir komplexe Störungen der Bewegungssteuerung und bauen fortschrittliche Automatisierungssysteme von Grund auf neu auf.\"",
+      quote: "\"Wir sind Experten für Hochgeschwindigkeits-Zigaretten- und Verpackungsmaschinen. Mit jahrzehntelanger Projekterfahrung vor Ort lösen wir komplexe Störungen der Bewegungssteuerung und bauen fortschrittliche Automatisierungssysteme von Grund auf neu auf.\"",
       gd: "G.D. Maker & Packer Spezialisten",
       sasib: "Sasib Maker & Packer Modernisierung",
       twincat: "TwinCAT 2 / 3 / TIA Portal Experten"
@@ -88,7 +89,7 @@ export const de = {
   },
   machinery: {
     tag: "Spezialisierte Fachkompetenz",
-    title: "Tabak- und Zigarettenverpackungssysteme",
+    title: "Zigaretten- und Verpackungssysteme",
     desc: "Hochgeschwindigkeitsproduktion erfordert Automatisierung auf Expertenniveau. Wir sind spezialisiert auf die Fehlerbehebung, Überholung und Modernisierung der komplexesten Maschinen der Branche.",
     targetPerf: "Ziel-Performance-Steigerung",
     standards: "ISO 9001 & CE-konforme Designstandards",
@@ -448,7 +449,7 @@ export const de = {
       },
       {
         title: "Prozess- & Taktzeitoptimierung",
-        description: "Geschwindigkeit bedeutet Marge bei der Tabakproduktion. Wir analysieren bestehende Abläufe, um Millisekunden einzusparen und den Durchsatz direkt zu steigern.",
+        description: "Geschwindigkeit bedeutet Marge bei der Zigaretten- und Verpackungsproduktion. Wir analysieren bestehende Abläufe, um Millisekunden einzusparen und den Durchsatz direkt zu steigern.",
         details: [
           "Optimierung von Pneumatik-Elektrik-Überschneidungen zur Reduzierung von Totzeiten",
           "Einsatz schneller Latch-Eingänge (Hardware-Trigger) für präzise Sensorik",
@@ -555,10 +556,10 @@ export const de = {
   },
   expertisePage: {
     tag: "Fachliche Spezialisierung",
-    title: "Spezialisten für Tabakmaschinen-Automatisierung",
-    desc: "Wir gehören zu den wenigen Automatisierungsteams weltweit mit jahrzehntelanger direkter Projekterfahrung bei der Modernisierung, Optimierung und Reparatur von Hochgeschwindigkeits-Tabakanlagen.",
+    title: "Spezialisten für Zigaretten- und Verpackungsmaschinen-Automatisierung",
+    desc: "Wir gehören zu den wenigen Automatisierungsteams weltweit mit jahrzehntelanger direkter Projekterfahrung bei der Modernisierung, Optimierung und Reparatur von Hochgeschwindigkeits-Zigaretten- und Verpackungsanlagen.",
     mainDesc: "Die Hochgeschwindigkeitsproduktion erfordert Engineering auf Top-Niveau. Wir verfügen über tiefe Projekterfahrung bei der Modernisierung und Instandsetzung von G.D.-, SASIB- und Molins-Anlagen weltweit.",
-    reasonsTitle: "Warum Sie bei Tabakmaschinen auf uns setzen sollten?",
+    reasonsTitle: "Warum Sie bei Zigaretten- und Verpackungsmaschinen auf uns setzen sollten?",
     reasons: [
       {
         title: "Tiefes Verständnis der speziellen Mechanik",

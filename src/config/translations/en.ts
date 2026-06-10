@@ -2,13 +2,13 @@ export const en = {
   nav: {
     home: "Home",
     services: "Services",
-    machinery: "Tobacco Machinery",
+    machinery: "Cigarette & Packaging Machinery",
     solutions: "Chronic Solutions",
     contact: "Contact Us",
     emergency: "Emergency 24/7 Support"
   },
   footer: {
-    about: "Industrial automation specialists for high-speed packaging and tobacco machinery. We resolve chronic electrical, software, and synchronization issues globally.",
+    about: "Industrial automation specialists for high-speed packaging and cigarette machinery. We resolve chronic electrical, software, and synchronization issues globally.",
     capabilities: "Engineering Capabilities",
     quickLinks: "Quick Navigation",
     contactUs: "Contact Us",
@@ -25,14 +25,15 @@ export const en = {
   home: {
     hero: {
       title: "Industrial Automation Experts for",
-      subtitle: "Tobacco & Packaging Machinery",
+      subtitle: "Cigarette & Packaging Machinery",
       desc: "Maintenance, Troubleshooting, Modernization and Advanced Automation Solutions. We resolve chronic failures, optimize cycle time, and build high-speed systems from the ground up.",
       contactButton: "Contact Our Engineers",
       emergencyButton: "Emergency Service Hotline",
-      promoLabel: "Promo Video"
+      promoLabel: "Promo Video",
+      promoHoverWatch: "Click or hover 5s to watch"
     },
     expertise: {
-      quote: "\"We are high-speed tobacco machinery experts. With decades of site experience, we solve complex motion control dropouts and build advanced automation systems from scratch.\"",
+      quote: "\"We are high-speed cigarette and packaging machinery experts. With decades of site experience, we solve complex motion control dropouts and build advanced automation systems from scratch.\"",
       gd: "G.D. Maker & Packer Specialists",
       sasib: "Sasib Maker & Packer Modernization",
       twincat: "TwinCAT 2 / 3 / TIA Portal Experts"
@@ -88,7 +89,7 @@ export const en = {
   },
   machinery: {
     tag: "Specialized Domain Authority",
-    title: "Tobacco & Cigarette Packaging Systems",
+    title: "Cigarette & Packaging Systems",
     desc: "High-speed production demands expert-level automation. We specialize in troubleshooting, revamping, and modernizing the industry's most complex machinery.",
     targetPerf: "Target Performance",
     standards: "ISO 9001 & CE Compliant Design Standards",
@@ -448,7 +449,7 @@ export const en = {
       },
       {
         title: "Process & Cycle-Time Optimization",
-        description: "Speed is profit in high-speed tobacco production. We audit existing sequences to trim milliseconds off repetitive operations, achieving immediate throughput gains.",
+        description: "Speed is profit in high-speed cigarette and packaging production. We audit existing sequences to trim milliseconds off repetitive operations, achieving immediate throughput gains.",
         details: [
           "Optimization of pneumatics-electronics overlaps to minimize dead time",
           "Implementation of high-speed capture inputs (Latch inputs) for sensor accuracy",
@@ -555,10 +556,10 @@ export const en = {
   },
   expertisePage: {
     tag: "Engineering Specialization",
-    title: "Tobacco Machinery Automation Specialists",
-    desc: "We are one of the few automation teams globally with decades of direct site experience retrofitting, optimizing, and repair-servicing high-speed tobacco machinery.",
+    title: "Cigarette & Packaging Machinery Automation Specialists",
+    desc: "We are one of the few automation teams globally with decades of direct site experience retrofitting, optimizing, and repair-servicing high-speed cigarette and packaging machinery.",
     mainDesc: "High-speed production demands elite engineering. We are one of the few automation companies globally with deep on-site experience modernizing and troubleshooting G.D., SASIB, and Molins machines.",
-    reasonsTitle: "Why work with us on tobacco machinery?",
+    reasonsTitle: "Why work with us on cigarette and packaging machinery?",
     reasons: [
       {
         title: "Deep understanding of specialized mechanical parts",
