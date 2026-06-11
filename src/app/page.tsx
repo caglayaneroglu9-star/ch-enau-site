@@ -51,15 +51,15 @@ export default function Home() {
         {/* Hero Video Background */}
         <div className="absolute inset-0 w-full h-full z-0 pointer-events-none">
           <video
-            src="/video_arka_plan/210424_medium.mp4"
+            src="/video_arka_plan/345357_medium.mp4"
             autoPlay
             muted
             loop
             playsInline
             className="w-full h-full object-cover"
           />
-          {/* Dark overlay for text readability */}
-          <div className="absolute inset-0 bg-[#050a15]/82" />
+          {/* Subtle dark overlay — video clearly visible */}
+          <div className="absolute inset-0 bg-[#050a15]/50" />
         </div>
         {/* Animated grid lines and glowing orbs */}
         <div className="absolute inset-0 circuit-grid opacity-15 pointer-events-none z-[1]" />
