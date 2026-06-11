@@ -401,8 +401,21 @@ export default function ContactPage() {
   const { t } = useLanguage();
 
   return (
-    <div className="py-12 sm:py-20 relative">
-      <div className="absolute inset-0 circuit-grid opacity-5 pointer-events-none" />
+    <div className="py-12 sm:py-20 relative min-h-screen">
+      {/* Contact Page Video Background */}
+      <div className="absolute inset-0 w-full h-full z-0 pointer-events-none overflow-hidden">
+        <video
+          src="/video_arka_plan/215500_medium.mp4"
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="w-full h-full object-cover"
+        />
+        {/* Subtle overlay for text readability */}
+        <div className="absolute inset-0 bg-[#050a15]/72" />
+      </div>
+      <div className="absolute inset-0 circuit-grid opacity-5 pointer-events-none z-[1]" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header Block */}
