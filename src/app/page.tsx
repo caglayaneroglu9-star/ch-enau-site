@@ -48,10 +48,23 @@ export default function Home() {
     <div className="relative min-h-screen">
       {/* 1. Hero Section */}
       <section className="relative min-h-[90vh] flex items-center pt-24 pb-16 overflow-hidden">
+        {/* Hero Video Background */}
+        <div className="absolute inset-0 w-full h-full z-0 pointer-events-none">
+          <video
+            src="/video_arka_plan/210424_medium.mp4"
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="w-full h-full object-cover"
+          />
+          {/* Dark overlay for text readability */}
+          <div className="absolute inset-0 bg-[#050a15]/82" />
+        </div>
         {/* Animated grid lines and glowing orbs */}
-        <div className="absolute inset-0 circuit-grid opacity-15 pointer-events-none" />
-        <div className="absolute top-[20%] left-[10%] w-[350px] h-[350px] bg-industrial-blue/10 rounded-full blur-[120px] pointer-events-none animate-float" />
-        <div className="absolute bottom-[10%] right-[10%] w-[450px] h-[450px] bg-neon-cyan/5 rounded-full blur-[150px] pointer-events-none" />
+        <div className="absolute inset-0 circuit-grid opacity-15 pointer-events-none z-[1]" />
+        <div className="absolute top-[20%] left-[10%] w-[350px] h-[350px] bg-industrial-blue/10 rounded-full blur-[120px] pointer-events-none animate-float z-[1]" />
+        <div className="absolute bottom-[10%] right-[10%] w-[450px] h-[450px] bg-neon-cyan/5 rounded-full blur-[150px] pointer-events-none z-[1]" />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full flex justify-center">
           <div className="flex flex-col items-center text-center max-w-4xl">
