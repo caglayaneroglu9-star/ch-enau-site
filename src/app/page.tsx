@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import {
@@ -16,10 +16,10 @@ import TechGrid from "@/components/TechGrid";
 import ProblemSolver from "@/components/ProblemSolver";
 import TobaccoMachineryDomain from "@/components/TobaccoMachineryDomain";
 import { useLanguage } from "@/config/LanguageContext";
-import PromoGlobeCard from "@/components/PromoGlobeCard";
+import HeroVideoBackground from "@/components/HeroVideoBackground";
 
 export default function Home() {
-  const { t, mounted } = useLanguage();
+  const { t } = useLanguage();
 
   const translatedQuickServices = [
     {
@@ -46,47 +46,29 @@ export default function Home() {
 
   return (
     <div className="relative min-h-screen">
+
       {/* 1. Hero Section */}
-      <section className="relative min-h-[90vh] flex items-center pt-24 pb-16 overflow-hidden">
-        {/* Hero Video Background */}
-        <div className="absolute inset-0 w-full h-full z-0 pointer-events-none">
-          <video
-            src="/video_arka_plan/345357_medium.mp4"
-            autoPlay
-            muted
-            loop
-            playsInline
-            className="w-full h-full object-cover"
-          />
-          {/* Subtle dark overlay — video clearly visible */}
-          <div className="absolute inset-0 bg-[#050a15]/50" />
-        </div>
+      <section className="relative min-h-[120vh] flex flex-col justify-end overflow-hidden">
+        {/* Hero Video Background — promo clips cycling */}
+        <HeroVideoBackground />
+
         {/* Animated grid lines and glowing orbs */}
         <div className="absolute inset-0 circuit-grid opacity-15 pointer-events-none z-[1]" />
         <div className="absolute top-[20%] left-[10%] w-[350px] h-[350px] bg-industrial-blue/10 rounded-full blur-[120px] pointer-events-none animate-float z-[1]" />
         <div className="absolute bottom-[10%] right-[10%] w-[450px] h-[450px] bg-neon-cyan/5 rounded-full blur-[150px] pointer-events-none z-[1]" />
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full flex justify-center">
-          <div className="flex flex-col items-center text-center max-w-4xl">
-            {/* Globe Card Container */}
-            <div className="w-full max-w-2xl mb-8 relative flex justify-center">
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.6 }}
-                className="w-full flex justify-center"
-              >
-                <PromoGlobeCard />
-              </motion.div>
-            </div>
+        {/* Bottom gradient fade so text is readable */}
+        <div className="absolute bottom-0 left-0 right-0 h-80 pointer-events-none z-[2]"
+          style={{ background: "linear-gradient(to top, rgba(5,10,21,0.96) 0%, rgba(5,10,21,0.65) 50%, transparent 100%)" }} />
 
-            {/* Heading Copy */}
-            <div className="flex flex-col items-center">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full flex justify-center pb-0">
+          <div className="flex flex-col items-center text-center max-w-4xl">
+            <div className="flex flex-col items-center gap-2">
               <motion.h1
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
-                className="font-sans font-extrabold text-4xl sm:text-5xl lg:text-6xl text-white tracking-tight leading-[1.1] text-center"
+                className="font-sans font-extrabold text-3xl sm:text-4xl lg:text-5xl text-white tracking-tight leading-[1.1] text-center"
               >
                 {t("home.hero.title")}{" "}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-cyan to-industrial-blue glow-text">
@@ -98,17 +80,16 @@ export default function Home() {
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="font-body text-base sm:text-lg text-steel-gray mt-6 leading-relaxed max-w-2xl text-center"
+                className="font-body text-sm text-steel-gray leading-relaxed max-w-2xl text-center"
               >
                 {t("home.hero.desc")}
               </motion.p>
 
-              {/* Action buttons */}
               <motion.div
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.3 }}
-                className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-4 mt-8 w-full sm:w-auto"
+                className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 mt-4 w-full sm:w-auto pb-6"
               >
                 <Link
                   href="/contact"
@@ -116,6 +97,7 @@ export default function Home() {
                 >
                   {t("home.hero.contactButton")}
                 </Link>
+
 
                 <Link
                   href="/contact?emergency=true"
@@ -186,7 +168,7 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {translatedQuickServices.map((service, index) => (
+            {translatedQuickServices.map((service) => (
               <div
                 key={service.title}
                 className="glassmorphic-card p-6 rounded-xl border border-white/5 relative group flex flex-col justify-between"
