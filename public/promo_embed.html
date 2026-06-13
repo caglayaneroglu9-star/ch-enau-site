@@ -14,6 +14,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:#000;cursor:default;
 #stage{position:fixed;inset:0;z-index:0}
 .clip{position:absolute;inset:0;opacity:0;transition:opacity 1.4s cubic-bezier(.4,0,.2,1)}
 .clip.active{opacity:1}
+.clip.no-transition{transition:none!important}
 .clip video{
   width:100%;height:100%;object-fit:cover;
   filter:saturate(1.15) contrast(1.08) brightness(.78);
@@ -318,8 +319,8 @@ body.open #chapters{opacity:.6}
 
 /* ─── MOBILE RESPONSIVE ─── */
 @media (max-width: 1024px) {
-  .clip video {
-    transform: scale(0.95) !important;
+  .clip.climax-clip video {
+    transform: scale(0.82) !important;
   }
   #title-stage {
     justify-content: flex-start !important;
@@ -564,13 +565,24 @@ const CLIPS = [
     flare: false, dur: 9000
   },
   {
-    src: '/video_arka_plan/CH enerji transformer kartal.mp4',
+    src: '/video_arka_plan/CH enerji transformer kartal_1.mp4',
     company: 'CH ENERGY & AUTOMATION',
     tag:     'Engineering the Future',
     metric:  'INDUSTRY 4.0 · SMART AUTOMATION · ENGINEERING EXCELLENCE',
     flare: true,
-    dur: 14000,
-    isClimax: true
+    dur: 10000,
+    isClimax: true,
+    isFirstClimaxPart: true
+  },
+  {
+    src: '/video_arka_plan/CH enerji transformer kartal_2.mp4',
+    company: 'CH ENERGY & AUTOMATION',
+    tag:     'Engineering the Future',
+    metric:  'INDUSTRY 4.0 · SMART AUTOMATION · ENGINEERING EXCELLENCE',
+    flare: true,
+    dur: 10000,
+    isClimax: true,
+    isSecondClimaxPart: true
   }
 ];
 
@@ -606,6 +618,9 @@ let masterGain = null;
 CLIPS.forEach((c, i) => {
   const div = document.createElement('div');
   div.className = 'clip' + (i === 0 ? ' active' : '');
+  if (c.isClimax) {
+    div.classList.add('climax-clip');
+  }
 
   const v = document.createElement('video');
   v.src          = c.src;
@@ -684,7 +699,16 @@ function startProgress(dur) {
 function gotoClip(idx) {
   if(idx >= TOTAL) { showFinal(); return; }
 
-  doFlash(()=>{
+  const currentClip = CLIPS[current];
+  const nextClip = CLIPS[idx];
+  const isSeamless = currentClip && nextClip && currentClip.isFirstClimaxPart && nextClip.isSecondClimaxPart;
+
+  const performTransition = () => {
+    if (isSeamless) {
+      slides[current].classList.add('no-transition');
+      slides[idx].classList.add('no-transition');
+    }
+
     slides[current].classList.remove('active');
     videos[current].pause();
 
@@ -695,14 +719,26 @@ function gotoClip(idx) {
     slides[current].classList.add('active');
     v.play().catch(()=>{});
 
-    v.playbackRate = 1.4;
-    setTimeout(()=>{ if(v) v.playbackRate = 1.0; }, 900);
+    if (!isSeamless) {
+      v.playbackRate = 1.4;
+      setTimeout(()=>{ if(v) v.playbackRate = 1.0; }, 900);
+    } else {
+      setTimeout(() => {
+        slides.forEach(s => s.classList.remove('no-transition'));
+      }, 50);
+    }
 
     setTitle(current);
     setFlare(CLIPS[current].flare);
     updateChapters();
     startProgress(CLIPS[current].dur);
-  });
+  };
+
+  if (isSeamless) {
+    performTransition();
+  } else {
+    doFlash(performTransition);
+  }
 }
 
 function jumpTo(idx) {
@@ -716,8 +752,8 @@ function scheduleNext(idx) {
   const clip = CLIPS[idx];
   const dur  = clip.dur;
 
-  // Klimaks sahnesine (kartal) geçince müziği yükselt
-  if(clip.isClimax && audioCtx && masterGain) {
+  // Klimaks sahnesine (kartal_1) geçince müziği yükselt
+  if(clip.isClimax && clip.isFirstClimaxPart && audioCtx && masterGain) {
     setTimeout(()=>{
       masterGain.gain.linearRampToValueAtTime(0.36, audioCtx.currentTime + 3.5);
     }, 1200);
