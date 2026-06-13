@@ -312,13 +312,18 @@ body.open #chapters{opacity:.6}
 /* ─── CLICK TO START — EMBED MODUNDA GİZLİ ─── */
 #start-prompt{display:none!important}
 
-/* ─── EMBED MODU: TITLE OVERLAY VE HUD GİZLE ─── */
-/* Sayfa kendi hero başlığını gösterdiği için promo başlıkları gizliyoruz */
-#title-stage{display:none!important}
+/* ─── EMBED MODU: HUD GİZLE ─── */
 #hud-left{display:none!important}
 #hud-right{display:none!important}
 
 /* ─── MOBILE RESPONSIVE ─── */
+@media (max-width: 1024px) {
+  #title-stage { display: none !important; }
+  #final-logo-wrap { display: none !important; }
+  #chapters { display: none !important; }
+  #prog-wrap { display: none !important; }
+}
+
 @media (max-width: 640px) {
   #bar-top { height: 40px; }
   #bar-bot { height: 40px; }
