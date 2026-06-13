@@ -318,10 +318,59 @@ body.open #chapters{opacity:.6}
 
 /* ─── MOBILE RESPONSIVE ─── */
 @media (max-width: 1024px) {
-  #title-stage { display: none !important; }
-  #final-logo-wrap { display: none !important; }
-  #chapters { display: none !important; }
-  #prog-wrap { display: none !important; }
+  .clip video {
+    transform: scale(0.95) !important;
+  }
+  #title-stage {
+    justify-content: flex-start !important;
+    padding-top: 120px !important;
+  }
+  .t-company {
+    font-size: clamp(1.4rem, 6vw, 2.2rem) !important;
+    white-space: normal !important;
+    letter-spacing: 0.15em !important;
+    line-height: 1.2 !important;
+    color: #ffffff !important;
+    text-shadow: 0 0 20px rgba(0,220,255,0.85), 0 0 40px rgba(0,220,255,0.5), 0 2px 12px rgba(0,0,0,0.95) !important;
+  }
+  .t-divider {
+    width: min(80vw, 300px) !important;
+    margin: 0.5rem auto !important;
+  }
+  .t-tag {
+    font-size: clamp(0.8rem, 3.5vw, 1.1rem) !important;
+    letter-spacing: 0.2em !important;
+    color: rgba(0,240,255,0.95) !important;
+    text-shadow: 0 0 10px rgba(0,220,255,0.6) !important;
+    white-space: normal !important;
+  }
+  .t-metric {
+    font-size: clamp(0.65rem, 3vw, 0.85rem) !important;
+    letter-spacing: 0.1em !important;
+    color: rgba(255,190,70,0.95) !important;
+    margin-top: 0.6rem !important;
+    text-shadow: 0 0 8px rgba(255,190,70,0.5) !important;
+    white-space: normal !important;
+  }
+  #final-frame {
+    justify-content: flex-start !important;
+    padding-top: 120px !important;
+  }
+  #final-logo-wrap {
+    transform: scale(0.95) !important;
+  }
+  #logo-topline, #logo-botline {
+    display: none !important;
+  }
+  .fc {
+    display: none !important;
+  }
+  #chapters {
+    display: none !important;
+  }
+  #prog-wrap {
+    display: none !important;
+  }
 }
 
 @media (max-width: 640px) {
