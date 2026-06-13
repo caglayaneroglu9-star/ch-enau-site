@@ -1,1074 +1,1546 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>CH Energy & Automation — Corporate Promo</title>
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&family=Share+Tech+Mono&display=swap');
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>CH Energy & Automation — Corporate Promo</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&family=Share+Tech+Mono&display=swap');
 
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-html,body{width:100%;height:100%;overflow:hidden;background:#000;cursor:default;pointer-events:none}
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
 
-/* ─── VIDEO LAYER ─── */
-#stage{position:fixed;inset:0;z-index:0}
-.clip{position:absolute;inset:0;opacity:0;transition:opacity 1.4s cubic-bezier(.4,0,.2,1)}
-.clip.active{opacity:1}
-.clip.no-transition{transition:none!important}
-.clip video{
-  width:100%;height:100%;object-fit:cover;
-  filter:saturate(1.15) contrast(1.08) brightness(.78);
-}
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #000;
+      cursor: default;
+      pointer-events: none
+    }
 
-/* ─── COLOR GRADE OVERLAY ─── */
-#grade{
-  position:fixed;inset:0;z-index:2;pointer-events:none;
-  background:
-    radial-gradient(ellipse 120% 100% at 50% 100%, rgba(0,30,60,.55) 0%, transparent 65%),
-    radial-gradient(ellipse 80% 60% at 50% 0%,   rgba(0,10,30,.4)  0%, transparent 70%);
-  mix-blend-mode:multiply;
-}
-#teal-shift{
-  position:fixed;inset:0;z-index:3;pointer-events:none;
-  background:linear-gradient(135deg,rgba(0,180,200,.06) 0%,transparent 60%,rgba(255,140,0,.04) 100%);
-}
-#vignette{
-  position:fixed;inset:0;z-index:4;pointer-events:none;
-  background:radial-gradient(ellipse at center,transparent 38%,rgba(0,0,0,.72) 100%);
-}
-#film-grain{
-  position:fixed;inset:-50%;width:200%;height:200%;z-index:5;pointer-events:none;
-  opacity:.038;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  animation:grain .45s steps(1) infinite;
-}
-@keyframes grain{
-  0%{transform:translate(0,0)}25%{transform:translate(-3%,-1%)}
-  50%{transform:translate(2%,3%)}75%{transform:translate(-1%,2%)}100%{transform:translate(3%,-2%)}
-}
+    /* ─── VIDEO LAYER ─── */
+    #stage {
+      position: fixed;
+      inset: 0;
+      z-index: 0
+    }
 
-/* ─── LENS FLARE ─── */
-#flare{
-  position:fixed;z-index:6;pointer-events:none;
-  top:8%;left:72%;transform:translate(-50%,-50%);
-  width:420px;height:420px;
-  background:radial-gradient(ellipse at center,rgba(255,220,100,.18) 0%,rgba(255,180,50,.07) 30%,transparent 70%);
-  border-radius:50%;
-  animation:flare-drift 9s ease-in-out infinite alternate;
-  opacity:0;transition:opacity 2s;
-}
-#flare.on{opacity:1}
-@keyframes flare-drift{
-  0%{transform:translate(-50%,-50%) scale(1)}
-  100%{transform:translate(-42%,-58%) scale(1.18)}
-}
-#flare-streak{
-  position:fixed;z-index:6;pointer-events:none;
-  top:0;left:0;width:100%;height:100%;
-  opacity:0;transition:opacity 1.5s;
-}
-#flare-streak.on{opacity:1}
-#flare-streak svg{width:100%;height:100%}
+    .clip {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 1.4s cubic-bezier(.4, 0, .2, 1)
+    }
 
-/* ─── SCAN LINES ─── */
-#scanlines{
-  position:fixed;inset:0;z-index:7;pointer-events:none;
-  background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.06) 2px,rgba(0,0,0,.06) 4px);
-}
+    .clip.active {
+      opacity: 1
+    }
 
-/* ─── CINEMATIC BARS ─── */
-.bar{position:fixed;left:0;right:0;background:#000;z-index:20;transition:height 1.4s cubic-bezier(.4,0,.2,1)}
-#bar-top{top:0;height:72px}
-#bar-bot{bottom:0;height:72px}
-body.open #bar-top,body.open #bar-bot{height:0}
+    .clip.no-transition {
+      transition: none !important
+    }
 
-/* ─── HUD CORNERS ─── */
-.hud-corner{position:fixed;z-index:25;width:60px;height:60px;opacity:0;transition:opacity 1s}
-.hud-corner svg{width:100%;height:100%}
-#hc-tl{top:16px;left:16px}
-#hc-tr{top:16px;right:16px}
-#hc-bl{bottom:16px;left:16px}
-#hc-br{bottom:16px;right:16px}
-body.open .hud-corner{opacity:.55}
+    .clip video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: saturate(1.15) contrast(1.08) brightness(.78);
+    }
 
-/* ─── HUD SCAN LINE ─── */
-#hud-scan{
-  position:fixed;left:0;right:0;height:2px;z-index:26;pointer-events:none;
-  background:linear-gradient(90deg,transparent,rgba(0,220,255,.6),transparent);
-  animation:scan-move 4.5s linear infinite;
-  opacity:0;transition:opacity 1s;
-}
-body.open #hud-scan{opacity:1}
-@keyframes scan-move{from{top:0}to{top:100%}}
+    /* ─── COLOR GRADE OVERLAY ─── */
+    #grade {
+      position: fixed;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse 120% 100% at 50% 100%, rgba(0, 30, 60, .55) 0%, transparent 65%),
+        radial-gradient(ellipse 80% 60% at 50% 0%, rgba(0, 10, 30, .4) 0%, transparent 70%);
+      mix-blend-mode: multiply;
+    }
 
-/* ─── HUD DATA STRIPS ─── */
-#hud-left,#hud-right{
-  position:fixed;top:50%;transform:translateY(-50%);
-  z-index:25;font-family:'Share Tech Mono',monospace;
-  font-size:.58rem;color:rgba(0,220,255,.45);
-  letter-spacing:.12em;line-height:1.9;
-  opacity:0;transition:opacity 1.2s;
-}
-#hud-left{left:18px;text-align:left}
-#hud-right{right:18px;text-align:right}
-body.open #hud-left,body.open #hud-right{opacity:1}
+    #teal-shift {
+      position: fixed;
+      inset: 0;
+      z-index: 3;
+      pointer-events: none;
+      background: linear-gradient(135deg, rgba(0, 180, 200, .06) 0%, transparent 60%, rgba(255, 140, 0, .04) 100%);
+    }
 
-/* ─── PROGRESS BAR ─── */
-#prog-wrap{position:fixed;bottom:0;left:0;right:0;height:3px;z-index:30;background:rgba(255,255,255,.07)}
-#prog-bar{
-  height:100%;width:0%;
-  background:linear-gradient(90deg,#00a8c8,#00dce8,#00a8c8);
-  box-shadow:0 0 10px rgba(0,200,230,.9);
-  transition:width .25s linear;
-}
+    #vignette {
+      position: fixed;
+      inset: 0;
+      z-index: 4;
+      pointer-events: none;
+      background: radial-gradient(ellipse at center, transparent 38%, rgba(0, 0, 0, .72) 100%);
+    }
 
-/* ─── CHAPTER DOTS ─── */
-#chapters{
-  position:fixed;bottom:10px;left:50%;transform:translateX(-50%);
-  z-index:30;display:flex;gap:10px;opacity:0;transition:opacity .5s;
-}
-body.open #chapters{opacity:.6}
-.ch-dot{
-  width:28px;height:3px;background:rgba(255,255,255,.25);border-radius:2px;
-  cursor:pointer;transition:background .3s,transform .3s;
-}
-.ch-dot.active{background:rgba(0,210,230,.9);transform:scaleY(1.6)}
-.ch-dot:hover{background:rgba(0,210,230,.6)}
+    #film-grain {
+      position: fixed;
+      inset: -50%;
+      width: 200%;
+      height: 200%;
+      z-index: 5;
+      pointer-events: none;
+      opacity: .038;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      animation: grain .45s steps(1) infinite;
+    }
 
-/* ─── TITLE SYSTEM ─── */
-#title-stage{
-  position:fixed;inset:0;z-index:40;display:flex;flex-direction:column;
-  align-items:center;justify-content:center;pointer-events:none;text-align:center;padding:0 5%;
-}
+    @keyframes grain {
+      0% {
+        transform: translate(0, 0)
+      }
 
-/* company name */
-.t-company{
-  font-family:'Orbitron',sans-serif;font-weight:900;
-  font-size:clamp(1.6rem,4.5vw,4.2rem);
-  letter-spacing:.32em;text-transform:uppercase;
-  color:#fff;
-  text-shadow:0 0 40px rgba(0,220,255,.6),0 0 80px rgba(0,180,220,.3),0 2px 24px rgba(0,0,0,.9);
-  opacity:0;transform:translateY(20px) scaleX(.96);
-  transition:opacity .1s,transform .1s;
-  white-space:nowrap;
-}
-.t-company.in{opacity:1;transform:translateY(0) scaleX(1);transition:opacity 1.2s ease,transform 1.2s ease}
-.t-company.out{opacity:0;transform:translateY(-14px) scaleX(.98);transition:opacity .6s ease,transform .6s ease}
+      25% {
+        transform: translate(-3%, -1%)
+      }
 
-/* divider line */
-.t-divider{
-  width:0;height:1px;background:linear-gradient(90deg,transparent,rgba(0,200,230,.8),transparent);
-  margin:.8rem auto;box-shadow:0 0 8px rgba(0,200,230,.6);
-  opacity:0;transition:width 1s ease .3s, opacity .3s ease .3s;
-}
-.t-divider.in{width:min(60vw,480px);opacity:1}
-.t-divider.out{width:0;opacity:0;transition:width .5s ease,opacity .5s ease}
+      50% {
+        transform: translate(2%, 3%)
+      }
 
-/* tagline */
-.t-tag{
-  font-family:'Rajdhani',sans-serif;font-weight:300;
-  font-size:clamp(.7rem,1.8vw,1.15rem);
-  letter-spacing:.55em;text-transform:uppercase;
-  color:rgba(0,220,255,.7);
-  opacity:0;transform:translateY(12px);
-  transition:opacity .1s,transform .1s;
-}
-.t-tag.in{opacity:1;transform:translateY(0);transition:opacity 1.4s ease .5s,transform 1.4s ease .5s}
-.t-tag.out{opacity:0;transform:translateY(-10px);transition:opacity .5s ease,transform .5s ease}
+      75% {
+        transform: translate(-1%, 2%)
+      }
 
-/* metric badge */
-.t-metric{
-  font-family:'Share Tech Mono',monospace;
-  font-size:clamp(.55rem,1.2vw,.8rem);
-  letter-spacing:.3em;color:rgba(255,180,50,.75);
-  margin-top:1.4rem;
-  opacity:0;transform:translateY(8px);
-  transition:opacity .1s;
-}
-.t-metric.in{opacity:1;transform:translateY(0);transition:opacity 1.2s ease .9s,transform 1.2s ease .9s}
-.t-metric.out{opacity:0;transition:opacity .4s ease}
+      100% {
+        transform: translate(3%, -2%)
+      }
+    }
 
-/* ─── FINAL FRAME ─── */
-#final-frame{
-  position:fixed;inset:0;z-index:100;
-  background:#000;display:flex;flex-direction:column;
-  align-items:center;justify-content:center;
-  opacity:0;pointer-events:none;
-  transition:opacity 2.5s cubic-bezier(.4,0,.2,1);
-}
-#final-frame.show{opacity:1;pointer-events:all}
-#final-logo-wrap{position:relative;display:flex;flex-direction:column;align-items:center;gap:0}
+    /* ─── LENS FLARE ─── */
+    #flare {
+      position: fixed;
+      z-index: 6;
+      pointer-events: none;
+      top: 8%;
+      left: 72%;
+      transform: translate(-50%, -50%);
+      width: 420px;
+      height: 420px;
+      background: radial-gradient(ellipse at center, rgba(255, 220, 100, .18) 0%, rgba(255, 180, 50, .07) 30%, transparent 70%);
+      border-radius: 50%;
+      animation: flare-drift 9s ease-in-out infinite alternate;
+      opacity: 0;
+      transition: opacity 2s;
+    }
 
-/* metallic glow ring */
-#logo-glow{
-  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
-  width:320px;height:320px;border-radius:50%;
-  background:radial-gradient(ellipse at center,rgba(0,180,230,.12) 0%,rgba(0,130,180,.05) 40%,transparent 70%);
-  box-shadow:
-    0 0 60px rgba(0,200,255,.18),
-    0 0 120px rgba(0,160,220,.1),
-    inset 0 0 40px rgba(0,200,255,.06);
-  animation:logo-pulse 3s ease-in-out infinite alternate;
-  pointer-events:none;
-}
-@keyframes logo-pulse{
-  0%{box-shadow:0 0 60px rgba(0,200,255,.18),0 0 120px rgba(0,160,220,.1),inset 0 0 40px rgba(0,200,255,.06)}
-  100%{box-shadow:0 0 90px rgba(0,200,255,.28),0 0 180px rgba(0,160,220,.18),inset 0 0 60px rgba(0,200,255,.1)}
-}
+    #flare.on {
+      opacity: 1
+    }
 
-/* metallic top line */
-#logo-topline{
-  width:0;height:1px;
-  background:linear-gradient(90deg,transparent,rgba(0,220,255,.9),rgba(180,220,255,.7),rgba(0,220,255,.9),transparent);
-  box-shadow:0 0 8px rgba(0,200,255,.8);
-  margin-bottom:2.4rem;
-  transition:width 1.8s ease .8s;
-}
-#final-frame.show #logo-topline{width:min(65vw,520px)}
+    @keyframes flare-drift {
+      0% {
+        transform: translate(-50%, -50%) scale(1)
+      }
 
-/* CH icon mark */
-#logo-mark{
-  font-family:'Orbitron',sans-serif;font-weight:900;
-  font-size:clamp(2.4rem,6vw,5rem);
-  letter-spacing:.08em;
-  background:linear-gradient(180deg,#e8f4ff 0%,#a8d8ff 35%,#60b8f0 65%,#c8e8ff 100%);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-  filter:drop-shadow(0 0 20px rgba(0,180,255,.5));
-  margin-bottom:.4rem;
-}
-#logo-sub{
-  font-family:'Rajdhani',sans-serif;font-weight:600;
-  font-size:clamp(.6rem,1.5vw,1rem);
-  letter-spacing:.6em;text-transform:uppercase;
-  color:rgba(0,200,240,.55);
-  margin-bottom:2.4rem;
-}
+      100% {
+        transform: translate(-42%, -58%) scale(1.18)
+      }
+    }
 
-/* final company title */
-#final-company{
-  font-family:'Orbitron',sans-serif;font-weight:900;
-  font-size:clamp(1.5rem,4vw,3.8rem);
-  letter-spacing:.28em;text-transform:uppercase;
-  background:linear-gradient(180deg,#ffffff 0%,#b8e4ff 50%,#78c8f0 100%);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-  text-shadow:none;filter:drop-shadow(0 0 30px rgba(0,180,255,.4));
-  margin-bottom:.7rem;white-space:nowrap;
-}
+    #flare-streak {
+      position: fixed;
+      z-index: 6;
+      pointer-events: none;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: opacity 1.5s;
+    }
 
-#final-divider{
-  width:0;height:1px;
-  background:linear-gradient(90deg,transparent,rgba(0,200,230,.7),transparent);
-  box-shadow:0 0 6px rgba(0,200,230,.5);margin:.7rem auto;
-  transition:width 1.6s ease 1.2s;
-}
-#final-frame.show #final-divider{width:min(55vw,440px)}
+    #flare-streak.on {
+      opacity: 1
+    }
 
-#final-tagline{
-  font-family:'Rajdhani',sans-serif;font-weight:300;
-  font-size:clamp(.65rem,1.5vw,1.05rem);
-  letter-spacing:.65em;text-transform:uppercase;
-  color:rgba(0,210,240,.6);
-  margin-bottom:.6rem;
-}
-#final-tagline2{
-  font-family:'Share Tech Mono',monospace;
-  font-size:clamp(.45rem,.9vw,.65rem);
-  letter-spacing:.4em;
-  color:rgba(180,220,255,.3);
-}
+    #flare-streak svg {
+      width: 100%;
+      height: 100%
+    }
 
-/* bottom line */
-#logo-botline{
-  width:0;height:1px;
-  background:linear-gradient(90deg,transparent,rgba(0,220,255,.9),rgba(180,220,255,.7),rgba(0,220,255,.9),transparent);
-  box-shadow:0 0 8px rgba(0,200,255,.8);
-  margin-top:2.4rem;
-  transition:width 1.8s ease 1s;
-}
-#final-frame.show #logo-botline{width:min(65vw,520px)}
+    /* ─── SCAN LINES ─── */
+    #scanlines {
+      position: fixed;
+      inset: 0;
+      z-index: 7;
+      pointer-events: none;
+      background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 0, 0, .06) 2px, rgba(0, 0, 0, .06) 4px);
+    }
 
-/* corner accents final */
-.fc{position:absolute;width:28px;height:28px}
-.fc svg{width:100%;height:100%}
-#fc-tl{top:-50px;left:-120px}
-#fc-tr{top:-50px;right:-120px}
-#fc-bl{bottom:-80px;left:-120px}
-#fc-br{bottom:-80px;right:-120px}
+    /* ─── CINEMATIC BARS ─── */
+    .bar {
+      position: fixed;
+      left: 0;
+      right: 0;
+      background: #000;
+      z-index: 20;
+      transition: height 1.4s cubic-bezier(.4, 0, .2, 1)
+    }
 
-/* ─── FLASH ─── */
-#flash{position:fixed;inset:0;z-index:90;background:#fff;opacity:0;pointer-events:none;transition:opacity .12s}
-#flash.pop{opacity:.22}
+    #bar-top {
+      top: 0;
+      height: 72px
+    }
 
-/* ─── LOADING — EMBED MODUNDA GİZLİ ─── */
-#loading{display:none!important}
+    #bar-bot {
+      bottom: 0;
+      height: 72px
+    }
 
-/* ─── BEAT INDICATOR ─── */
-#beat-ring{
-  position:fixed;inset:0;z-index:8;pointer-events:none;
-  border:1px solid rgba(0,200,230,0);border-radius:0;
-  transition:border-color .08s,transform .08s;
-}
-#beat-ring.pulse{border-color:rgba(0,200,230,.08);transform:scale(1.002)}
+    body.open #bar-top,
+    body.open #bar-bot {
+      height: 0
+    }
 
-/* ─── CLICK TO START — EMBED MODUNDA GİZLİ ─── */
-#start-prompt{display:none!important}
+    /* ─── HUD CORNERS ─── */
+    .hud-corner {
+      position: fixed;
+      z-index: 25;
+      width: 60px;
+      height: 60px;
+      opacity: 0;
+      transition: opacity 1s
+    }
 
-/* ─── EMBED MODU: HUD GİZLE ─── */
-#hud-left{display:none!important}
-#hud-right{display:none!important}
+    .hud-corner svg {
+      width: 100%;
+      height: 100%
+    }
 
-/* ─── MOBILE RESPONSIVE ─── */
-@media (max-width: 1024px) {
-  .clip.climax-clip video {
-    transform: scale(0.82) !important;
-  }
-  #title-stage {
-    justify-content: flex-start !important;
-    padding-top: 120px !important;
-  }
-  .t-company {
-    font-size: clamp(1.4rem, 6vw, 2.2rem) !important;
-    white-space: normal !important;
-    letter-spacing: 0.15em !important;
-    line-height: 1.2 !important;
-    color: #ffffff !important;
-    text-shadow: 0 0 20px rgba(0,220,255,0.85), 0 0 40px rgba(0,220,255,0.5), 0 2px 12px rgba(0,0,0,0.95) !important;
-  }
-  .t-divider {
-    width: min(80vw, 300px) !important;
-    margin: 0.5rem auto !important;
-  }
-  .t-tag {
-    font-size: clamp(0.8rem, 3.5vw, 1.1rem) !important;
-    letter-spacing: 0.2em !important;
-    color: rgba(0,240,255,0.95) !important;
-    text-shadow: 0 0 10px rgba(0,220,255,0.6) !important;
-    white-space: normal !important;
-  }
-  .t-metric {
-    font-size: clamp(0.65rem, 3vw, 0.85rem) !important;
-    letter-spacing: 0.1em !important;
-    color: rgba(255,190,70,0.95) !important;
-    margin-top: 0.6rem !important;
-    text-shadow: 0 0 8px rgba(255,190,70,0.5) !important;
-    white-space: normal !important;
-  }
-  #final-frame {
-    justify-content: flex-start !important;
-    padding-top: 120px !important;
-  }
-  #final-logo-wrap {
-    transform: scale(0.95) !important;
-  }
-  #logo-topline, #logo-botline {
-    display: none !important;
-  }
-  .fc {
-    display: none !important;
-  }
-  #chapters {
-    display: none !important;
-  }
-  #prog-wrap {
-    display: none !important;
-  }
-}
+    #hc-tl {
+      top: 16px;
+      left: 16px
+    }
 
-@media (max-width: 640px) {
-  #bar-top { height: 40px; }
-  #bar-bot { height: 40px; }
-  body.open #bar-top, body.open #bar-bot { height: 0; }
-  #hc-tl, #hc-tr, #hc-bl, #hc-br { width: 32px; height: 32px; }
-  #hc-tl { top: 8px; left: 8px; }
-  #hc-tr { top: 8px; right: 8px; }
-  #hc-bl { bottom: 8px; left: 8px; }
-  #hc-br { bottom: 8px; right: 8px; }
-  #final-company { font-size: clamp(1rem, 6vw, 2.2rem); letter-spacing: .15em; white-space: normal; text-align: center; }
-  #logo-mark { font-size: clamp(1.8rem, 9vw, 3.5rem); }
-  #logo-sub { font-size: clamp(.5rem, 2.5vw, .8rem); letter-spacing: .3em; }
-  #final-tagline { font-size: clamp(.55rem, 2.5vw, .85rem); letter-spacing: .3em; }
-  #final-tagline2 { font-size: clamp(.38rem, 1.8vw, .55rem); letter-spacing: .2em; }
-  #chapters { bottom: 6px; gap: 6px; }
-  .ch-dot { width: 18px; }
-}
+    #hc-tr {
+      top: 16px;
+      right: 16px
+    }
 
+    #hc-bl {
+      bottom: 16px;
+      left: 16px
+    }
 
-</style>
+    #hc-br {
+      bottom: 16px;
+      right: 16px
+    }
+
+    body.open .hud-corner {
+      opacity: .55
+    }
+
+    /* ─── HUD SCAN LINE ─── */
+    #hud-scan {
+      position: fixed;
+      left: 0;
+      right: 0;
+      height: 2px;
+      z-index: 26;
+      pointer-events: none;
+      background: linear-gradient(90deg, transparent, rgba(0, 220, 255, .6), transparent);
+      animation: scan-move 4.5s linear infinite;
+      opacity: 0;
+      transition: opacity 1s;
+    }
+
+    body.open #hud-scan {
+      opacity: 1
+    }
+
+    @keyframes scan-move {
+      from {
+        top: 0
+      }
+
+      to {
+        top: 100%
+      }
+    }
+
+    /* ─── HUD DATA STRIPS ─── */
+    #hud-left,
+    #hud-right {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 25;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: .58rem;
+      color: rgba(0, 220, 255, .45);
+      letter-spacing: .12em;
+      line-height: 1.9;
+      opacity: 0;
+      transition: opacity 1.2s;
+    }
+
+    #hud-left {
+      left: 18px;
+      text-align: left
+    }
+
+    #hud-right {
+      right: 18px;
+      text-align: right
+    }
+
+    body.open #hud-left,
+    body.open #hud-right {
+      opacity: 1
+    }
+
+    /* ─── PROGRESS BAR ─── */
+    #prog-wrap {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      z-index: 30;
+      background: rgba(255, 255, 255, .07)
+    }
+
+    #prog-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #00a8c8, #00dce8, #00a8c8);
+      box-shadow: 0 0 10px rgba(0, 200, 230, .9);
+      transition: width .25s linear;
+    }
+
+    /* ─── CHAPTER DOTS ─── */
+    #chapters {
+      position: fixed;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 30;
+      display: flex;
+      gap: 10px;
+      opacity: 0;
+      transition: opacity .5s;
+    }
+
+    body.open #chapters {
+      opacity: .6
+    }
+
+    .ch-dot {
+      width: 28px;
+      height: 3px;
+      background: rgba(255, 255, 255, .25);
+      border-radius: 2px;
+      cursor: pointer;
+      transition: background .3s, transform .3s;
+    }
+
+    .ch-dot.active {
+      background: rgba(0, 210, 230, .9);
+      transform: scaleY(1.6)
+    }
+
+    .ch-dot:hover {
+      background: rgba(0, 210, 230, .6)
+    }
+
+    /* ─── TITLE SYSTEM ─── */
+    #title-stage {
+      position: fixed;
+      inset: 0;
+      z-index: 40;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+      text-align: center;
+      padding: 0 5%;
+    }
+
+    /* company name */
+    .t-company {
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 900;
+      font-size: clamp(1.6rem, 4.5vw, 4.2rem);
+      letter-spacing: .32em;
+      text-transform: uppercase;
+      color: #fff;
+      text-shadow: 0 0 40px rgba(0, 220, 255, .6), 0 0 80px rgba(0, 180, 220, .3), 0 2px 24px rgba(0, 0, 0, .9);
+      opacity: 0;
+      transform: translateY(20px) scaleX(.96);
+      transition: opacity .1s, transform .1s;
+      white-space: nowrap;
+    }
+
+    .t-company.in {
+      opacity: 1;
+      transform: translateY(0) scaleX(1);
+      transition: opacity 1.2s ease, transform 1.2s ease
+    }
+
+    .t-company.out {
+      opacity: 0;
+      transform: translateY(-14px) scaleX(.98);
+      transition: opacity .6s ease, transform .6s ease
+    }
+
+    /* divider line */
+    .t-divider {
+      width: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(0, 200, 230, .8), transparent);
+      margin: .8rem auto;
+      box-shadow: 0 0 8px rgba(0, 200, 230, .6);
+      opacity: 0;
+      transition: width 1s ease .3s, opacity .3s ease .3s;
+    }
+
+    .t-divider.in {
+      width: min(60vw, 480px);
+      opacity: 1
+    }
+
+    .t-divider.out {
+      width: 0;
+      opacity: 0;
+      transition: width .5s ease, opacity .5s ease
+    }
+
+    /* tagline */
+    .t-tag {
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 300;
+      font-size: clamp(.7rem, 1.8vw, 1.15rem);
+      letter-spacing: .55em;
+      text-transform: uppercase;
+      color: rgba(0, 220, 255, .7);
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity .1s, transform .1s;
+    }
+
+    .t-tag.in {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 1.4s ease .5s, transform 1.4s ease .5s
+    }
+
+    .t-tag.out {
+      opacity: 0;
+      transform: translateY(-10px);
+      transition: opacity .5s ease, transform .5s ease
+    }
+
+    /* metric badge */
+    .t-metric {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: clamp(.55rem, 1.2vw, .8rem);
+      letter-spacing: .3em;
+      color: rgba(255, 180, 50, .75);
+      margin-top: 1.4rem;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity .1s;
+    }
+
+    .t-metric.in {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 1.2s ease .9s, transform 1.2s ease .9s
+    }
+
+    .t-metric.out {
+      opacity: 0;
+      transition: opacity .4s ease
+    }
+
+    /* ─── FINAL FRAME ─── */
+    #final-frame {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      background: #000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 2.5s cubic-bezier(.4, 0, .2, 1);
+    }
+
+    #final-frame.show {
+      opacity: 1;
+      pointer-events: all
+    }
+
+    #final-logo-wrap {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0
+    }
+
+    /* metallic glow ring */
+    #logo-glow {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      background: radial-gradient(ellipse at center, rgba(0, 180, 230, .12) 0%, rgba(0, 130, 180, .05) 40%, transparent 70%);
+      box-shadow:
+        0 0 60px rgba(0, 200, 255, .18),
+        0 0 120px rgba(0, 160, 220, .1),
+        inset 0 0 40px rgba(0, 200, 255, .06);
+      animation: logo-pulse 3s ease-in-out infinite alternate;
+      pointer-events: none;
+    }
+
+    @keyframes logo-pulse {
+      0% {
+        box-shadow: 0 0 60px rgba(0, 200, 255, .18), 0 0 120px rgba(0, 160, 220, .1), inset 0 0 40px rgba(0, 200, 255, .06)
+      }
+
+      100% {
+        box-shadow: 0 0 90px rgba(0, 200, 255, .28), 0 0 180px rgba(0, 160, 220, .18), inset 0 0 60px rgba(0, 200, 255, .1)
+      }
+    }
+
+    /* metallic top line */
+    #logo-topline {
+      width: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(0, 220, 255, .9), rgba(180, 220, 255, .7), rgba(0, 220, 255, .9), transparent);
+      box-shadow: 0 0 8px rgba(0, 200, 255, .8);
+      margin-bottom: 2.4rem;
+      transition: width 1.8s ease .8s;
+    }
+
+    #final-frame.show #logo-topline {
+      width: min(65vw, 520px)
+    }
+
+    /* CH icon mark */
+    #logo-mark {
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 900;
+      font-size: clamp(2.4rem, 6vw, 5rem);
+      letter-spacing: .08em;
+      background: linear-gradient(180deg, #e8f4ff 0%, #a8d8ff 35%, #60b8f0 65%, #c8e8ff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter: drop-shadow(0 0 20px rgba(0, 180, 255, .5));
+      margin-bottom: .4rem;
+    }
+
+    #logo-sub {
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 600;
+      font-size: clamp(.6rem, 1.5vw, 1rem);
+      letter-spacing: .6em;
+      text-transform: uppercase;
+      color: rgba(0, 200, 240, .55);
+      margin-bottom: 2.4rem;
+    }
+
+    /* final company title */
+    #final-company {
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 900;
+      font-size: clamp(1.5rem, 4vw, 3.8rem);
+      letter-spacing: .28em;
+      text-transform: uppercase;
+      background: linear-gradient(180deg, #ffffff 0%, #b8e4ff 50%, #78c8f0 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: none;
+      filter: drop-shadow(0 0 30px rgba(0, 180, 255, .4));
+      margin-bottom: .7rem;
+      white-space: nowrap;
+    }
+
+    #final-divider {
+      width: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(0, 200, 230, .7), transparent);
+      box-shadow: 0 0 6px rgba(0, 200, 230, .5);
+      margin: .7rem auto;
+      transition: width 1.6s ease 1.2s;
+    }
+
+    #final-frame.show #final-divider {
+      width: min(55vw, 440px)
+    }
+
+    #final-tagline {
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 300;
+      font-size: clamp(.65rem, 1.5vw, 1.05rem);
+      letter-spacing: .65em;
+      text-transform: uppercase;
+      color: rgba(0, 210, 240, .6);
+      margin-bottom: .6rem;
+    }
+
+    #final-tagline2 {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: clamp(.45rem, .9vw, .65rem);
+      letter-spacing: .4em;
+      color: rgba(180, 220, 255, .3);
+    }
+
+    /* bottom line */
+    #logo-botline {
+      width: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(0, 220, 255, .9), rgba(180, 220, 255, .7), rgba(0, 220, 255, .9), transparent);
+      box-shadow: 0 0 8px rgba(0, 200, 255, .8);
+      margin-top: 2.4rem;
+      transition: width 1.8s ease 1s;
+    }
+
+    #final-frame.show #logo-botline {
+      width: min(65vw, 520px)
+    }
+
+    /* corner accents final */
+    .fc {
+      position: absolute;
+      width: 28px;
+      height: 28px
+    }
+
+    .fc svg {
+      width: 100%;
+      height: 100%
+    }
+
+    #fc-tl {
+      top: -50px;
+      left: -120px
+    }
+
+    #fc-tr {
+      top: -50px;
+      right: -120px
+    }
+
+    #fc-bl {
+      bottom: -80px;
+      left: -120px
+    }
+
+    #fc-br {
+      bottom: -80px;
+      right: -120px
+    }
+
+    /* ─── FLASH ─── */
+    #flash {
+      position: fixed;
+      inset: 0;
+      z-index: 90;
+      background: #fff;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .12s
+    }
+
+    #flash.pop {
+      opacity: .22
+    }
+
+    /* ─── LOADING — EMBED MODUNDA GİZLİ ─── */
+    #loading {
+      display: none !important
+    }
+
+    /* ─── BEAT INDICATOR ─── */
+    #beat-ring {
+      position: fixed;
+      inset: 0;
+      z-index: 8;
+      pointer-events: none;
+      border: 1px solid rgba(0, 200, 230, 0);
+      border-radius: 0;
+      transition: border-color .08s, transform .08s;
+    }
+
+    #beat-ring.pulse {
+      border-color: rgba(0, 200, 230, .08);
+      transform: scale(1.002)
+    }
+
+    /* ─── CLICK TO START — EMBED MODUNDA GİZLİ ─── */
+    #start-prompt {
+      display: none !important
+    }
+
+    /* ─── EMBED MODU: HUD GİZLE ─── */
+    #hud-left {
+      display: none !important
+    }
+
+    #hud-right {
+      display: none !important
+    }
+
+    /* ─── MOBILE RESPONSIVE ─── */
+    @media (max-width: 1024px) {
+      .clip.climax-clip video {
+        transform: scale(0.82) !important;
+      }
+
+      #title-stage {
+        justify-content: flex-start !important;
+        padding-top: 120px !important;
+      }
+
+      .t-company {
+        font-size: clamp(1.4rem, 6vw, 2.2rem) !important;
+        white-space: normal !important;
+        letter-spacing: 0.15em !important;
+        line-height: 1.2 !important;
+        color: #ffffff !important;
+        text-shadow: 0 0 20px rgba(0, 220, 255, 0.85), 0 0 40px rgba(0, 220, 255, 0.5), 0 2px 12px rgba(0, 0, 0, 0.95) !important;
+      }
+
+      .t-divider {
+        width: min(80vw, 300px) !important;
+        margin: 0.5rem auto !important;
+      }
+
+      .t-tag {
+        font-size: clamp(0.8rem, 3.5vw, 1.1rem) !important;
+        letter-spacing: 0.2em !important;
+        color: rgba(0, 240, 255, 0.95) !important;
+        text-shadow: 0 0 10px rgba(0, 220, 255, 0.6) !important;
+        white-space: normal !important;
+      }
+
+      .t-metric {
+        font-size: clamp(0.65rem, 3vw, 0.85rem) !important;
+        letter-spacing: 0.1em !important;
+        color: rgba(255, 190, 70, 0.95) !important;
+        margin-top: 0.6rem !important;
+        text-shadow: 0 0 8px rgba(255, 190, 70, 0.5) !important;
+        white-space: normal !important;
+      }
+
+      #final-frame {
+        justify-content: flex-start !important;
+        padding-top: 120px !important;
+      }
+
+      #final-logo-wrap {
+        transform: scale(0.95) !important;
+      }
+
+      #logo-topline,
+      #logo-botline {
+        display: none !important;
+      }
+
+      .fc {
+        display: none !important;
+      }
+
+      #chapters {
+        display: none !important;
+      }
+
+      #prog-wrap {
+        display: none !important;
+      }
+    }
+
+    @media (max-width: 640px) {
+      #bar-top {
+        height: 40px;
+      }
+
+      #bar-bot {
+        height: 40px;
+      }
+
+      body.open #bar-top,
+      body.open #bar-bot {
+        height: 0;
+      }
+
+      #hc-tl,
+      #hc-tr,
+      #hc-bl,
+      #hc-br {
+        width: 32px;
+        height: 32px;
+      }
+
+      #hc-tl {
+        top: 8px;
+        left: 8px;
+      }
+
+      #hc-tr {
+        top: 8px;
+        right: 8px;
+      }
+
+      #hc-bl {
+        bottom: 8px;
+        left: 8px;
+      }
+
+      #hc-br {
+        bottom: 8px;
+        right: 8px;
+      }
+
+      #final-company {
+        font-size: clamp(1rem, 6vw, 2.2rem);
+        letter-spacing: .15em;
+        white-space: normal;
+        text-align: center;
+      }
+
+      #logo-mark {
+        font-size: clamp(1.8rem, 9vw, 3.5rem);
+      }
+
+      #logo-sub {
+        font-size: clamp(.5rem, 2.5vw, .8rem);
+        letter-spacing: .3em;
+      }
+
+      #final-tagline {
+        font-size: clamp(.55rem, 2.5vw, .85rem);
+        letter-spacing: .3em;
+      }
+
+      #final-tagline2 {
+        font-size: clamp(.38rem, 1.8vw, .55rem);
+        letter-spacing: .2em;
+      }
+
+      #chapters {
+        bottom: 6px;
+        gap: 6px;
+      }
+
+      .ch-dot {
+        width: 18px;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-<!-- Loading -->
-<div id="loading">
-  <div id="load-ring"></div>
-  <div id="load-text">Initializing</div>
-  <div id="load-pct">CH ENERGY &amp; AUTOMATION</div>
-</div>
-
-<!-- Start prompt -->
-<div id="start-prompt" id="sp">
-  <div id="start-icon">
-    <svg width="26" height="26" viewBox="0 0 24 24" fill="rgba(0,200,230,.85)"><path d="M8 5v14l11-7z"/></svg>
+  <!-- Loading -->
+  <div id="loading">
+    <div id="load-ring"></div>
+    <div id="load-text">Initializing</div>
+    <div id="load-pct">CH ENERGY &amp; AUTOMATION</div>
   </div>
-  <div id="start-text">Click to Begin</div>
-</div>
 
-<!-- Beat ring -->
-<div id="beat-ring"></div>
-
-<!-- Flash -->
-<div id="flash"></div>
-
-<!-- Videos -->
-<div id="stage"></div>
-
-<!-- Grade overlays -->
-<div id="grade"></div>
-<div id="teal-shift"></div>
-<div id="vignette"></div>
-<div id="film-grain"></div>
-
-<!-- Lens flare -->
-<div id="flare"></div>
-<div id="flare-streak">
-  <svg viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-    <defs>
-      <linearGradient id="fg" x1="0" y1="0" x2="1" y2="0">
-        <stop offset="0%" stop-color="rgba(255,220,100,0)"/>
-        <stop offset="50%" stop-color="rgba(255,220,100,0.12)"/>
-        <stop offset="100%" stop-color="rgba(255,220,100,0)"/>
-      </linearGradient>
-    </defs>
-    <line x1="0" y1="200" x2="1920" y2="880" stroke="url(#fg)" stroke-width="2"/>
-    <line x1="0" y1="220" x2="1920" y2="860" stroke="rgba(255,200,80,.04)" stroke-width="4"/>
-  </svg>
-</div>
-
-<!-- Scan lines -->
-<div id="scanlines"></div>
-
-<!-- Cinematic bars -->
-<div class="bar" id="bar-top"></div>
-<div class="bar" id="bar-bot"></div>
-
-<!-- HUD scan -->
-<div id="hud-scan"></div>
-
-<!-- HUD Corners -->
-<div class="hud-corner" id="hc-tl">
-  <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M2 30 L2 2 L30 2" stroke="rgba(0,200,230,.7)" stroke-width="1.5"/>
-    <circle cx="2" cy="2" r="2" fill="rgba(0,200,230,.7)"/>
-  </svg>
-</div>
-<div class="hud-corner" id="hc-tr">
-  <svg viewBox="0 0 60 60" fill="none">
-    <path d="M58 30 L58 2 L30 2" stroke="rgba(0,200,230,.7)" stroke-width="1.5"/>
-    <circle cx="58" cy="2" r="2" fill="rgba(0,200,230,.7)"/>
-  </svg>
-</div>
-<div class="hud-corner" id="hc-bl">
-  <svg viewBox="0 0 60 60" fill="none">
-    <path d="M2 30 L2 58 L30 58" stroke="rgba(0,200,230,.7)" stroke-width="1.5"/>
-    <circle cx="2" cy="58" r="2" fill="rgba(0,200,230,.7)"/>
-  </svg>
-</div>
-<div class="hud-corner" id="hc-br">
-  <svg viewBox="0 0 60 60" fill="none">
-    <path d="M58 30 L58 58 L30 58" stroke="rgba(0,200,230,.7)" stroke-width="1.5"/>
-    <circle cx="58" cy="58" r="2" fill="rgba(0,200,230,.7)"/>
-  </svg>
-</div>
-
-<!-- HUD data strips -->
-<div id="hud-left">
-  SYS_ONLINE<br>CAM_A :: ACTIVE<br>RES :: 3840×2160<br>FPS :: 60.00<br>CODEC :: H.265<br>BIT :: 200Mbps<br>──────────<br>LAT :: 0.004ms<br>SYNC :: LOCKED
-</div>
-<div id="hud-right">
-  CH-ENA-v4.1<br>MODULE :: AUTO<br>DRIVE :: SERVO<br>LOAD :: 98.4%<br>TEMP :: 42°C<br>POWER :: ON<br>──────────<br>PLC :: READY<br>NET :: SECURED
-</div>
-
-<!-- Title stage -->
-<div id="title-stage">
-  <div class="t-company" id="tc"></div>
-  <div class="t-divider"  id="td"></div>
-  <div class="t-tag"      id="tt"></div>
-  <div class="t-metric"   id="tm"></div>
-</div>
-
-<!-- Progress -->
-<div id="prog-wrap"><div id="prog-bar"></div></div>
-
-<!-- Chapter dots -->
-<div id="chapters"></div>
-
-<!-- Final Frame -->
-<div id="final-frame">
-  <div id="final-logo-wrap">
-    <!-- corner accents -->
-    <div class="fc" id="fc-tl"><svg viewBox="0 0 28 28" fill="none"><path d="M1 14 L1 1 L14 1" stroke="rgba(0,200,230,.5)" stroke-width="1"/></svg></div>
-    <div class="fc" id="fc-tr"><svg viewBox="0 0 28 28" fill="none"><path d="M27 14 L27 1 L14 1" stroke="rgba(0,200,230,.5)" stroke-width="1"/></svg></div>
-    <div class="fc" id="fc-bl"><svg viewBox="0 0 28 28" fill="none"><path d="M1 14 L1 27 L14 27" stroke="rgba(0,200,230,.5)" stroke-width="1"/></svg></div>
-    <div class="fc" id="fc-br"><svg viewBox="0 0 28 28" fill="none"><path d="M27 14 L27 27 L14 27" stroke="rgba(0,200,230,.5)" stroke-width="1"/></svg></div>
-
-    <div id="logo-glow"></div>
-    <div id="logo-topline"></div>
-    <div id="logo-mark">CH</div>
-    <div id="logo-sub">Energy &amp; Automation</div>
-    <div id="final-company">CH Energy &amp; Automation</div>
-    <div id="final-divider"></div>
-    <div id="final-tagline">Engineering the Future</div>
-    <div id="final-tagline2">INDUSTRY 4.0 &nbsp;·&nbsp; SMART AUTOMATION &nbsp;·&nbsp; ENGINEERING EXCELLENCE</div>
-    <div id="logo-botline"></div>
+  <!-- Start prompt -->
+  <div id="start-prompt" id="sp">
+    <div id="start-icon">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="rgba(0,200,230,.85)">
+        <path d="M8 5v14l11-7z" />
+      </svg>
+    </div>
+    <div id="start-text">Click to Begin</div>
   </div>
-</div>
 
-<script>
-/* ═══════════════════════════════════════════════════════
-   CH ENERGY & AUTOMATION — CORPORATE PROMO ENGINE
-   ═══════════════════════════════════════════════════════ */
+  <!-- Beat ring -->
+  <div id="beat-ring"></div>
 
-// ── VIDEO CLIPS + SCENE DATA ──────────────────────────────────────────────────
-const CLIPS = [
-  {
-    src: '/video_arka_plan/159021-818026286_medium.mp4',
-    company: 'CH ENERGY',
-    tag:     '& AUTOMATION',
-    metric:  'ENGINEERING EXCELLENCE · INDUSTRY 4.0',
-    flare: true, dur: 9000
-  },
-  {
-    src: '/video_arka_plan/172156-846731269_medium.mp4',
-    company: 'ENGINEERING',
-    tag:     'EXCELLENCE',
-    metric:  'ADVANCED SYSTEMS · RELIABLE AUTOMATION',
-    flare: true, dur: 10000
-  },
-  {
-    src: '/video_arka_plan/215500_medium.mp4',
-    company: 'SMART',
-    tag:     'TECHNOLOGIES',
-    metric:  'AI-DRIVEN · PROCESS CONTROL · ROBOTICS',
-    flare: false, dur: 9000
-  },
-  {
-    src: '/video_arka_plan/345357_medium.mp4',
-    company: 'RELIABLE',
-    tag:     'AUTOMATION',
-    metric:  'ZERO-FAULT ENGINEERING · 99.98% UPTIME',
-    flare: true, dur: 10000
-  },
-  {
-    src: '/video_arka_plan/4763-179741146_medium.mp4',
-    company: 'FUTURE DRIVEN',
-    tag:     'ENGINEERING',
-    metric:  'NEXT-GEN SYSTEMS · INDUSTRY 4.0 READY',
-    flare: false, dur: 9000
-  },
-  {
-    src: '/video_arka_plan/CH enerji transformer kartal_1.mp4',
-    company: 'CH ENERGY & AUTOMATION',
-    tag:     'Engineering the Future',
-    metric:  'INDUSTRY 4.0 · SMART AUTOMATION · ENGINEERING EXCELLENCE',
-    flare: true,
-    dur: 10000,
-    isClimax: true,
-    isFirstClimaxPart: true
-  },
-  {
-    src: '/video_arka_plan/CH enerji transformer kartal_2.mp4',
-    company: 'CH ENERGY & AUTOMATION',
-    tag:     'Engineering the Future',
-    metric:  'INDUSTRY 4.0 · SMART AUTOMATION · ENGINEERING EXCELLENCE',
-    flare: true,
-    dur: 10000,
-    isClimax: true,
-    isSecondClimaxPart: true
-  }
-];
+  <!-- Flash -->
+  <div id="flash"></div>
 
-const TOTAL = CLIPS.length;
-const TRANS  = 1400;
+  <!-- Videos -->
+  <div id="stage"></div>
 
-// ── DOM REFS ─────────────────────────────────────────────────────────────────
-const stage       = document.getElementById('stage');
-const tc          = document.getElementById('tc');
-const td          = document.getElementById('td');
-const tt          = document.getElementById('tt');
-const tm_el       = document.getElementById('tm');
-const progBar     = document.getElementById('prog-bar');
-const chapters    = document.getElementById('chapters');
-const flash       = document.getElementById('flash');
-const flare       = document.getElementById('flare');
-const flareStreak = document.getElementById('flare-streak');
-const finalFrame  = document.getElementById('final-frame');
-const beatRing    = document.getElementById('beat-ring');
+  <!-- Grade overlays -->
+  <div id="grade"></div>
+  <div id="teal-shift"></div>
+  <div id="vignette"></div>
+  <div id="film-grain"></div>
 
-// ── STATE ────────────────────────────────────────────────────────────────────
-let current   = 0;
-let playing   = false;
-let timer     = null;
-let progTimer = null;
-let slideStart = 0;
-let slides    = [];
-let videos    = [];
-let audioCtx  = null;
-let masterGain = null;
+  <!-- Lens flare -->
+  <div id="flare"></div>
+  <div id="flare-streak">
+    <svg viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <defs>
+        <linearGradient id="fg" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="rgba(255,220,100,0)" />
+          <stop offset="50%" stop-color="rgba(255,220,100,0.12)" />
+          <stop offset="100%" stop-color="rgba(255,220,100,0)" />
+        </linearGradient>
+      </defs>
+      <line x1="0" y1="200" x2="1920" y2="880" stroke="url(#fg)" stroke-width="2" />
+      <line x1="0" y1="220" x2="1920" y2="860" stroke="rgba(255,200,80,.04)" stroke-width="4" />
+    </svg>
+  </div>
 
-// ── BUILD VIDEO SLIDES ────────────────────────────────────────────────────────
-CLIPS.forEach((c, i) => {
-  const div = document.createElement('div');
-  div.className = 'clip' + (i === 0 ? ' active' : '');
-  if (c.isClimax) {
-    div.classList.add('climax-clip');
-  }
+  <!-- Scan lines -->
+  <div id="scanlines"></div>
 
-  const v = document.createElement('video');
-  v.src          = c.src;
-  v.muted        = true;
-  v.loop         = c.isClimax ? false : true;
-  v.playsInline  = true;
-  v.preload      = 'metadata';
-  v.playbackRate = 1.0;
+  <!-- Cinematic bars -->
+  <div class="bar" id="bar-top"></div>
+  <div class="bar" id="bar-bot"></div>
 
-  div.appendChild(v);
-  stage.appendChild(div);
-  slides.push(div);
-  videos.push(v);
-});
+  <!-- HUD scan -->
+  <div id="hud-scan"></div>
 
-// ── BUILD CHAPTERS ────────────────────────────────────────────────────────────
-CLIPS.forEach((_, i) => {
-  const dot = document.createElement('div');
-  dot.className = 'ch-dot' + (i === 0 ? ' active' : '');
-  dot.addEventListener('click', () => { if(playing) jumpTo(i); });
-  chapters.appendChild(dot);
-});
+  <!-- HUD Corners -->
+  <div class="hud-corner" id="hc-tl">
+    <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M2 30 L2 2 L30 2" stroke="rgba(0,200,230,.7)" stroke-width="1.5" />
+      <circle cx="2" cy="2" r="2" fill="rgba(0,200,230,.7)" />
+    </svg>
+  </div>
+  <div class="hud-corner" id="hc-tr">
+    <svg viewBox="0 0 60 60" fill="none">
+      <path d="M58 30 L58 2 L30 2" stroke="rgba(0,200,230,.7)" stroke-width="1.5" />
+      <circle cx="58" cy="2" r="2" fill="rgba(0,200,230,.7)" />
+    </svg>
+  </div>
+  <div class="hud-corner" id="hc-bl">
+    <svg viewBox="0 0 60 60" fill="none">
+      <path d="M2 30 L2 58 L30 58" stroke="rgba(0,200,230,.7)" stroke-width="1.5" />
+      <circle cx="2" cy="58" r="2" fill="rgba(0,200,230,.7)" />
+    </svg>
+  </div>
+  <div class="hud-corner" id="hc-br">
+    <svg viewBox="0 0 60 60" fill="none">
+      <path d="M58 30 L58 58 L30 58" stroke="rgba(0,200,230,.7)" stroke-width="1.5" />
+      <circle cx="58" cy="58" r="2" fill="rgba(0,200,230,.7)" />
+    </svg>
+  </div>
 
-function updateChapters() {
-  document.querySelectorAll('.ch-dot').forEach((d,i)=>d.classList.toggle('active',i===current));
-}
+  <!-- HUD data strips -->
+  <div id="hud-left">
+    SYS_ONLINE<br>CAM_A :: ACTIVE<br>RES :: 3840×2160<br>FPS :: 60.00<br>CODEC :: H.265<br>BIT ::
+    200Mbps<br>──────────<br>LAT :: 0.004ms<br>SYNC :: LOCKED
+  </div>
+  <div id="hud-right">
+    CH-ENA-v4.1<br>MODULE :: AUTO<br>DRIVE :: SERVO<br>LOAD :: 98.4%<br>TEMP :: 42°C<br>POWER :: ON<br>──────────<br>PLC
+    :: READY<br>NET :: SECURED
+  </div>
 
-// ── FLASH TRANSITION ─────────────────────────────────────────────────────────
-function doFlash(cb) {
-  flash.classList.add('pop');
-  setTimeout(()=>{ flash.classList.remove('pop'); if(cb) cb(); }, 130);
-}
+  <!-- Title stage -->
+  <div id="title-stage">
+    <div class="t-company" id="tc"></div>
+    <div class="t-divider" id="td"></div>
+    <div class="t-tag" id="tt"></div>
+    <div class="t-metric" id="tm"></div>
+  </div>
 
-// ── TITLE ANIMATION ──────────────────────────────────────────────────────────
-function setTitle(idx) {
-  const c = CLIPS[idx];
-  tc.classList.remove('in'); tc.classList.add('out');
-  td.classList.remove('in'); td.classList.add('out');
-  tt.classList.remove('in'); tt.classList.add('out');
-  tm_el.classList.remove('in'); tm_el.classList.add('out');
+  <!-- Progress -->
+  <div id="prog-wrap">
+    <div id="prog-bar"></div>
+  </div>
 
-  setTimeout(()=>{
-    tc.textContent = c.company;
-    tt.textContent = c.tag;
-    tm_el.textContent = c.metric;
-    tc.classList.remove('out'); td.classList.remove('out');
-    tt.classList.remove('out'); tm_el.classList.remove('out');
-    requestAnimationFrame(()=>{
-      tc.classList.add('in');
-      td.classList.add('in');
-      tt.classList.add('in');
-      tm_el.classList.add('in');
-    });
-  }, 600);
-}
+  <!-- Chapter dots -->
+  <div id="chapters"></div>
 
-// ── FLARE ────────────────────────────────────────────────────────────────────
-function setFlare(on) {
-  flare.classList.toggle('on', on);
-  flareStreak.classList.toggle('on', on);
-}
+  <!-- Final Frame -->
+  <div id="final-frame">
+    <div id="final-logo-wrap">
+      <!-- corner accents -->
+      <div class="fc" id="fc-tl"><svg viewBox="0 0 28 28" fill="none">
+          <path d="M1 14 L1 1 L14 1" stroke="rgba(0,200,230,.5)" stroke-width="1" />
+        </svg></div>
+      <div class="fc" id="fc-tr"><svg viewBox="0 0 28 28" fill="none">
+          <path d="M27 14 L27 1 L14 1" stroke="rgba(0,200,230,.5)" stroke-width="1" />
+        </svg></div>
+      <div class="fc" id="fc-bl"><svg viewBox="0 0 28 28" fill="none">
+          <path d="M1 14 L1 27 L14 27" stroke="rgba(0,200,230,.5)" stroke-width="1" />
+        </svg></div>
+      <div class="fc" id="fc-br"><svg viewBox="0 0 28 28" fill="none">
+          <path d="M27 14 L27 27 L14 27" stroke="rgba(0,200,230,.5)" stroke-width="1" />
+        </svg></div>
 
-// ── PROGRESS ─────────────────────────────────────────────────────────────────
-function startProgress(dur) {
-  clearInterval(progTimer);
-  slideStart = Date.now();
-  progBar.style.width = '0%';
-  progTimer = setInterval(()=>{
-    if(!playing) return;
-    const pct = Math.min((Date.now()-slideStart)/dur*100,100);
-    progBar.style.width = pct + '%';
-  }, 80);
-}
+      <div id="logo-glow"></div>
+      <div id="logo-topline"></div>
+      <div id="logo-mark">CH</div>
+      <div id="logo-sub">Energy &amp; Automation</div>
+      <div id="final-company">CH Energy &amp; Automation</div>
+      <div id="final-divider"></div>
+      <div id="final-tagline">Engineering the Future</div>
+      <div id="final-tagline2">INDUSTRY 4.0 &nbsp;·&nbsp; SMART AUTOMATION &nbsp;·&nbsp; ENGINEERING EXCELLENCE</div>
+      <div id="logo-botline"></div>
+    </div>
+  </div>
 
-// ── GOTO CLIP ─────────────────────────────────────────────────────────────────
-function gotoClip(idx) {
-  if(idx >= TOTAL) { showFinal(); return; }
+  <script>
+    /* ═══════════════════════════════════════════════════════
+       CH ENERGY & AUTOMATION — CORPORATE PROMO ENGINE
+       ═══════════════════════════════════════════════════════ */
 
-  const currentClip = CLIPS[current];
-  const nextClip = CLIPS[idx];
-  const isSeamless = currentClip && nextClip && currentClip.isFirstClimaxPart && nextClip.isSecondClimaxPart;
-
-  const performTransition = () => {
-    if (isSeamless) {
-      slides[current].classList.add('no-transition');
-      slides[idx].classList.add('no-transition');
-    }
-
-    slides[current].classList.remove('active');
-    videos[current].pause();
-
-    current = idx;
-    const v = videos[current];
-    v.currentTime = 0;
-    v.playbackRate = 1.0;
-    slides[current].classList.add('active');
-    v.play().catch(()=>{});
-
-    if (!isSeamless) {
-      v.playbackRate = 1.4;
-      setTimeout(()=>{ if(v) v.playbackRate = 1.0; }, 900);
-    } else {
-      setTimeout(() => {
-        slides.forEach(s => s.classList.remove('no-transition'));
-      }, 50);
-    }
-
-    setTitle(current);
-    setFlare(CLIPS[current].flare);
-    updateChapters();
-    startProgress(CLIPS[current].dur);
-  };
-
-  if (isSeamless) {
-    performTransition();
-  } else {
-    doFlash(performTransition);
-  }
-}
-
-function jumpTo(idx) {
-  clearTimeout(timer);
-  gotoClip(idx);
-  scheduleNext(idx);
-}
-
-function scheduleNext(idx) {
-  clearTimeout(timer);
-  const clip = CLIPS[idx];
-  const dur  = clip.dur;
-
-  // Klimaks sahnesine (kartal_1) geçince müziği yükselt
-  if(clip.isClimax && clip.isFirstClimaxPart && audioCtx && masterGain) {
-    setTimeout(()=>{
-      masterGain.gain.linearRampToValueAtTime(0.36, audioCtx.currentTime + 3.5);
-    }, 1200);
-  }
-
-  timer = setTimeout(()=>{
-    const next = idx + 1;
-    if(next >= TOTAL) { showFinal(); return; }
-    gotoClip(next);
-    scheduleNext(next);
-  }, dur);
-}
-
-// ── FINAL FRAME ───────────────────────────────────────────────────────────────
-function showFinal() {
-  playing = false;
-  clearInterval(progTimer);
-  clearTimeout(timer);
-
-  const v = videos[current];
-  let rate = v.playbackRate;
-
-  // Önce hafif yükselt sonra yavaşlat (sinematik)
-  if(audioCtx && masterGain) {
-    masterGain.gain.linearRampToValueAtTime(0.42, audioCtx.currentTime + 1.5);
-  }
-
-  setTimeout(()=>{
-    const slowDown = setInterval(()=>{
-      rate = Math.max(0.08, rate - 0.055);
-      v.playbackRate = rate;
-      if(rate <= 0.08) {
-        clearInterval(slowDown);
-        if(masterGain && audioCtx) {
-          masterGain.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 4);
-        }
-        setTimeout(()=>{
-          slides[current].classList.remove('active');
-          v.pause();
-          finalFrame.classList.add('show');
-          document.body.classList.remove('open');
-          // 10 saniye sonra otomatik yeniden başlat
-          setTimeout(restartSequence, 10000);
-        }, 1400);
+    // ── VIDEO CLIPS + SCENE DATA ──────────────────────────────────────────────────
+    const CLIPS = [
+      {
+        src: '/video_arka_plan/159021-818026286_medium.mp4',
+        company: 'CH ENERGY',
+        tag: '& AUTOMATION',
+        metric: 'ENGINEERING EXCELLENCE · INDUSTRY 4.0',
+        flare: true, dur: 9000
+      },
+      {
+        src: '/video_arka_plan/172156-846731269_medium.mp4',
+        company: 'ENGINEERING',
+        tag: 'EXCELLENCE',
+        metric: 'ADVANCED SYSTEMS · RELIABLE AUTOMATION',
+        flare: true, dur: 10000
+      },
+      {
+        src: '/video_arka_plan/215500_medium.mp4',
+        company: 'SMART',
+        tag: 'TECHNOLOGIES',
+        metric: 'AI-DRIVEN · PROCESS CONTROL · ROBOTICS',
+        flare: false, dur: 9000
+      },
+      {
+        src: '/video_arka_plan/345357_medium.mp4',
+        company: 'RELIABLE',
+        tag: 'AUTOMATION',
+        metric: 'ZERO-FAULT ENGINEERING · 99.98% UPTIME',
+        flare: true, dur: 10000
+      },
+      {
+        src: '/video_arka_plan/4763-179741146_medium.mp4',
+        company: 'FUTURE DRIVEN',
+        tag: 'ENGINEERING',
+        metric: 'NEXT-GEN SYSTEMS · INDUSTRY 4.0 READY',
+        flare: false, dur: 9000
+      },
+      {
+        src: '/video_arka_plan/CH enerji transformer kartal_1.mp4',
+        company: 'CH ENERGY & AUTOMATION',
+        tag: 'Engineering the Future',
+        metric: 'INDUSTRY 4.0 · SMART AUTOMATION · ENGINEERING EXCELLENCE',
+        flare: true,
+        dur: 10000,
+        isClimax: true,
+        isFirstClimaxPart: true
+      },
+      {
+        src: '/video_arka_plan/CH enerji transformer kartal_2.mp4',
+        company: '',
+        tag: 'Engineering the Future',
+        metric: 'INDUSTRY 4.0 · SMART AUTOMATION · ENGINEERING EXCELLENCE',
+        flare: true,
+        dur: 10000,
+        isClimax: true,
+        isSecondClimaxPart: true
       }
-    }, 110);
-  }, 1200);
-}
+    ];
 
-// ── RESTART SEQUENCE ──────────────────────────────────────────────────────────
-function restartSequence() {
-  clearTimeout(timer);
-  clearInterval(progTimer);
+    const TOTAL = CLIPS.length;
+    const TRANS = 1400;
 
-  slides.forEach((s, i) => {
-    s.classList.remove('active');
-    videos[i].pause();
-    videos[i].currentTime = 0;
-  });
-  finalFrame.classList.remove('show');
-  document.body.classList.add('open');
+    // ── DOM REFS ─────────────────────────────────────────────────────────────────
+    const stage = document.getElementById('stage');
+    const tc = document.getElementById('tc');
+    const td = document.getElementById('td');
+    const tt = document.getElementById('tt');
+    const tm_el = document.getElementById('tm');
+    const progBar = document.getElementById('prog-bar');
+    const chapters = document.getElementById('chapters');
+    const flash = document.getElementById('flash');
+    const flare = document.getElementById('flare');
+    const flareStreak = document.getElementById('flare-streak');
+    const finalFrame = document.getElementById('final-frame');
+    const beatRing = document.getElementById('beat-ring');
 
-  current = 0;
-  playing = true;
+    // ── STATE ────────────────────────────────────────────────────────────────────
+    let current = 0;
+    let playing = false;
+    let timer = null;
+    let progTimer = null;
+    let slideStart = 0;
+    let slides = [];
+    let videos = [];
+    let audioCtx = null;
+    let masterGain = null;
 
-  const v = videos[0];
-  v.currentTime = 0;
-  v.playbackRate = 1.4;
-  slides[0].classList.add('active');
-  v.play().catch(()=>{});
-  setTimeout(()=>{ if(v) v.playbackRate = 1.0; }, 900);
+    // ── BUILD VIDEO SLIDES ────────────────────────────────────────────────────────
+    CLIPS.forEach((c, i) => {
+      const div = document.createElement('div');
+      div.className = 'clip' + (i === 0 ? ' active' : '');
+      if (c.isClimax) {
+        div.classList.add('climax-clip');
+      }
 
-  setTimeout(()=> setTitle(0), 600);
-  setFlare(CLIPS[0].flare);
-  startProgress(CLIPS[0].dur);
-  scheduleNext(0);
-  updateChapters();
+      const v = document.createElement('video');
+      v.src = c.src;
+      v.muted = true;
+      v.loop = c.isClimax ? false : true;
+      v.playsInline = true;
+      v.preload = 'metadata';
+      v.playbackRate = 1.0;
 
-  if(audioCtx && masterGain) {
-    masterGain.gain.cancelScheduledValues(audioCtx.currentTime);
-    masterGain.gain.setValueAtTime(0, audioCtx.currentTime);
-    masterGain.gain.linearRampToValueAtTime(0.22, audioCtx.currentTime + 4);
-  }
-}
+      div.appendChild(v);
+      stage.appendChild(div);
+      slides.push(div);
+      videos.push(v);
+    });
 
-// ── CINEMATIC AUDIO ENGINE ────────────────────────────────────────────────────
-function buildAudio() {
-  if(audioCtx) return;
-  audioCtx   = new (window.AudioContext || window.webkitAudioContext)();
-  masterGain = audioCtx.createGain();
-  masterGain.gain.setValueAtTime(0, audioCtx.currentTime);
-  masterGain.gain.linearRampToValueAtTime(0.22, audioCtx.currentTime + 4);
-  masterGain.connect(audioCtx.destination);
+    // ── BUILD CHAPTERS ────────────────────────────────────────────────────────────
+    CLIPS.forEach((_, i) => {
+      const dot = document.createElement('div');
+      dot.className = 'ch-dot' + (i === 0 ? ' active' : '');
+      dot.addEventListener('click', () => { if (playing) jumpTo(i); });
+      chapters.appendChild(dot);
+    });
 
-  const rev = createReverb(3.5);
-
-  createDrone(36.7,  0.38, rev);
-  createDrone(55,    0.28, rev);
-  createDrone(73.4,  0.18, rev);
-  createDrone(110,   0.10, rev);
-  createDrone(146.8, 0.06, rev);
-
-  createPad(146.8, 0.09, rev);
-  createPad(174.6, 0.06, rev);
-  createPad(220,   0.05, rev);
-  createPad(261.6, 0.04, rev);
-  createPad(293.7, 0.03, rev);
-
-  createShimmer(880,  0.025);
-  createShimmer(1320, 0.015);
-
-  createSubPulse(36.7, rev);
-  createNoise(rev);
-  startBeat();
-}
-
-function createReverb(duration) {
-  const len    = audioCtx.sampleRate * duration;
-  const buf    = audioCtx.createBuffer(2, len, audioCtx.sampleRate);
-  for(let ch=0; ch<2; ch++){
-    const d = buf.getChannelData(ch);
-    for(let i=0; i<len; i++) d[i] = (Math.random()*2-1) * Math.pow(1-i/len, 2.2);
-  }
-  const conv   = audioCtx.createConvolver();
-  conv.buffer  = buf;
-  conv.connect(masterGain);
-  return conv;
-}
-
-function createDrone(freq, amp, rev) {
-  const osc  = audioCtx.createOscillator();
-  const gain = audioCtx.createGain();
-  osc.type   = 'sawtooth';
-  osc.frequency.value = freq;
-
-  const lfo  = audioCtx.createOscillator();
-  const lfoG = audioCtx.createGain();
-  lfo.frequency.value = 0.05 + Math.random() * 0.08;
-  lfoG.gain.value     = freq * 0.004;
-  lfo.connect(lfoG); lfoG.connect(osc.frequency); lfo.start();
-
-  const lpf  = audioCtx.createBiquadFilter();
-  lpf.type   = 'lowpass';
-  lpf.frequency.value = freq * 4.5;
-  lpf.Q.value = 0.5;
-
-  gain.gain.setValueAtTime(0, audioCtx.currentTime);
-  gain.gain.linearRampToValueAtTime(amp, audioCtx.currentTime + 5);
-
-  osc.connect(lpf); lpf.connect(gain);
-  gain.connect(masterGain);
-  gain.connect(rev);
-  osc.start();
-}
-
-function createPad(freq, amp, rev) {
-  const osc  = audioCtx.createOscillator();
-  const gain = audioCtx.createGain();
-  osc.type   = 'sine';
-  osc.frequency.value = freq;
-
-  const vib  = audioCtx.createOscillator();
-  const vibG = audioCtx.createGain();
-  vib.frequency.value = 0.22;
-  vibG.gain.value     = 0.4;
-  vib.connect(vibG); vibG.connect(osc.frequency); vib.start();
-
-  gain.gain.setValueAtTime(0, audioCtx.currentTime);
-  gain.gain.linearRampToValueAtTime(amp, audioCtx.currentTime + 8);
-
-  osc.connect(gain);
-  gain.connect(masterGain);
-  gain.connect(rev);
-  osc.start();
-}
-
-function createShimmer(freq, amp) {
-  const osc  = audioCtx.createOscillator();
-  const gain = audioCtx.createGain();
-  osc.type   = 'triangle';
-  osc.frequency.value = freq;
-
-  const lfo  = audioCtx.createOscillator();
-  const lfoG = audioCtx.createGain();
-  lfo.frequency.value = 0.12;
-  lfoG.gain.value     = amp * 0.6;
-  lfo.connect(lfoG); lfoG.connect(gain.gain); lfo.start();
-
-  gain.gain.setValueAtTime(amp, audioCtx.currentTime);
-  osc.connect(gain); gain.connect(masterGain); osc.start();
-}
-
-function createSubPulse(freq, rev) {
-  function pulse() {
-    const osc  = audioCtx.createOscillator();
-    const env  = audioCtx.createGain();
-    osc.type   = 'sine';
-    osc.frequency.value = freq;
-    env.gain.setValueAtTime(0, audioCtx.currentTime);
-    env.gain.linearRampToValueAtTime(0.22, audioCtx.currentTime + 0.04);
-    env.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.7);
-    osc.connect(env); env.connect(masterGain); env.connect(rev);
-    osc.start(); osc.stop(audioCtx.currentTime + 0.75);
-    setTimeout(pulse2, 200);
-    setTimeout(pulse, 3200);
-  }
-  function pulse2() {
-    const osc  = audioCtx.createOscillator();
-    const env  = audioCtx.createGain();
-    osc.type   = 'sine';
-    osc.frequency.value = freq;
-    env.gain.setValueAtTime(0, audioCtx.currentTime);
-    env.gain.linearRampToValueAtTime(0.12, audioCtx.currentTime + 0.04);
-    env.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.5);
-    osc.connect(env); env.connect(masterGain); env.connect(rev);
-    osc.start(); osc.stop(audioCtx.currentTime + 0.55);
-  }
-  setTimeout(pulse, 2000);
-}
-
-function createNoise(rev) {
-  const len  = audioCtx.sampleRate * 4;
-  const buf  = audioCtx.createBuffer(1, len, audioCtx.sampleRate);
-  const data = buf.getChannelData(0);
-  for(let i=0; i<len; i++) data[i] = Math.random()*2-1;
-
-  const src  = audioCtx.createBufferSource();
-  src.buffer = buf; src.loop = true;
-
-  const lpf  = audioCtx.createBiquadFilter();
-  lpf.type   = 'bandpass'; lpf.frequency.value = 350; lpf.Q.value = 0.3;
-
-  const gain = audioCtx.createGain();
-  gain.gain.setValueAtTime(0, audioCtx.currentTime);
-  gain.gain.linearRampToValueAtTime(0.015, audioCtx.currentTime + 3);
-
-  src.connect(lpf); lpf.connect(gain);
-  gain.connect(masterGain); gain.connect(rev);
-  src.start();
-}
-
-// ── RHYTHMIC BEAT ENGINE ──────────────────────────────────────────────────────
-const BPM = 72;
-const beatMs = (60 / BPM) * 1000;
-
-function startBeat() {
-  let beat = 0;
-  function tick() {
-    if(!audioCtx || !playing) { setTimeout(tick, beatMs); return; }
-    triggerKick();
-    if(beat % 2 === 1) triggerSnare();
-    if(beat % 4 === 0) triggerBeatRing();
-    beat = (beat + 1) % 8;
-    setTimeout(tick, beatMs);
-  }
-  setTimeout(tick, 2000);
-}
-
-function triggerKick() {
-  const osc = audioCtx.createOscillator();
-  const env = audioCtx.createGain();
-  osc.type  = 'sine';
-  osc.frequency.setValueAtTime(120, audioCtx.currentTime);
-  osc.frequency.exponentialRampToValueAtTime(30, audioCtx.currentTime + 0.25);
-  env.gain.setValueAtTime(0.28, audioCtx.currentTime);
-  env.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.3);
-  osc.connect(env); env.connect(masterGain);
-  osc.start(); osc.stop(audioCtx.currentTime + 0.32);
-}
-
-function triggerSnare() {
-  const len  = audioCtx.sampleRate * 0.15;
-  const buf  = audioCtx.createBuffer(1, len, audioCtx.sampleRate);
-  const d    = buf.getChannelData(0);
-  for(let i=0; i<len; i++) d[i] = Math.random()*2-1;
-  const src  = audioCtx.createBufferSource();
-  src.buffer = buf;
-  const hpf  = audioCtx.createBiquadFilter();
-  hpf.type   = 'highpass'; hpf.frequency.value = 2000;
-  const env  = audioCtx.createGain();
-  env.gain.setValueAtTime(0.07, audioCtx.currentTime);
-  env.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.15);
-  src.connect(hpf); hpf.connect(env); env.connect(masterGain);
-  src.start();
-}
-
-function triggerBeatRing() {
-  beatRing.classList.add('pulse');
-  setTimeout(()=>beatRing.classList.remove('pulse'), 80);
-}
-
-// ── OTOMATİK BAŞLATMA (embed modu) ──────────────────────────────────────────
-document.addEventListener('DOMContentLoaded', ()=>{
-  playing = true;
-
-  document.body.classList.add('open');
-
-  videos[0].currentTime = 0;
-  videos[0].playbackRate = 1.4;
-  videos[0].play().catch(()=>{});
-  setTimeout(()=>{ if(videos[0]) videos[0].playbackRate = 1.0; }, 900);
-
-  setTimeout(()=> setTitle(0), 600);
-  setFlare(CLIPS[0].flare);
-  startProgress(CLIPS[0].dur);
-  scheduleNext(0);
-  updateChapters();
-
-  // ── PARENT'TAN RESTART MESAJI (scroll geri dönünce) ──────────────────────
-  window.addEventListener('message', (e) => {
-    if (e.data === 'restart') {
-      restartSequence();
+    function updateChapters() {
+      document.querySelectorAll('.ch-dot').forEach((d, i) => d.classList.toggle('active', i === current));
     }
-  });
-});
-</script>
+
+    // ── FLASH TRANSITION ─────────────────────────────────────────────────────────
+    function doFlash(cb) {
+      flash.classList.add('pop');
+      setTimeout(() => { flash.classList.remove('pop'); if (cb) cb(); }, 130);
+    }
+
+    // ── TITLE ANIMATION ──────────────────────────────────────────────────────────
+    function setTitle(idx) {
+      const c = CLIPS[idx];
+      tc.classList.remove('in'); tc.classList.add('out');
+      td.classList.remove('in'); td.classList.add('out');
+      tt.classList.remove('in'); tt.classList.add('out');
+      tm_el.classList.remove('in'); tm_el.classList.add('out');
+
+      setTimeout(() => {
+        tc.textContent = c.company;
+        tt.textContent = c.tag;
+        tm_el.textContent = c.metric;
+        tc.classList.remove('out'); td.classList.remove('out');
+        tt.classList.remove('out'); tm_el.classList.remove('out');
+        requestAnimationFrame(() => {
+          tc.classList.add('in');
+          td.classList.add('in');
+          tt.classList.add('in');
+          tm_el.classList.add('in');
+        });
+      }, 600);
+    }
+
+    // ── FLARE ────────────────────────────────────────────────────────────────────
+    function setFlare(on) {
+      flare.classList.toggle('on', on);
+      flareStreak.classList.toggle('on', on);
+    }
+
+    // ── PROGRESS ─────────────────────────────────────────────────────────────────
+    function startProgress(dur) {
+      clearInterval(progTimer);
+      slideStart = Date.now();
+      progBar.style.width = '0%';
+      progTimer = setInterval(() => {
+        if (!playing) return;
+        const pct = Math.min((Date.now() - slideStart) / dur * 100, 100);
+        progBar.style.width = pct + '%';
+      }, 80);
+    }
+
+    // ── GOTO CLIP ─────────────────────────────────────────────────────────────────
+    function gotoClip(idx) {
+      if (idx >= TOTAL) { showFinal(); return; }
+
+      const currentClip = CLIPS[current];
+      const nextClip = CLIPS[idx];
+      const isSeamless = currentClip && nextClip && currentClip.isFirstClimaxPart && nextClip.isSecondClimaxPart;
+
+      const performTransition = () => {
+        if (isSeamless) {
+          slides[current].classList.add('no-transition');
+          slides[idx].classList.add('no-transition');
+        }
+
+        slides[current].classList.remove('active');
+        videos[current].pause();
+
+        current = idx;
+        const v = videos[current];
+        v.currentTime = 0;
+        v.playbackRate = 1.0;
+        slides[current].classList.add('active');
+        v.play().catch(() => { });
+
+        if (!isSeamless) {
+          v.playbackRate = 1.4;
+          setTimeout(() => { if (v) v.playbackRate = 1.0; }, 900);
+        } else {
+          setTimeout(() => {
+            slides.forEach(s => s.classList.remove('no-transition'));
+          }, 50);
+        }
+
+        setTitle(current);
+        setFlare(CLIPS[current].flare);
+        updateChapters();
+        startProgress(CLIPS[current].dur);
+      };
+
+      if (isSeamless) {
+        performTransition();
+      } else {
+        doFlash(performTransition);
+      }
+    }
+
+    function jumpTo(idx) {
+      clearTimeout(timer);
+      gotoClip(idx);
+      scheduleNext(idx);
+    }
+
+    function scheduleNext(idx) {
+      clearTimeout(timer);
+      const clip = CLIPS[idx];
+      const dur = clip.dur;
+
+      // Klimaks sahnesine (kartal_1) geçince müziği yükselt
+      if (clip.isClimax && clip.isFirstClimaxPart && audioCtx && masterGain) {
+        setTimeout(() => {
+          masterGain.gain.linearRampToValueAtTime(0.36, audioCtx.currentTime + 3.5);
+        }, 1200);
+      }
+
+      timer = setTimeout(() => {
+        const next = idx + 1;
+        if (next >= TOTAL) { showFinal(); return; }
+        gotoClip(next);
+        scheduleNext(next);
+      }, dur);
+    }
+
+    // ── FINAL FRAME ───────────────────────────────────────────────────────────────
+    function showFinal() {
+      playing = false;
+      clearInterval(progTimer);
+      clearTimeout(timer);
+
+      const v = videos[current];
+      let rate = v.playbackRate;
+
+      // Önce hafif yükselt sonra yavaşlat (sinematik)
+      if (audioCtx && masterGain) {
+        masterGain.gain.linearRampToValueAtTime(0.42, audioCtx.currentTime + 1.5);
+      }
+
+      setTimeout(() => {
+        const slowDown = setInterval(() => {
+          rate = Math.max(0.08, rate - 0.055);
+          v.playbackRate = rate;
+          if (rate <= 0.08) {
+            clearInterval(slowDown);
+            if (masterGain && audioCtx) {
+              masterGain.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 4);
+            }
+            setTimeout(() => {
+              slides[current].classList.remove('active');
+              v.pause();
+              finalFrame.classList.add('show');
+              document.body.classList.remove('open');
+              // 10 saniye sonra otomatik yeniden başlat
+              setTimeout(restartSequence, 10000);
+            }, 1400);
+          }
+        }, 110);
+      }, 1200);
+    }
+
+    // ── RESTART SEQUENCE ──────────────────────────────────────────────────────────
+    function restartSequence() {
+      clearTimeout(timer);
+      clearInterval(progTimer);
+
+      slides.forEach((s, i) => {
+        s.classList.remove('active');
+        videos[i].pause();
+        videos[i].currentTime = 0;
+      });
+      finalFrame.classList.remove('show');
+      document.body.classList.add('open');
+
+      current = 0;
+      playing = true;
+
+      const v = videos[0];
+      v.currentTime = 0;
+      v.playbackRate = 1.4;
+      slides[0].classList.add('active');
+      v.play().catch(() => { });
+      setTimeout(() => { if (v) v.playbackRate = 1.0; }, 900);
+
+      setTimeout(() => setTitle(0), 600);
+      setFlare(CLIPS[0].flare);
+      startProgress(CLIPS[0].dur);
+      scheduleNext(0);
+      updateChapters();
+
+      if (audioCtx && masterGain) {
+        masterGain.gain.cancelScheduledValues(audioCtx.currentTime);
+        masterGain.gain.setValueAtTime(0, audioCtx.currentTime);
+        masterGain.gain.linearRampToValueAtTime(0.22, audioCtx.currentTime + 4);
+      }
+    }
+
+    // ── CINEMATIC AUDIO ENGINE ────────────────────────────────────────────────────
+    function buildAudio() {
+      if (audioCtx) return;
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      masterGain = audioCtx.createGain();
+      masterGain.gain.setValueAtTime(0, audioCtx.currentTime);
+      masterGain.gain.linearRampToValueAtTime(0.22, audioCtx.currentTime + 4);
+      masterGain.connect(audioCtx.destination);
+
+      const rev = createReverb(3.5);
+
+      createDrone(36.7, 0.38, rev);
+      createDrone(55, 0.28, rev);
+      createDrone(73.4, 0.18, rev);
+      createDrone(110, 0.10, rev);
+      createDrone(146.8, 0.06, rev);
+
+      createPad(146.8, 0.09, rev);
+      createPad(174.6, 0.06, rev);
+      createPad(220, 0.05, rev);
+      createPad(261.6, 0.04, rev);
+      createPad(293.7, 0.03, rev);
+
+      createShimmer(880, 0.025);
+      createShimmer(1320, 0.015);
+
+      createSubPulse(36.7, rev);
+      createNoise(rev);
+      startBeat();
+    }
+
+    function createReverb(duration) {
+      const len = audioCtx.sampleRate * duration;
+      const buf = audioCtx.createBuffer(2, len, audioCtx.sampleRate);
+      for (let ch = 0; ch < 2; ch++) {
+        const d = buf.getChannelData(ch);
+        for (let i = 0; i < len; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, 2.2);
+      }
+      const conv = audioCtx.createConvolver();
+      conv.buffer = buf;
+      conv.connect(masterGain);
+      return conv;
+    }
+
+    function createDrone(freq, amp, rev) {
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = 'sawtooth';
+      osc.frequency.value = freq;
+
+      const lfo = audioCtx.createOscillator();
+      const lfoG = audioCtx.createGain();
+      lfo.frequency.value = 0.05 + Math.random() * 0.08;
+      lfoG.gain.value = freq * 0.004;
+      lfo.connect(lfoG); lfoG.connect(osc.frequency); lfo.start();
+
+      const lpf = audioCtx.createBiquadFilter();
+      lpf.type = 'lowpass';
+      lpf.frequency.value = freq * 4.5;
+      lpf.Q.value = 0.5;
+
+      gain.gain.setValueAtTime(0, audioCtx.currentTime);
+      gain.gain.linearRampToValueAtTime(amp, audioCtx.currentTime + 5);
+
+      osc.connect(lpf); lpf.connect(gain);
+      gain.connect(masterGain);
+      gain.connect(rev);
+      osc.start();
+    }
+
+    function createPad(freq, amp, rev) {
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = 'sine';
+      osc.frequency.value = freq;
+
+      const vib = audioCtx.createOscillator();
+      const vibG = audioCtx.createGain();
+      vib.frequency.value = 0.22;
+      vibG.gain.value = 0.4;
+      vib.connect(vibG); vibG.connect(osc.frequency); vib.start();
+
+      gain.gain.setValueAtTime(0, audioCtx.currentTime);
+      gain.gain.linearRampToValueAtTime(amp, audioCtx.currentTime + 8);
+
+      osc.connect(gain);
+      gain.connect(masterGain);
+      gain.connect(rev);
+      osc.start();
+    }
+
+    function createShimmer(freq, amp) {
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = 'triangle';
+      osc.frequency.value = freq;
+
+      const lfo = audioCtx.createOscillator();
+      const lfoG = audioCtx.createGain();
+      lfo.frequency.value = 0.12;
+      lfoG.gain.value = amp * 0.6;
+      lfo.connect(lfoG); lfoG.connect(gain.gain); lfo.start();
+
+      gain.gain.setValueAtTime(amp, audioCtx.currentTime);
+      osc.connect(gain); gain.connect(masterGain); osc.start();
+    }
+
+    function createSubPulse(freq, rev) {
+      function pulse() {
+        const osc = audioCtx.createOscillator();
+        const env = audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.value = freq;
+        env.gain.setValueAtTime(0, audioCtx.currentTime);
+        env.gain.linearRampToValueAtTime(0.22, audioCtx.currentTime + 0.04);
+        env.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.7);
+        osc.connect(env); env.connect(masterGain); env.connect(rev);
+        osc.start(); osc.stop(audioCtx.currentTime + 0.75);
+        setTimeout(pulse2, 200);
+        setTimeout(pulse, 3200);
+      }
+      function pulse2() {
+        const osc = audioCtx.createOscillator();
+        const env = audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.value = freq;
+        env.gain.setValueAtTime(0, audioCtx.currentTime);
+        env.gain.linearRampToValueAtTime(0.12, audioCtx.currentTime + 0.04);
+        env.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.5);
+        osc.connect(env); env.connect(masterGain); env.connect(rev);
+        osc.start(); osc.stop(audioCtx.currentTime + 0.55);
+      }
+      setTimeout(pulse, 2000);
+    }
+
+    function createNoise(rev) {
+      const len = audioCtx.sampleRate * 4;
+      const buf = audioCtx.createBuffer(1, len, audioCtx.sampleRate);
+      const data = buf.getChannelData(0);
+      for (let i = 0; i < len; i++) data[i] = Math.random() * 2 - 1;
+
+      const src = audioCtx.createBufferSource();
+      src.buffer = buf; src.loop = true;
+
+      const lpf = audioCtx.createBiquadFilter();
+      lpf.type = 'bandpass'; lpf.frequency.value = 350; lpf.Q.value = 0.3;
+
+      const gain = audioCtx.createGain();
+      gain.gain.setValueAtTime(0, audioCtx.currentTime);
+      gain.gain.linearRampToValueAtTime(0.015, audioCtx.currentTime + 3);
+
+      src.connect(lpf); lpf.connect(gain);
+      gain.connect(masterGain); gain.connect(rev);
+      src.start();
+    }
+
+    // ── RHYTHMIC BEAT ENGINE ──────────────────────────────────────────────────────
+    const BPM = 72;
+    const beatMs = (60 / BPM) * 1000;
+
+    function startBeat() {
+      let beat = 0;
+      function tick() {
+        if (!audioCtx || !playing) { setTimeout(tick, beatMs); return; }
+        triggerKick();
+        if (beat % 2 === 1) triggerSnare();
+        if (beat % 4 === 0) triggerBeatRing();
+        beat = (beat + 1) % 8;
+        setTimeout(tick, beatMs);
+      }
+      setTimeout(tick, 2000);
+    }
+
+    function triggerKick() {
+      const osc = audioCtx.createOscillator();
+      const env = audioCtx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(120, audioCtx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(30, audioCtx.currentTime + 0.25);
+      env.gain.setValueAtTime(0.28, audioCtx.currentTime);
+      env.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.3);
+      osc.connect(env); env.connect(masterGain);
+      osc.start(); osc.stop(audioCtx.currentTime + 0.32);
+    }
+
+    function triggerSnare() {
+      const len = audioCtx.sampleRate * 0.15;
+      const buf = audioCtx.createBuffer(1, len, audioCtx.sampleRate);
+      const d = buf.getChannelData(0);
+      for (let i = 0; i < len; i++) d[i] = Math.random() * 2 - 1;
+      const src = audioCtx.createBufferSource();
+      src.buffer = buf;
+      const hpf = audioCtx.createBiquadFilter();
+      hpf.type = 'highpass'; hpf.frequency.value = 2000;
+      const env = audioCtx.createGain();
+      env.gain.setValueAtTime(0.07, audioCtx.currentTime);
+      env.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.15);
+      src.connect(hpf); hpf.connect(env); env.connect(masterGain);
+      src.start();
+    }
+
+    function triggerBeatRing() {
+      beatRing.classList.add('pulse');
+      setTimeout(() => beatRing.classList.remove('pulse'), 80);
+    }
+
+    // ── OTOMATİK BAŞLATMA (embed modu) ──────────────────────────────────────────
+    document.addEventListener('DOMContentLoaded', () => {
+      playing = true;
+
+      document.body.classList.add('open');
+
+      videos[0].currentTime = 0;
+      videos[0].playbackRate = 1.4;
+      videos[0].play().catch(() => { });
+      setTimeout(() => { if (videos[0]) videos[0].playbackRate = 1.0; }, 900);
+
+      setTimeout(() => setTitle(0), 600);
+      setFlare(CLIPS[0].flare);
+      startProgress(CLIPS[0].dur);
+      scheduleNext(0);
+      updateChapters();
+
+      // ── PARENT'TAN RESTART MESAJI (scroll geri dönünce) ──────────────────────
+      window.addEventListener('message', (e) => {
+        if (e.data === 'restart') {
+          restartSequence();
+        }
+      });
+    });
+  </script>
 </body>
+
 </html>
