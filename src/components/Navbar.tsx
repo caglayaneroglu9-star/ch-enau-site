@@ -44,7 +44,7 @@ export default function Navbar() {
         <div className="flex items-center justify-between">
           {/* Logo & Company Name */}
           <Link href="/" className="flex items-center gap-4 group">
-            <div className="relative w-24 h-24 md:w-32 md:h-32 rounded-2xl overflow-hidden border border-neon-cyan/30 flex items-center justify-center bg-secondary-navy">
+            <div className="relative w-12 h-12 md:w-20 md:h-20 rounded-xl overflow-hidden border border-neon-cyan/30 flex items-center justify-center bg-secondary-navy">
               <img
                 src="/logo.jpg"
                 alt="CH Energie & Automation Logo"
@@ -52,10 +52,10 @@ export default function Navbar() {
               />
             </div>
             <div className="flex flex-col">
-              <span className="font-sans font-bold text-2xl md:text-3xl leading-none tracking-wide text-white group-hover:text-neon-cyan transition-colors">
+              <span className="font-sans font-bold text-base md:text-2xl leading-none tracking-wide text-white group-hover:text-neon-cyan transition-colors">
                 CH ENERGIE
               </span>
-              <span className="font-sans font-semibold text-xs md:text-sm tracking-[0.15em] text-steel-gray mt-2">
+              <span className="font-sans font-semibold text-[10px] md:text-sm tracking-[0.15em] text-steel-gray mt-1">
                 & AUTOMATION
               </span>
             </div>

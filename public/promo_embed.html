@@ -311,6 +311,33 @@ body.open #chapters{opacity:.6}
 
 /* ─── CLICK TO START — EMBED MODUNDA GİZLİ ─── */
 #start-prompt{display:none!important}
+
+/* ─── EMBED MODU: TITLE OVERLAY VE HUD GİZLE ─── */
+/* Sayfa kendi hero başlığını gösterdiği için promo başlıkları gizliyoruz */
+#title-stage{display:none!important}
+#hud-left{display:none!important}
+#hud-right{display:none!important}
+
+/* ─── MOBILE RESPONSIVE ─── */
+@media (max-width: 640px) {
+  #bar-top { height: 40px; }
+  #bar-bot { height: 40px; }
+  body.open #bar-top, body.open #bar-bot { height: 0; }
+  #hc-tl, #hc-tr, #hc-bl, #hc-br { width: 32px; height: 32px; }
+  #hc-tl { top: 8px; left: 8px; }
+  #hc-tr { top: 8px; right: 8px; }
+  #hc-bl { bottom: 8px; left: 8px; }
+  #hc-br { bottom: 8px; right: 8px; }
+  #final-company { font-size: clamp(1rem, 6vw, 2.2rem); letter-spacing: .15em; white-space: normal; text-align: center; }
+  #logo-mark { font-size: clamp(1.8rem, 9vw, 3.5rem); }
+  #logo-sub { font-size: clamp(.5rem, 2.5vw, .8rem); letter-spacing: .3em; }
+  #final-tagline { font-size: clamp(.55rem, 2.5vw, .85rem); letter-spacing: .3em; }
+  #final-tagline2 { font-size: clamp(.38rem, 1.8vw, .55rem); letter-spacing: .2em; }
+  #chapters { bottom: 6px; gap: 6px; }
+  .ch-dot { width: 18px; }
+}
+
+
 </style>
 </head>
 <body>

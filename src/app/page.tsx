@@ -48,7 +48,7 @@ export default function Home() {
     <div className="relative min-h-screen">
 
       {/* 1. Hero Section */}
-      <section className="relative min-h-[120vh] flex flex-col justify-end overflow-hidden">
+      <section className="relative min-h-[100svh] sm:min-h-[120vh] flex flex-col justify-end overflow-hidden">
         {/* Hero Video Background — promo clips cycling */}
         <HeroVideoBackground />
 
@@ -57,18 +57,20 @@ export default function Home() {
         <div className="absolute top-[20%] left-[10%] w-[350px] h-[350px] bg-industrial-blue/10 rounded-full blur-[120px] pointer-events-none animate-float z-[1]" />
         <div className="absolute bottom-[10%] right-[10%] w-[450px] h-[450px] bg-neon-cyan/5 rounded-full blur-[150px] pointer-events-none z-[1]" />
 
-        {/* Bottom gradient fade so text is readable */}
-        <div className="absolute bottom-0 left-0 right-0 h-80 pointer-events-none z-[2]"
-          style={{ background: "linear-gradient(to top, rgba(5,10,21,0.96) 0%, rgba(5,10,21,0.65) 50%, transparent 100%)" }} />
+        {/* Bottom gradient fade so text is readable — mobilde daha yoğun */}
+        <div className="absolute bottom-0 left-0 right-0 h-[60%] pointer-events-none z-[2]"
+          style={{ background: "linear-gradient(to top, rgba(5,10,21,0.97) 0%, rgba(5,10,21,0.85) 30%, rgba(5,10,21,0.5) 60%, transparent 100%)" }} />
+        {/* Mobilde ekstra karartma */}
+        <div className="absolute inset-0 bg-black/20 pointer-events-none z-[1] sm:hidden" />
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full flex justify-center pb-0">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full flex justify-center pb-0 pt-20 sm:pt-0">
           <div className="flex flex-col items-center text-center max-w-4xl">
             <div className="flex flex-col items-center gap-2">
               <motion.h1
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
-                className="font-sans font-extrabold text-3xl sm:text-4xl lg:text-5xl text-white tracking-tight leading-[1.1] text-center"
+                className="font-sans font-extrabold text-2xl sm:text-4xl lg:text-5xl text-white tracking-tight leading-[1.15] text-center px-2"
               >
                 {t("home.hero.title")}{" "}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-cyan to-industrial-blue glow-text">
@@ -80,7 +82,7 @@ export default function Home() {
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="font-body text-sm text-steel-gray leading-relaxed max-w-2xl text-center"
+                className="font-body text-sm text-steel-gray leading-relaxed max-w-2xl text-center px-2 hidden sm:block"
               >
                 {t("home.hero.desc")}
               </motion.p>
@@ -89,7 +91,7 @@ export default function Home() {
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.3 }}
-                className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 mt-4 w-full sm:w-auto pb-6"
+                className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 mt-4 w-full sm:w-auto pb-8 sm:pb-6 px-4 sm:px-0"
               >
                 <Link
                   href="/contact"
