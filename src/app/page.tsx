@@ -48,7 +48,7 @@ export default function Home() {
     <div className="relative min-h-screen">
 
       {/* 1. Hero Section */}
-      <section className="relative min-h-[100svh] sm:min-h-[120vh] flex flex-col justify-end overflow-hidden">
+      <section className="relative min-h-[100svh] sm:min-h-[120vh] flex flex-col justify-center sm:justify-end overflow-hidden pb-24 sm:pb-28">
         {/* Hero Video Background — promo clips cycling */}
         <HeroVideoBackground />
 

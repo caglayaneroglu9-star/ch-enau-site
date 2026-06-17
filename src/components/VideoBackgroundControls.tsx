@@ -96,7 +96,7 @@ export default function VideoBackgroundControls() {
   const blurPresets: BlurLevel[] = ["none", "low", "medium", "high"];
 
   return (
-    <div className="fixed bottom-6 left-20 z-50 font-sans" ref={panelRef}>
+    <div className="fixed bottom-6 left-6 sm:left-20 z-50 font-sans" ref={panelRef}>
       {/* Floating Action Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}

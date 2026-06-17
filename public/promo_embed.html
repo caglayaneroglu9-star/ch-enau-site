@@ -849,6 +849,22 @@
         width: 18px;
       }
     }
+
+    /* ─── BACKGROUND MODE STYLES ─── */
+    body.bg-mode #title-stage,
+    body.bg-mode #chapters,
+    body.bg-mode #prog-wrap,
+    body.bg-mode #final-frame,
+    body.bg-mode .hud-corner,
+    body.bg-mode #hud-scan {
+      display: none !important;
+    }
+    body.bg-mode .bar {
+      display: none !important;
+    }
+    body.bg-mode .clip video {
+      height: 100% !important;
+    }
   </style>
 </head>
 
@@ -997,6 +1013,12 @@
     /* ═══════════════════════════════════════════════════════
        CH ENERGY & AUTOMATION — CORPORATE PROMO ENGINE
        ═══════════════════════════════════════════════════════ */
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const isBg = urlParams.get('bg') === 'true';
+    if (isBg) {
+      document.body.classList.add('bg-mode');
+    }
 
     // ── VIDEO CLIPS + SCENE DATA ──────────────────────────────────────────────────
     const CLIPS = [
@@ -1168,7 +1190,15 @@
 
     // ── GOTO CLIP ─────────────────────────────────────────────────────────────────
     function gotoClip(idx) {
-      if (idx >= TOTAL) { showFinal(); return; }
+      if (idx >= TOTAL) {
+        if (isBg) {
+          gotoClip(0);
+          scheduleNext(0);
+          return;
+        }
+        showFinal();
+        return;
+      }
 
       const currentClip = CLIPS[current];
       const nextClip = CLIPS[idx];
@@ -1232,7 +1262,15 @@
 
       timer = setTimeout(() => {
         const next = idx + 1;
-        if (next >= TOTAL) { showFinal(); return; }
+        if (next >= TOTAL) {
+          if (isBg) {
+            gotoClip(0);
+            scheduleNext(0);
+            return;
+          }
+          showFinal();
+          return;
+        }
         gotoClip(next);
         scheduleNext(next);
       }, dur);

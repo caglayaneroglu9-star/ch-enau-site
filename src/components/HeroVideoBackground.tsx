@@ -32,7 +32,7 @@ export default function HeroVideoBackground() {
   return (
     <iframe
       ref={iframeRef}
-      src="/promo_embed.html"
+      src="/promo_embed.html?bg=true"
       className="absolute inset-0 w-full h-full border-0 pointer-events-none z-0"
       allow="autoplay"
       title="CH Energy & Automation Promo"
