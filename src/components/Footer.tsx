@@ -144,8 +144,6 @@ export default function Footer() {
                 <Mail className="w-5 h-5 text-neon-cyan shrink-0" />
                 <a
                   href="mailto:support@ch-enau.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
                   className="font-body text-sm text-steel-gray hover:text-white transition-colors"
                 >
                   support@ch-enau.com
