@@ -13,84 +13,112 @@ export async function POST(request: Request) {
       );
     }
 
+    const resendApiKey = process.env.RESEND_API_KEY;
+    const web3FormsKey = process.env.WEB3FORMS_ACCESS_KEY;
     const smtpHost = process.env.SMTP_HOST;
-    const smtpPort = parseInt(process.env.SMTP_PORT || "465", 10);
     const smtpUser = process.env.SMTP_USER;
     const smtpPass = process.env.SMTP_PASS;
 
-    if (!smtpHost || !smtpUser || !smtpPass) {
-      console.warn("SMTP credentials not provided in environment variables.");
-      return NextResponse.json(
-        { error: "SMTP credentials missing on server" },
-        { status: 500 }
-      );
+    // Option 1: Resend API (Recommended - Free & Fast)
+    if (resendApiKey) {
+      const resendResponse = await fetch("https://api.resend.com/emails", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${resendApiKey}`,
+        },
+        body: JSON.stringify({
+          from: "CH-ENAU Website <onboarding@resend.dev>",
+          to: "support@ch-enau.com",
+          reply_to: email,
+          subject: `${emergency ? "[ACİL / EMERGENCY] " : ""}Technical Service Request - ${company}`,
+          html: `
+            <div style="font-family: Arial, sans-serif; max-width: 600px; padding: 20px; border: 1px solid #eee; border-radius: 8px;">
+              <h2 style="color: #0066cc;">${emergency ? "🚨 ACİL SERVİS TALEBİ" : "📩 Teknik Servis Talebi"}</h2>
+              <p><strong>Müşteri / Ad Soyad:</strong> ${name}</p>
+              <p><strong>Şirket:</strong> ${company}</p>
+              <p><strong>E-posta:</strong> <a href="mailto:${email}">${email}</a></p>
+              <p><strong>Telefon:</strong> ${phone || "Belirtilmedi"}</p>
+              <p><strong>Makine Tipi:</strong> ${machine}</p>
+              <p><strong>Acil Durum:</strong> ${emergency ? "EVET - ÜRETİM DURDU" : "Hayır"}</p>
+              <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;" />
+              <h3>Mesaj / Arıza Detayı:</h3>
+              <p style="background: #f4f6f8; padding: 15px; border-radius: 6px; white-space: pre-wrap;">${message}</p>
+            </div>
+          `,
+        }),
+      });
+
+      const resendData = await resendResponse.json();
+      if (!resendResponse.ok) {
+        throw new Error(resendData.message || "Resend API Error");
+      }
+
+      return NextResponse.json({ success: true });
     }
 
-    // Configure Nodemailer transporter with Domain Provider SMTP
-    const transporter = nodemailer.createTransport({
-      host: smtpHost,
-      port: smtpPort,
-      secure: smtpPort === 465, // true for 465, false for other ports
-      auth: {
-        user: smtpUser,
-        pass: smtpPass,
-      },
-    });
+    // Option 2: Web3Forms (Free - No Email Password Required)
+    if (web3FormsKey) {
+      const w3Response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: web3FormsKey,
+          subject: `${emergency ? "[ACİL] " : ""}Servis Talebi - ${company}`,
+          from_name: name,
+          replyto: email,
+          to_email: "support@ch-enau.com",
+          name,
+          company,
+          email,
+          phone: phone || "Belirtilmedi",
+          machine,
+          emergency: emergency ? "EVET" : "HAYIR",
+          message,
+        }),
+      });
 
-    const mailOptions = {
-      from: `"${name} via Website" <${smtpUser}>`,
-      to: "support@ch-enau.com",
-      replyTo: email,
-      subject: `${emergency ? "[ACİL / EMERGENCY] " : ""}Servis Talebi: ${company}`,
-      html: `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #e0e0e0; padding: 20px; rounded: 8px;">
-          <h2 style="color: #0066cc; border-bottom: 2px solid #0066cc; padding-bottom: 10px;">
-            ${emergency ? "🚨 ACİL SERVİS TALEBİ" : "📩 Teknik Servis Talebi"}
-          </h2>
-          <table style="width: 100%; border-collapse: collapse; margin-top: 15px;">
-            <tr>
-              <td style="padding: 8px; font-weight: bold; width: 35%;">Müşteri / Ad Soyad:</td>
-              <td style="padding: 8px;">${name}</td>
-            </tr>
-            <tr>
-              <td style="padding: 8px; font-weight: bold;">Şirket / Firma:</td>
-              <td style="padding: 8px;">${company}</td>
-            </tr>
-            <tr>
-              <td style="padding: 8px; font-weight: bold;">E-posta:</td>
-              <td style="padding: 8px;"><a href="mailto:${email}">${email}</a></td>
-            </tr>
-            <tr>
-              <td style="padding: 8px; font-weight: bold;">Telefon:</td>
-              <td style="padding: 8px;">${phone || "Belirtilmedi"}</td>
-            </tr>
-            <tr>
-              <td style="padding: 8px; font-weight: bold;">Makine Tipi:</td>
-              <td style="padding: 8px;">${machine}</td>
-            </tr>
-            <tr>
-              <td style="padding: 8px; font-weight: bold;">Acil Durum:</td>
-              <td style="padding: 8px; color: ${emergency ? "red" : "green"}; font-weight: bold;">
-                ${emergency ? "EVET - ÜRETİM DURDU" : "Normal Talep"}
-              </td>
-            </tr>
-          </table>
-          
-          <h3 style="margin-top: 20px; color: #333;">Arıza / Talep Detayı:</h3>
-          <div style="background: #f9f9f9; padding: 15px; border-left: 4px solid #0066cc; white-space: pre-wrap;">
-            ${message}
-          </div>
-        </div>
-      `,
-    };
+      const w3Data = await w3Response.json();
+      if (!w3Data.success) {
+        throw new Error(w3Data.message || "Web3Forms submission failed");
+      }
 
-    await transporter.sendMail(mailOptions);
+      return NextResponse.json({ success: true });
+    }
 
-    return NextResponse.json({ success: true });
-  } catch (error: any) {
-    console.error("SMTP Direct Send Error:", error);
+    // Option 3: Standard SMTP Transporter (if password exists)
+    if (smtpHost && smtpUser && smtpPass) {
+      const smtpPort = parseInt(process.env.SMTP_PORT || "465", 10);
+      const transporter = nodemailer.createTransport({
+        host: smtpHost,
+        port: smtpPort,
+        secure: smtpPort === 465,
+        auth: { user: smtpUser, pass: smtpPass },
+      });
+
+      await transporter.sendMail({
+        from: `"${name} via Website" <${smtpUser}>`,
+        to: "support@ch-enau.com",
+        replyTo: email,
+        subject: `${emergency ? "[ACİL] " : ""}Servis Talebi: ${company}`,
+        text: `Müşteri: ${name}\nŞirket: ${company}\nEposta: ${email}\nTelefon: ${phone}\nMakine: ${machine}\nMesaj:\n${message}`,
+      });
+
+      return NextResponse.json({ success: true });
+    }
+
+    console.warn("No active email service key (RESEND_API_KEY, WEB3FORMS_ACCESS_KEY, or SMTP_PASS) found.");
     return NextResponse.json(
-      { error: error.message || "E-posta gönderimi başarısız oldu." },
+      { error: "No email service configured." },
+      { status: 500 }
+    );
+  } catch (error: any) {
+    console.error("Contact Form API Error:", error);
+    return NextResponse.json(
+      { error: error.message || "E-posta gönderilemedi." },
       { status: 500 }
     );
   }
