@@ -19,6 +19,7 @@ function ContactFormContent() {
   });
 
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
   // Sync state with query parameter
@@ -36,7 +37,7 @@ function ContactFormContent() {
     setFormData((prev) => ({ ...prev, [name]: val }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
 
@@ -52,27 +53,45 @@ function ContactFormContent() {
       return;
     }
 
-    // Construct mailto link with form details
-    const subject = encodeURIComponent(
-      `${formData.emergency ? "[ACİL / EMERGENCY] " : ""}Technical Service Request - ${formData.company}`
-    );
+    setLoading(true);
 
-    const bodyText = 
-      `Name / Ad: ${formData.name}\n` +
-      `Company / Şirket: ${formData.company}\n` +
-      `Email / E-posta: ${formData.email}\n` +
-      `Phone / Telefon: ${formData.phone || "-"}\n` +
-      `Machine Type / Makine: ${formData.machine}\n` +
-      `Emergency / Acil Durum: ${formData.emergency ? "YES / EVET" : "NO / HAYIR"}\n\n` +
-      `Details / Detaylar:\n${formData.message}`;
+    try {
+      // 1. Try sending via API route backend
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
 
-    const mailtoUrl = `mailto:support@ch-enau.com?subject=${subject}&body=${encodeURIComponent(bodyText)}`;
+      if (!res.ok) {
+        throw new Error("Failed to send message via API");
+      }
 
-    // Open user's email client
-    window.location.href = mailtoUrl;
+      setSubmitted(true);
+    } catch (err) {
+      console.warn("API route fallback to mailto:", err);
+      
+      // Fallback: Construct mailto link with form details
+      const subject = encodeURIComponent(
+        `${formData.emergency ? "[ACİL / EMERGENCY] " : ""}Technical Service Request - ${formData.company}`
+      );
 
-    // Success transition
-    setSubmitted(true);
+      const bodyText = 
+        `Name / Ad: ${formData.name}\n` +
+        `Company / Şirket: ${formData.company}\n` +
+        `Email / E-posta: ${formData.email}\n` +
+        `Phone / Telefon: ${formData.phone || "-"}\n` +
+        `Machine Type / Makine: ${formData.machine}\n` +
+        `Emergency / Acil Durum: ${formData.emergency ? "YES / EVET" : "NO / HAYIR"}\n\n` +
+        `Details / Detaylar:\n${formData.message}`;
+
+      const mailtoUrl = `mailto:support@ch-enau.com?subject=${subject}&body=${encodeURIComponent(bodyText)}`;
+      window.location.href = mailtoUrl;
+
+      setSubmitted(true);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const isTr = language === "tr";
@@ -265,14 +284,21 @@ function ContactFormContent() {
 
               <button
                 type="submit"
+                disabled={loading}
                 className={`w-full py-4 rounded-lg font-sans font-bold text-sm tracking-wide uppercase transition-all duration-300 flex items-center justify-center gap-2 ${
-                  formData.emergency
+                  loading
+                    ? "bg-slate-700 text-steel-gray cursor-not-allowed opacity-70"
+                    : formData.emergency
                     ? "bg-red-600 hover:bg-red-700 text-white shadow-[0_0_20px_rgba(239,68,68,0.3)]"
                     : "bg-industrial-blue hover:bg-industrial-blue/90 text-white shadow-[0_0_15px_rgba(0,102,204,0.2)]"
                 }`}
               >
-                <Send className="w-4 h-4" />
-                {formData.emergency ? t("contactPage.form.transmitBtn") : t("contactPage.form.submitBtn")}
+                <Send className={`w-4 h-4 ${loading ? "animate-spin" : ""}`} />
+                {loading
+                  ? (isTr ? "Gönderiliyor..." : isDe ? "Wird gesendet..." : "Sending...")
+                  : formData.emergency
+                  ? t("contactPage.form.transmitBtn")
+                  : t("contactPage.form.submitBtn")}
               </button>
             </form>
           )}
