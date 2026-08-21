@@ -336,8 +336,8 @@ function ContactFormContent() {
                 <p className="font-sans font-bold text-xs text-white/50 uppercase tracking-widest">
                   {t("contactPage.emailLabel")}
                 </p>
-                <a href="mailto:support@ch-energie.de" className="font-body text-sm sm:text-base text-white hover:text-neon-cyan transition-colors">
-                  support@ch-energie.de
+                <a href="mailto:support@ch-enau.com" className="font-body text-sm sm:text-base text-white hover:text-neon-cyan transition-colors">
+                  support@ch-enau.com
                 </a>
               </div>
             </li>

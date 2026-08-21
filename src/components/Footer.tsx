@@ -143,10 +143,10 @@ export default function Footer() {
               <li className="flex gap-3 items-center">
                 <Mail className="w-5 h-5 text-neon-cyan shrink-0" />
                 <a
-                  href="mailto:support@ch-energie.de"
+                  href="mailto:support@ch-enau.com"
                   className="font-body text-sm text-steel-gray hover:text-white transition-colors"
                 >
-                  support@ch-energie.de
+                  support@ch-enau.com
                 </a>
               </li>
               <li className="flex gap-3 items-center">
