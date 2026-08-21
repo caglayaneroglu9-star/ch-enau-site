@@ -56,22 +56,47 @@ function ContactFormContent() {
     setLoading(true);
 
     try {
-      // 1. Try sending via API route backend
-      const res = await fetch("/api/contact", {
+      // 1. Try FormSubmit.co direct AJAX endpoint to support@ch-enau.com
+      const fsRes = await fetch("https://formsubmit.co/ajax/support@ch-enau.com", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          _subject: `${formData.emergency ? "[ACİL / EMERGENCY] " : ""}Teknik Servis Talebi: ${formData.company}`,
+          _captcha: "false",
+          _template: "table",
+          "Ad Soyad": formData.name,
+          "Şirket": formData.company,
+          "E-posta": formData.email,
+          "Telefon": formData.phone || "Belirtilmedi",
+          "Makine Tipi": formData.machine,
+          "Acil Durum": formData.emergency ? "EVET - ÜRETİM DURDU" : "Hayır",
+          "Mesaj Detayı": formData.message,
+        }),
       });
 
-      if (!res.ok) {
-        throw new Error("Failed to send message via API");
-      }
+      const fsData = await fsRes.json();
+
+      // If Web3Forms key is available, send as dual backup
+      const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY || "dea42ec2-e86b-4d0e-aee9-42618dbe24c6";
+      fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          access_key: accessKey,
+          subject: `Servis Talebi - ${formData.company}`,
+          to_email: "support@ch-enau.com",
+          ...formData,
+        }),
+      }).catch(() => {});
 
       setSubmitted(true);
-    } catch (err) {
-      console.warn("API route fallback to mailto:", err);
+    } catch (err: any) {
+      console.warn("Direct submission error, fallback to mailto:", err);
       
-      // Fallback: Construct mailto link with form details
+      // Fallback to mailto link if offline or blocked
       const subject = encodeURIComponent(
         `${formData.emergency ? "[ACİL / EMERGENCY] " : ""}Technical Service Request - ${formData.company}`
       );
