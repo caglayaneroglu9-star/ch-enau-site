@@ -53,9 +53,33 @@ function ContactFormContent() {
       return;
     }
 
+    // Rate Limit Check: 30 minutes (1,800,000 ms) per email address
+    const emailKey = `last_submit_${formData.email.toLowerCase().trim()}`;
+    const lastSubmitTime = typeof window !== "undefined" ? localStorage.getItem(emailKey) : null;
+    const THIRTY_MINUTES_MS = 30 * 60 * 1000;
+
+    if (lastSubmitTime) {
+      const timePassed = Date.now() - parseInt(lastSubmitTime, 10);
+      if (timePassed < THIRTY_MINUTES_MS) {
+        const minutesLeft = Math.ceil((THIRTY_MINUTES_MS - timePassed) / (60 * 1000));
+        setError(
+          language === "tr"
+            ? `Bu e-posta adresi ile son 30 dakika içinde bir talep gönderildi. Lütfen ${minutesLeft} dakika sonra tekrar deneyiniz.`
+            : language === "de"
+            ? `Mit dieser E-Mail wurde in den letzten 30 Minuten bereits eine Anfrage gesendet. Bitte in ${minutesLeft} Min. erneut versuchen.`
+            : `A request has already been sent from this email address in the last 30 minutes. Please try again in ${minutesLeft} mins.`
+        );
+        return;
+      }
+    }
+
     setLoading(true);
 
     try {
+      // Record timestamp for rate limiting
+      if (typeof window !== "undefined") {
+        localStorage.setItem(emailKey, Date.now().toString());
+      }
       // 1. Try FormSubmit.co direct AJAX endpoint to support@ch-enau.com
       const fsRes = await fetch("https://formsubmit.co/ajax/support@ch-enau.com", {
         method: "POST",
@@ -157,7 +181,18 @@ function ContactFormContent() {
                 )}
               </p>
               <button
-                onClick={() => setSubmitted(false)}
+                onClick={() => {
+                  setFormData({
+                    name: "",
+                    company: "",
+                    email: "",
+                    phone: "",
+                    machine: "general",
+                    message: "",
+                    emergency: false,
+                  });
+                  setSubmitted(false);
+                }}
                 className="mt-6 px-6 py-2 bg-secondary-navy hover:bg-secondary-navy/80 border border-white/10 text-white rounded-lg text-sm font-semibold transition-colors"
               >
                 {t("contactPage.form.submitAnother")}

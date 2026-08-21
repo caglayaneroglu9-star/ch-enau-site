@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 
+const rateLimitMap = new Map<string, number>();
+
 export async function POST(request: Request) {
   try {
     const body = await request.json();
@@ -12,6 +14,21 @@ export async function POST(request: Request) {
         { status: 400 }
       );
     }
+
+    // Server-side 30-minute rate limit per email
+    const emailKey = email.toLowerCase().trim();
+    const lastSubmitTime = rateLimitMap.get(emailKey);
+    const THIRTY_MINUTES_MS = 30 * 60 * 1000;
+
+    if (lastSubmitTime && Date.now() - lastSubmitTime < THIRTY_MINUTES_MS) {
+      const minutesLeft = Math.ceil((THIRTY_MINUTES_MS - (Date.now() - lastSubmitTime)) / (60 * 1000));
+      return NextResponse.json(
+        { error: `Rate limit: Lütfen ${minutesLeft} dakika sonra tekrar deneyiniz.` },
+        { status: 429 }
+      );
+    }
+
+    rateLimitMap.set(emailKey, Date.now());
 
     const resendApiKey = process.env.RESEND_API_KEY;
     const web3FormsKey = process.env.WEB3FORMS_ACCESS_KEY;
