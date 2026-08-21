@@ -52,6 +52,25 @@ function ContactFormContent() {
       return;
     }
 
+    // Construct mailto link with form details
+    const subject = encodeURIComponent(
+      `${formData.emergency ? "[ACİL / EMERGENCY] " : ""}Technical Service Request - ${formData.company}`
+    );
+
+    const bodyText = 
+      `Name / Ad: ${formData.name}\n` +
+      `Company / Şirket: ${formData.company}\n` +
+      `Email / E-posta: ${formData.email}\n` +
+      `Phone / Telefon: ${formData.phone || "-"}\n` +
+      `Machine Type / Makine: ${formData.machine}\n` +
+      `Emergency / Acil Durum: ${formData.emergency ? "YES / EVET" : "NO / HAYIR"}\n\n` +
+      `Details / Detaylar:\n${formData.message}`;
+
+    const mailtoUrl = `mailto:support@ch-enau.com?subject=${subject}&body=${encodeURIComponent(bodyText)}`;
+
+    // Open user's email client
+    window.location.href = mailtoUrl;
+
     // Success transition
     setSubmitted(true);
   };
