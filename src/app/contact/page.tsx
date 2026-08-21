@@ -65,12 +65,6 @@ function ContactFormContent() {
     ? "Elektroingenieur | Senior-Systemarchitekt"
     : "Electrical & Electronics Engineer | Senior Systems Architect";
 
-  const hakanTitle = isTr
-    ? "Kıdemli Otomasyon Mühendisi"
-    : isDe
-    ? "Senior Automatisierungsingenieur"
-    : "Senior Automation Engineer";
-
   const optionalLabel = isTr ? "(İsteğe Bağlı)" : isDe ? "(Optional)" : "(Optional)";
 
   return (
@@ -324,30 +318,7 @@ function ContactFormContent() {
               </div>
             </div>
 
-            {/* Hakan Ozkan */}
-            <div className="p-4 rounded-xl bg-primary-navy/60 border border-white/5 flex flex-col gap-3">
-              <div>
-                <h4 className="font-sans font-bold text-sm text-white">Hakan ÖZKAN</h4>
-                <p className="font-body text-xs text-neon-cyan">{hakanTitle}</p>
-              </div>
-              <div className="flex flex-col gap-2 font-body text-xs sm:text-sm">
-                <a href="tel:+905074139675" className="flex items-center gap-2 text-steel-gray hover:text-white transition-colors">
-                  <Phone className="w-3.5 h-3.5 text-neon-cyan" />
-                  +90 (507) 413 96 75
-                </a>
-              </div>
-              <div className="pt-1">
-                <a
-                  href="https://wa.me/905074139675"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 rounded-lg text-emerald-400 text-xs font-bold transition-all"
-                >
-                  <MessageSquare className="w-3.5 h-3.5" />
-                  WhatsApp Support
-                </a>
-              </div>
-            </div>
+
           </div>
         </div>
 

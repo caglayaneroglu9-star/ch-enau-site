@@ -122,7 +122,7 @@ export default function Footer() {
               <li className="flex gap-3 items-start">
                 <MapPin className="w-5 h-5 text-neon-cyan shrink-0 mt-0.5" />
                 <span className="font-body text-sm text-steel-gray leading-relaxed">
-                  {t("footer.address") || "Gaziemir / İzmir"} <br />
+                  {t("footer.address") || "Folkart Towers B Kule, Bayraklı / İzmir"} <br />
                   <span className="text-xs text-white/40">({t("footer.worldwideNotice") || "On-site operations worldwide"})</span>
                 </span>
               </li>
@@ -136,12 +136,6 @@ export default function Footer() {
                     </a>
                     <a href="tel:+905337063813" className="hover:text-white transition-colors block">
                       +90 (533) 706 38 13
-                    </a>
-                  </div>
-                  <div>
-                    <span className="text-xs font-bold text-white/50 block uppercase tracking-wider">Hakan ÖZKAN</span>
-                    <a href="tel:+905074139675" className="hover:text-white transition-colors block">
-                      +90 (507) 413 96 75
                     </a>
                   </div>
                 </div>

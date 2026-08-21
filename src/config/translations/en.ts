@@ -12,7 +12,7 @@ export const en = {
     capabilities: "Engineering Capabilities",
     quickLinks: "Quick Navigation",
     contactUs: "Contact Us",
-    address: "Gaziemir, Izmir / Turkey",
+    address: "Folkart Towers B Kule, Bayraklı / Izmir / Turkey",
     rights: "All rights reserved. German Engineering Standards.",
     readyLabel: "Engineers Ready for Global Dispatch",
     coreStack: "Core Stack Expertise",
@@ -465,7 +465,7 @@ export const en = {
     title: "Consult with Our Senior Engineers",
     desc: "Whether you need to troubleshoot a high-speed packaging line or plan a control cabinet retrofit, our experts are ready to assist. Complete the form or contact us directly.",
     sidebarTitle: "Direct Contact",
-    sidebarLocation: "Gaziemir, Izmir / Turkey",
+    sidebarLocation: "Folkart Towers B Kule, Bayraklı / Izmir",
     sidebarDesc: "Technical Headquarters & Engineering Lab",
     sidebarHours: "Available 24/7 for critical incidents",
     sidebarLine: "Emergency Line",
@@ -476,7 +476,7 @@ export const en = {
     emailLabel: "Email",
     addressLabel: "Office Address",
     dispatchTitle: "Global Dispatch Network",
-    dispatchDesc: "Headquartered in Gaziemir / İzmir, our team is located strategically to guarantee fast travel to manufacturing centers worldwide.",
+    dispatchDesc: "Headquartered at Folkart Towers B Kule, Bayraklı / İzmir, our team is located strategically to guarantee fast travel to manufacturing centers worldwide.",
     form: {
       formTitle: "Technical Service Request",
       formDesc: "Specify details regarding cabinet retrofits, logic issues, or machine diagnostics.",
@@ -595,7 +595,7 @@ export const en = {
   chatbot: {
     botName: "CH Automation AI",
     welcomeMessage: "Hello! I am the CH Energie & Automation AI Assistant. I can help with basic technical questions, office details, or machine speeds. For complex troubleshooting or specific PLC programming inquiries, I'll direct you to our senior engineers.",
-    fallbackMessage: "This appears to be a complex technical issue or outside my current training documentation. To prevent incorrect diagnosis and resolve this quickly, please contact our senior automation engineers Çağlayan EROĞLU (+49 0160 122 13 06 / +90 533 706 38 13) or Hakan ÖZKAN (+90 507 413 96 75) directly.",
+    fallbackMessage: "This appears to be a complex technical issue or outside my current training documentation. To prevent incorrect diagnosis and resolve this quickly, please contact our senior automation engineer Çağlayan EROĞLU (+49 0160 122 13 06 / +90 533 706 38 13) directly.",
     quickChips: [
       "Where is the office & contact?",
       "G.D. machine speed limit?",
@@ -605,7 +605,7 @@ export const en = {
     trainingDocuments: [
       {
         keywords: ["address", "office", "location", "turkey", "izmir", "gaziemir", "where"],
-        response: "Our technical lab is located in Gaziemir / Izmir, Turkey. You can contact Çağlayan EROĞLU (+90 533 706 38 13) or Hakan ÖZKAN (+90 507 413 96 75) directly to schedule a meeting or organize a site service visit."
+        response: "Our technical office is located at Folkart Towers B Kule, Bayraklı / Izmir, Turkey. You can contact Çağlayan EROĞLU (+90 533 706 38 13) directly to schedule a meeting or organize a site service visit."
       },
       {
         keywords: ["speed", "cpm", "20000", "limit", "capacity", "fast", "machine speed"],

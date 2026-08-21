@@ -12,7 +12,7 @@ export const tr = {
     capabilities: "Mühendislik Yetenekleri",
     quickLinks: "Hızlı Navigasyon",
     contactUs: "Bize Ulaşın",
-    address: "Gaziemir, İzmir / Türkiye",
+    address: "Folkart Towers B Kule, Bayraklı / İzmir / Türkiye",
     rights: "Tüm hakları saklıdır. Alman Mühendislik Standartları.",
     readyLabel: "Mühendislerimiz Küresel Müdahale İçin Hazır",
     coreStack: "Uzmanlık Alanlarımız",
@@ -465,7 +465,7 @@ export const tr = {
     title: "Kıdemli Mühendislerimizle Görüşün",
     desc: "İster yüksek hızlı paketleme hattındaki bir arızayı gidermek ister bir kontrol kabini modernizasyonu planlamak isteyin, uzmanlarımız yardıma hazırdır. Formu doldurun veya doğrudan bizi arayın.",
     sidebarTitle: "Doğrudan İletişim",
-    sidebarLocation: "Gaziemir, İzmir / Türkiye",
+    sidebarLocation: "Folkart Towers B Kule, Bayraklı / İzmir",
     sidebarDesc: "Teknik Merkez ve Mühendislik Laboratuvarı",
     sidebarHours: "Kritik durumlar için 7/24 hizmetinizdeyiz",
     sidebarLine: "Acil Teknik Destek Hattı",
@@ -476,7 +476,7 @@ export const tr = {
     emailLabel: "E-posta",
     addressLabel: "Ofis Adresi",
     dispatchTitle: "Küresel Müdahale Ağı",
-    dispatchDesc: "Merkez ofisimiz Gaziemir / İzmir, dünya genelindeki üretim merkezlerine en hızlı şekilde ulaşabilmek için stratejik bir konumdadır.",
+    dispatchDesc: "Merkez ofisimiz Folkart Towers B Kule, Bayraklı / İzmir, dünya genelindeki üretim merkezlerine en hızlı şekilde ulaşabilmek için stratejik bir konumdadır.",
     form: {
       formTitle: "Teknik Servis Talebi",
       formDesc: "Pano modernizasyonu, yazılım sorunları veya makine teşhisi ile ilgili detayları belirtin.",
@@ -595,7 +595,7 @@ export const tr = {
   chatbot: {
     botName: "CH Otomasyon Yapay Zeka Asistanı",
     welcomeMessage: "Merhaba! Ben CH Energie & Automation Yapay Zeka Asistanıyım. Sitemizde yer alan temel teknik konular, ofis bilgileri veya genel makine hızları hakkında sorularınızı yanıtlayabilirim. Karmaşık arızalar ve özel PLC yazılım talepleriniz için sizi doğrudan uzman mühendislerimize yönlendireceğim.",
-    fallbackMessage: "Bu karmaşık bir teknik sorun veya sistemimde tanımlanmamış bir durum gibi görünüyor. Yanlış müdahaleleri önlemek ve en doğru teşhisi koymak için lütfen doğrudan kıdemli mühendislerimiz Çağlayan EROĞLU (+49 0160 122 13 06 / +90 533 706 38 13) veya Hakan ÖZKAN (+90 507 413 96 75) ile iletişime geçin.",
+    fallbackMessage: "Bu karmaşık bir teknik sorun veya sistemimde tanımlanmamış bir durum gibi görünüyor. Yanlış müdahaleleri önlemek ve en doğru teşhisi koymak için lütfen doğrudan kıdemli mühendisimiz Çağlayan EROĞLU (+49 0160 122 13 06 / +90 533 706 38 13) ile iletişime geçin.",
     quickChips: [
       "Ofis nerede ve iletişim?",
       "G.D. makine hız sınırı?",
@@ -605,7 +605,7 @@ export const tr = {
     trainingDocuments: [
       {
         keywords: ["adres", "ofis", "gaziemir", "izmir", "nerede", "konum", "ulaşım"],
-        response: "Teknik merkezimiz Gaziemir / İzmir adresinde yer almaktadır. Çağlayan EROĞLU (+90 533 706 38 13) ve Hakan ÖZKAN (+90 507 413 96 75) ile doğrudan görüşerek saha ziyareti veya randevu planlayabilirsiniz."
+        response: "Teknik merkezimiz Folkart Towers B Kule, Bayraklı / İzmir adresinde yer almaktadır. Çağlayan EROĞLU (+90 533 706 38 13) ile doğrudan görüşerek saha ziyareti veya randevu planlayabilirsiniz."
       },
       {
         keywords: ["hız", "cpm", "20000", "kapasite", "hızlı", "makine hızı"],

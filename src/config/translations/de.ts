@@ -12,7 +12,7 @@ export const de = {
     capabilities: "Ingenieurleistungen",
     quickLinks: "Schnellnavigation",
     contactUs: "Kontaktieren Sie uns",
-    address: "Gaziemir, Izmir / Türkei",
+    address: "Folkart Towers B Kule, Bayraklı / Izmir / Türkei",
     rights: "Alle Rechte vorbehalten. Deutscher Engineering-Standard.",
     readyLabel: "Ingenieure bereit für den weltweiten Einsatz",
     coreStack: "Experten-Technologie-Stack",
@@ -465,7 +465,7 @@ export const de = {
     title: "Sprechen Sie mit unseren Projektingenieuren",
     desc: "Ob Sie Hilfe bei der Störungssuche an einer Linie benötigen oder ein Schaltschrank-Retrofit planen – unsere Experten helfen Ihnen gerne. Nutzen Sie das Formular oder rufen Sie uns direkt an.",
     sidebarTitle: "Direktkontakt",
-    sidebarLocation: "Gaziemir, Izmir / Türkei",
+    sidebarLocation: "Folkart Towers B Kule, Bayraklı / Izmir",
     sidebarDesc: "Technisches Hauptquartier & Entwicklungslabor",
     sidebarHours: "Bei kritischen Ausfällen rund um die Uhr erreichbar",
     sidebarLine: "Technischer Notfall-Support",
@@ -476,7 +476,7 @@ export const de = {
     emailLabel: "E-Mail",
     addressLabel: "Büroadresse",
     dispatchTitle: "Globales Servicenetzwerk",
-    dispatchDesc: "Mit Sitz in Gaziemir / İzmir ist unser Team strategisch so positioniert, dass eine schnelle Anreise zu den Produktionszentren weltweit gewährleistet ist.",
+    dispatchDesc: "Mit Sitz im Folkart Towers B Kule, Bayraklı / İzmir ist unser Team strategisch so positioniert, dass eine schnelle Anreise zu den Produktionszentren weltweit gewährleistet ist.",
     form: {
       formTitle: "Technische Serviceanfrage",
       formDesc: "Geben Sie Details zu Schaltschrank-Retrofits, SPS-Softwareproblemen oder Anlagendiagnosen an.",
@@ -595,7 +595,7 @@ export const de = {
   chatbot: {
     botName: "CH Automatisierungs-KI",
     welcomeMessage: "Hallo! Ich bin der KI-Assistent von CH Energie & Automation. Ich kann Ihnen bei grundlegenden Fragen zu Bürodetails, technischen Themen oder Maschinengeschwindigkeiten helfen. Bei komplexen Störungen leite ich Sie direkt an unsere Projektingenieure weiter.",
-    fallbackMessage: "Dies scheint ein komplexeres technisches Problem zu sein, das meine aktuellen Trainingsdaten überschreitet. Um Fehlbedienungen zu vermeiden, wenden Sie sich bitte direkt an unsere erfahrenen Automatisierungsingenieure Çağlayan EROĞLU (+49 0160 122 13 06 / +90 533 706 38 13) oder Hakan ÖZKAN (+90 507 413 96 75).",
+    fallbackMessage: "Dies scheint ein komplexeres technisches Problem zu sein, das meine aktuellen Trainingsdaten überschreitet. Um Fehlbedienungen zu vermeiden, wenden Sie sich bitte direkt an unseren erfahrenen Automatisierungsingenieur Çağlayan EROĞLU (+49 0160 122 13 06 / +90 533 706 38 13).",
     quickChips: [
       "Büroadresse & Kontakt?",
       "G.D. Maschinengeschwindigkeit?",
@@ -605,7 +605,7 @@ export const de = {
     trainingDocuments: [
       {
         keywords: ["adresse", "büro", "standort", "türkei", "izmir", "gaziemir", "wo"],
-        response: "Unser Entwicklungslabor befindet sich in Gaziemir / Izmir, Türkei. Sie können Çağlayan EROĞLU (+90 533 706 38 13) oder Hakan ÖZKAN (+90 507 413 96 75) direkt kontaktieren, um einen Termin oder Service-Einsatz zu vereinbaren."
+        response: "Unser Büro befindet sich im Folkart Towers B Kule, Bayraklı / Izmir, Türkei. Sie können Çağlayan EROĞLU (+90 533 706 38 13) direkt kontaktieren, um einen Termin oder Service-Einsatz zu vereinbaren."
       },
       {
         keywords: ["geschwindigkeit", "cpm", "20000", "limit", "leistung", "schnell", "taktung"],

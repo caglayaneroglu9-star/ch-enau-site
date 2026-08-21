@@ -2,7 +2,7 @@
   "enabled": true,
   "botName": "CH Automation AI",
   "welcomeMessage": "Merhaba! Ben CH Energie & Automation Yapay Zeka Asistanıyım. Sitemizde yer alan temel teknik konular, ofis bilgileri veya genel makine hızları hakkında sorularınızı yanıtlayabilirim. Karmaşık arızalar ve özel PLC yazılım talepleriniz için sizi doğrudan uzman mühendislerimize yönlendireceğim.",
-  "fallbackMessage": "Bu karmaşık bir teknik sorun veya sistemimde tanımlanmamış bir durum gibi görünüyor. Yanlış müdahaleleri önlemek ve en doğru teşhisi koymak için lütfen doğrudan kıdemli mühendislerimiz Çağlayan EROĞLU (+49 0160 122 13 06 / +90 533 706 38 13) veya Hakan ÖZKAN (+90 507 413 96 75) ile iletişime geçin.",
+  "fallbackMessage": "Bu karmaşık bir teknik sorun veya sistemimde tanımlanmamış bir durum gibi görünüyor. Yanlış müdahaleleri önlemek ve en doğru teşhisi koymak için lütfen doğrudan kıdemli mühendisimiz Çağlayan EROĞLU (+49 0160 122 13 06 / +90 533 706 38 13) ile iletişime geçin.",
   "quickChips": [
     "Ofis nerede ve iletişim?",
     "G.D. Makine hız sınırı nedir?",
@@ -12,7 +12,7 @@
   "trainingDocuments": [
     {
       "keywords": ["adres", "ofis", "gaziemir", "izmir", "nerede", "konum", "ulaşım"],
-      "response": "Teknik merkezimiz Gaziemir / İzmir adresinde yer almaktadır. Çağlayan EROĞLU (+90 533 706 38 13) ve Hakan ÖZKAN (+90 507 413 96 75) ile doğrudan görüşerek randevu alabilir veya saha ziyareti planlayabilirsiniz."
+      "response": "Teknik merkezimiz Folkart Towers B Kule, Bayraklı / İzmir adresinde yer almaktadır. Çağlayan EROĞLU (+90 533 706 38 13) ile doğrudan görüşerek randevu alabilir veya saha ziyareti planlayabilirsiniz."
     },
     {
       "keywords": ["hız", "cpm", "20000", "kapasite", "hızlı", "makine hızı"],
