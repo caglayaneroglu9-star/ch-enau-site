@@ -595,7 +595,7 @@ export const en = {
   chatbot: {
     botName: "CH Automation AI",
     welcomeMessage: "Hello! I am the CH Energie & Automation AI Assistant. I can help with basic technical questions, office details, or machine speeds. For complex troubleshooting or specific PLC programming inquiries, I'll direct you to our senior engineers.",
-    fallbackMessage: "This appears to be a complex technical issue or outside my current training documentation. To prevent incorrect diagnosis and resolve this quickly, please contact our senior automation engineer Çağlayan EROĞLU (+49 0160 122 13 06 / +90 533 706 38 13) directly.",
+    fallbackMessage: "This appears to be a complex technical issue or outside my current training documentation. To prevent incorrect diagnosis and resolve this quickly, please contact our senior automation engineer Çağlayan EROĞLU (+49 160 122 13 06 / +90 533 706 38 13) directly.",
     quickChips: [
       "Where is the office & contact?",
       "G.D. machine speed limit?",

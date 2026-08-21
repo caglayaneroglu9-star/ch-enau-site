@@ -595,7 +595,7 @@ export const de = {
   chatbot: {
     botName: "CH Automatisierungs-KI",
     welcomeMessage: "Hallo! Ich bin der KI-Assistent von CH Energie & Automation. Ich kann Ihnen bei grundlegenden Fragen zu Bürodetails, technischen Themen oder Maschinengeschwindigkeiten helfen. Bei komplexen Störungen leite ich Sie direkt an unsere Projektingenieure weiter.",
-    fallbackMessage: "Dies scheint ein komplexeres technisches Problem zu sein, das meine aktuellen Trainingsdaten überschreitet. Um Fehlbedienungen zu vermeiden, wenden Sie sich bitte direkt an unseren erfahrenen Automatisierungsingenieur Çağlayan EROĞLU (+49 0160 122 13 06 / +90 533 706 38 13).",
+    fallbackMessage: "Dies scheint ein komplexeres technisches Problem zu sein, das meine aktuellen Trainingsdaten überschreitet. Um Fehlbedienungen zu vermeiden, wenden Sie sich bitte direkt an unseren erfahrenen Automatisierungsingenieur Çağlayan EROĞLU (+49 160 122 13 06 / +90 533 706 38 13).",
     quickChips: [
       "Büroadresse & Kontakt?",
       "G.D. Maschinengeschwindigkeit?",

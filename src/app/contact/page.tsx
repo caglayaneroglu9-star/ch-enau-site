@@ -394,7 +394,7 @@ function ContactFormContent() {
               <div className="flex flex-col gap-2 font-body text-xs sm:text-sm">
                 <a href="tel:+491601221306" className="flex items-center gap-2 text-steel-gray hover:text-white transition-colors">
                   <Phone className="w-3.5 h-3.5 text-neon-cyan" />
-                  +49 (0) 160 122 13 06
+                  +49 160 122 13 06
                 </a>
                 <a href="tel:+905337063813" className="flex items-center gap-2 text-steel-gray hover:text-white transition-colors">
                   <Phone className="w-3.5 h-3.5 text-neon-cyan" />

@@ -595,7 +595,7 @@ export const tr = {
   chatbot: {
     botName: "CH Otomasyon Yapay Zeka Asistanı",
     welcomeMessage: "Merhaba! Ben CH Energie & Automation Yapay Zeka Asistanıyım. Sitemizde yer alan temel teknik konular, ofis bilgileri veya genel makine hızları hakkında sorularınızı yanıtlayabilirim. Karmaşık arızalar ve özel PLC yazılım talepleriniz için sizi doğrudan uzman mühendislerimize yönlendireceğim.",
-    fallbackMessage: "Bu karmaşık bir teknik sorun veya sistemimde tanımlanmamış bir durum gibi görünüyor. Yanlış müdahaleleri önlemek ve en doğru teşhisi koymak için lütfen doğrudan kıdemli mühendisimiz Çağlayan EROĞLU (+49 0160 122 13 06 / +90 533 706 38 13) ile iletişime geçin.",
+    fallbackMessage: "Bu karmaşık bir teknik sorun veya sistemimde tanımlanmamış bir durum gibi görünüyor. Yanlış müdahaleleri önlemek ve en doğru teşhisi koymak için lütfen doğrudan kıdemli mühendisimiz Çağlayan EROĞLU (+49 160 122 13 06 / +90 533 706 38 13) ile iletişime geçin.",
     quickChips: [
       "Ofis nerede ve iletişim?",
       "G.D. makine hız sınırı?",

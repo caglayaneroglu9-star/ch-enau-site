@@ -132,7 +132,7 @@ export default function Footer() {
                   <div>
                     <span className="text-xs font-bold text-white/50 block uppercase tracking-wider">Çağlayan EROĞLU</span>
                     <a href="tel:+491601221306" className="hover:text-white transition-colors font-semibold block">
-                      +49 (0) 160 122 13 06
+                      +49 160 122 13 06
                     </a>
                     <a href="tel:+905337063813" className="hover:text-white transition-colors block">
                       +90 (533) 706 38 13
